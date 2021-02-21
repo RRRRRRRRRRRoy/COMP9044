@@ -11,7 +11,7 @@ to
 
 
 1) Write a grep -E command that will print all the lines in the file where the electorate begins with 'W'.
-Q1 answer: egrep ": Member.for.W" parliament.txt
+Q1 answer: egrep ":.Member.for.W" parliament.txt
 
 
 2) Write a grep -E command that will print all the lines in the file where the MP's first name is "Andrew".
