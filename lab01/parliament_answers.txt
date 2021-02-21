@@ -15,7 +15,7 @@ Q1 answer: egrep ":.Member.for.W" parliament.txt
 
 
 2) Write a grep -E command that will print all the lines in the file where the MP's first name is "Andrew".
-Q2 answer: egrep ".*Andrew.*" parliament.txt
+Q2 answer: egrep "Andrew .*" parliament.txt
 
 
 3) Write a grep -E command that will print all the lines in the file where the MP's surname (last name) ends in the letters 'll'.
