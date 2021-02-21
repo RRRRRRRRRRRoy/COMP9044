@@ -11,7 +11,7 @@ to
 
 
 1) Write a grep -E command that prints the lines in a file named input.txt containing at least one A and at least one B.
-Q1 answer: 
+Q1 answer: egrep '(A.*B|B.*A)' input.txt
 
 
 2) Write a grep -E command that prints the lines in a file named input.txt containing only the characters A and B. Such that all pairs of adjacent A's occur before any pairs of adjacent B's.
