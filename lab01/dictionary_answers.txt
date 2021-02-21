@@ -23,4 +23,4 @@ Q3 answer: egrep "[aA].*e.*i.*o.*u" dictionary.txt
 
 
 4) Write an grep -E command that prints the words which contain the vowels "aeiou", in that order, and no other vowels.
-Q4 answer: egrep "^[^aeiouAEIOU]*[Aa][^aeiou]*e[^aeiou]*i[^aeiou]*o[^aeiou]*u[^aeiou]*$"
+Q4 answer: egrep "^[^aeiou]*[Aa][^aeiou]*e[^aeiou]*i[^aeiou]*o[^aeiou]*u[^aeiou]*$" dictionary.txt
