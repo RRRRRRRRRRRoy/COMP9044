@@ -11,16 +11,16 @@ to
 
 
 1) Write an grep -E command that prints the words which contain the characters "lmn" consecutively.
-Q1 answer: 
+Q1 answer: egrep "(lmn)" dictionary.txt
 
 
 2) Write an grep -E command that prints the words which contain any four consecutive vowels.
-Q2 answer: 
+Q2 answer: egrep "([aA|eE|iI|oO|uU][aA|eE|iI|oO|uU][aA|eE|iI|oO|uU][aA|eE|iI|oO|uU])" dictionary.txt
 
 
 3) Write an grep -E command that prints the words which contain all 5 vowels "aeiou" in that order.
-Q3 answer: 
+Q3 answer: egrep "[aA].*e.*i.*o.*u" dictionary.txt
 
 
 4) Write an grep -E command that prints the words which contain the vowels "aeiou", in that order, and no other vowels.
-Q4 answer: 
+Q4 answer: egrep "^$"
