@@ -15,7 +15,7 @@ Q1 answer: sort -n -t"|" -k2 enrolments.psv | head  -n 1
 
 
 2) Write the sort and the head or tail commands needed to print the first 100 enrolments ordered first by Course Code, then by zID.
-Q2 answer: 
+Q2 answer: sort -n -t"|" -k1 enrolments.psv | head  -n 100
 
 
 3) Write the sort and the head or tail commands needed to print the first 50 enrolments ordered first by Birthdate, then by Course Code, then by Zid.
