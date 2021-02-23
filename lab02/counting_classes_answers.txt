@@ -1,0 +1,38 @@
+This file is automarked.
+
+Do not add extra lines to this file, just add your answers.
+
+For example if your answer to Q0 is: "grep -E Andrew words.txt"
+Change the line that starts with
+    "Q0 answer:"
+to
+    "Q0 answer: grep -E Andrew words.txt"
+------------------------------------------------------------------------------------------------------------------------
+
+
+1) Write a shell pipeline which will print how many classes there are.
+Q1 answer: 
+
+
+2) Write a shell pipeline which will print how many different courses have classes.
+Q2 answer: 
+
+
+3) Write a shell pipeline which will print the course with the most classes, and how many classes are in this course.
+Q3 answer: 
+
+
+4) Write a shell pipeline which will print the two rooms most frequently used by non-LAB CSE classes and how often they are used.
+Q4 answer: 
+
+
+5) Write a shell pipeline which will print the most common day and hour in the week for classes to start and how many classes start at that time.
+Q5 answer: 
+
+
+6) Write a shell pipeline which will print the latest time a class will finish.
+Q6 answer: 
+
+
+7) Write a shell pipeline which will print a list of the course codes of COMP courses that run 2 or more classes of the same type starting at the same time on the same day.  (e.g. three tuts starting Monday at 10:00).
+Q7 answer: 
