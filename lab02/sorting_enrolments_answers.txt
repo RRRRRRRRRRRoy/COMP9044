@@ -11,7 +11,7 @@ to
 
 
 1) Write the sort and the head or tail commands needed to print the enrolment for the student with the lowest zID.
-Q1 answer: 
+Q1 answer: sort -n -t"|" -k2 enrolments.psv | head  -n 1 
 
 
 2) Write the sort and the head or tail commands needed to print the first 100 enrolments ordered first by Course Code, then by zID.
