@@ -11,11 +11,11 @@ to
 
 
 1) Write a grep -E command that prints the lines in a file named input.txt containing at least one A and at least one B.
-Q1 answer: egrep '(A.*B|B.*A)' input.txt
+Q1 answer: egrep '(A.*+B|B.*+A)' input.txt
 
 
 2) Write a grep -E command that prints the lines in a file named input.txt containing only the characters A and B. Such that all pairs of adjacent A's occur before any pairs of adjacent B's.
-Q2 answer: egrep -v '[^AB.*BA]|BB.*AA' input.txt
+Q2 answer: egrep -v '[^AB.*BA]|B.*AA' input.txt
 
 
 3) Write a grep -E command that prints the lines in a file named input.txt containing only the characters A and B such that the number of A's is divisible by 4.
