@@ -27,7 +27,7 @@ Q4 answer: egrep -v "(LAB)" classes.tsv | cut -c 1-6 | sort -k1,1 | uniq -c | so
 
 
 5) Write a shell pipeline which will print the most common day and hour in the week for classes to start and how many classes start at that time.
-Q5 answer: cut -f6 classes.tsv| cut -c 1-6 | sort | uniq -c | sort -n  | tail -n 1
+Q5 answer: cut -f6 classes.tsv| cut -c 1-6 | sort -k1,1 | uniq -c | sort -nr -k1,1 | head -n 1
 
 
 6) Write a shell pipeline which will print the latest time a class will finish.
