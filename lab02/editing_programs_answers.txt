@@ -11,7 +11,7 @@ to
 
 
 1) Write a sed command to change all the functions from V1 to V2.
-Q1 answer: sed 's/V1/V2/' program.c
+Q1 answer: sed 's/sort_V1/sort_V2/' program.c
 
 
 2) Write a sed command to remove all single line comments starting with TODO or FIXME.
