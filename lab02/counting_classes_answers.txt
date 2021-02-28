@@ -11,7 +11,7 @@ to
 
 
 1) Write a shell pipeline which will print how many classes there are.
-Q1 answer: cat class.csv | wc -l
+Q1 answer: cat classes.csv | wc -l
 
 
 2) Write a shell pipeline which will print how many different courses have classes.
