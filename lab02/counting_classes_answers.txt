@@ -35,4 +35,4 @@ Q6 answer: cut -f6 classes.tsv| cut -c 8-9 | sort -nr -k1,1| head -n 1
 
 
 7) Write a shell pipeline which will print a list of the course codes of COMP courses that run 2 or more classes of the same type starting at the same time on the same day.  (e.g. three tuts starting Monday at 10:00).
-Q7 answer: egrep "^COMP" classes.tsv | cut -f1,3,6 | cut -c | rev | cut -c 4-| rev | sort -k1,1 | uniq -d | cut -f1 | uniq
+Q7 answer: egrep "^COMP" classes.tsv | cut -f1,3,6 | rev | cut -c 4-| rev | sort -k1,1 
