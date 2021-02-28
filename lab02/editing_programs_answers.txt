@@ -27,4 +27,4 @@ Q4 answer: sed 's/include "[a-z]*\.*"/include <[a-z]+.*>/' program.c
 
 
 5) Write a sed command to remove the main method.
-Q5 answer: 
+Q5 answer: sed '53,63d' program.c
