@@ -15,7 +15,7 @@ Q1 answer: cat classes.tsv | wc -l
 
 
 2) Write a shell pipeline which will print how many different courses have classes.
-Q2 answer: 
+Q2 answer: cat classes.tsv | uniq -c
 
 
 3) Write a shell pipeline which will print the course with the most classes, and how many classes are in this course.
