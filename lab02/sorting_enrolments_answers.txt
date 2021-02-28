@@ -15,12 +15,12 @@ Q1 answer: sort -n -r -t"|" -k2 enrolments.psv | tail -n 1
 
 
 2) Write the sort and the head or tail commands needed to print the first 100 enrolments ordered first by Course Code, then by zID.
-Q2 answer: sort -t"|" -k1 -k2 enrolments.psv | head  -n 100
+Q2 answer: sort -t"|" -k1 -k2 enrolments.psv | head -n 100
 
 
 3) Write the sort and the head or tail commands needed to print the first 50 enrolments ordered first by Birthdate, then by Course Code, then by Zid.
-Q3 answer: sort -n -t"|" -k8,8 -k1,2 enrolments.psv | head  -n 50
+Q3 answer: sort -n -t"|" -k8 -k1,2 enrolments.psv | head -n 50
 
 
 4) Write the sort and the head or tail commands needed to print the first 25 enrolments ordered first by the decimal part of the WAM, then by zID, then by Course Code.
-Q4 answer: sort -t"|" -rk6.5,6.7 -k2 -k1 enrolments.psv | head  -n 50
+Q4 answer: sort -t"|" -rk6.5,6.7 -k2,1 enrolments.psv | head  -n 50
