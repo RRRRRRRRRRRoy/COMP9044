@@ -15,7 +15,7 @@ Q1 answer: sed 's/_sort_V1/_sort_V2/' program.c
 
 
 2) Write a sed command to remove all single line comments starting with TODO or FIXME.
-Q2 answer: sed 's/\/\/.[(TODO)|(FIXME)]//' program.c
+Q2 answer: sed 's/\/\/.[(TODO)|(FIXME).*]//' program.c
 
 
 3) Write a sed command to print all lines starting with extern.
