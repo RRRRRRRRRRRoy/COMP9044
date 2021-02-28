@@ -23,7 +23,7 @@ Q3 answer: sed -n 's/^extern/extern/p' program.c
 
 
 4) Write a sed command to replace all include statements using "" with <>.
-Q4 answer: 
+Q4 answer: sed 's/include "[a-z]*\.*" /include <[a-z]*.*>'
 
 
 5) Write a sed command to remove the main method.
