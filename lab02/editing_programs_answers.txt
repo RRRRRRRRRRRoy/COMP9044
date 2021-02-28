@@ -19,7 +19,7 @@ Q2 answer: sed '/\/\/ [(TODO)(FIXME)]/d' program.c
 
 
 3) Write a sed command to print all lines starting with extern.
-Q3 answer: 
+Q3 answer: sed -n 's/^extern/extern/p' program.c
 
 
 4) Write a sed command to replace all include statements using "" with <>.
