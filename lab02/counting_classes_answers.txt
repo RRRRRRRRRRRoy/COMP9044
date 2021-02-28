@@ -23,7 +23,7 @@ Q3 answer: sort -k1,1 classes.tsv | cut -f1 | uniq -c | sort |tail -n 1
 
 
 4) Write a shell pipeline which will print the two rooms most frequently used by non-LAB CSE classes and how often they are used.
-Q4 answer: egrep -v "LAB" classes.tsv | cut -f 7 | sort -k1,1 | uniq -c | sort -k1,1 -n | tail -n 2 | sort -k1,1
+Q4 answer: egrep -v "LAB" classes.tsv | cut -f 7 | sort -k1,1 | uniq -c | sort -k1,1 -nr | tail -n 2 |
 
 
 5) Write a shell pipeline which will print the most common day and hour in the week for classes to start and how many classes start at that time.
