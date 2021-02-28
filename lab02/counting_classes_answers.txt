@@ -19,7 +19,7 @@ Q2 answer: cat classes.tsv | uniq -c
 
 
 3) Write a shell pipeline which will print the course with the most classes, and how many classes are in this course.
-Q3 answer: 
+Q3 answer: cut -f1 classes.tsv | sort -k1 | uniq | wc -l
 
 
 4) Write a shell pipeline which will print the two rooms most frequently used by non-LAB CSE classes and how often they are used.
