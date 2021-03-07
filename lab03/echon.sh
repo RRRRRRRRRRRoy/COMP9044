@@ -21,8 +21,11 @@ if test $(echo $num | bc) != $num  # if test "..." != "..."
 then 
     echo "./echon.sh: argument 1 must be a non-negative integer" 1>&2
     exit 1
+
+fi 
+
 # check the number which is negative
-elif test $num -lt 0 
+if test $num -lt 0 
 then 
     echo "./echon.sh: argument 1 must be a non-negative integer" 1>&2
     exit 1
