@@ -17,13 +17,21 @@ str=$2
 # Use bc can check the input is number or not
 # number use bc is still itself but string use bc is 0
 # Source: https://stackoverflow.com/questions/31034540/correct-usage-of-bc-in-a-shell-script
-if test $(echo num|bc)!=$1
+if test $(echo $num | bc) != $num  # if test "..." != "..."
 then 
     echo "./echon.sh: argument 1 must be a non-negative integer" 1>&2
-    exit 1
-elif test $num -lt 0
-then
-    echo "./echon.sh: argument 1 must be a non-negative integer" 1>&2
-    exit 1
+    exit
 fi
 
+if [ $num -lt 0 ]
+then
+    echo "./echon.sh: argument 1 must be a non-negative integer" 1>&2
+    exit
+fi
+
+counter=0
+while test $counter -lt $num 
+do
+    echo $str
+    counter=$(($counter + 1))
+done
