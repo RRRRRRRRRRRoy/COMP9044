@@ -11,12 +11,8 @@ then
     echo "$0: argument 1 must be an integer between 2019 and 2021" 
     exit 1
 
-elif [[$1 == "COMP"]]
-then
-    echo "$0: argument 1 must be an integer between 2019 and 2021" 
-    exit 1
-    
-elif test $1 -ge 2019 && test $1 -le 2021
+
+elif test $1 -ge 2019 2>/dev/null && test $1 -le 2021 2>/dev/null
 then
     :
 
