@@ -1,6 +1,6 @@
 #!/bin/sh
 
-# empty string used to store file names
+
 small=""
 medium=""
 large=""
