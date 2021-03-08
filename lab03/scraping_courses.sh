@@ -6,9 +6,9 @@ then
     exit 1
 fi
 
-if [[ $(echo $1 | bc) -ne $1 ]]
+if [[ $(echo $1 | bc) -ne $1 ]] 2>/dev/null
 then
-    echo "$0: argument 1 must be an integer between 2019 and 2021" 1>&2
+    echo "$0: argument 1 must be an integer between 2019 and 2021" 
     exit 1
 
 
