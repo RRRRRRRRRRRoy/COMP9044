@@ -44,7 +44,7 @@ do
         file_counter=$(($file_counter + 1))
 
         # checking whether go through all the current files in dir
-        if test $file_counter -ge $file_number
+        if test $file_number -le $file_counter
         then 
             echo "Small files: ${small_size[*]}"
             echo "Medium-sized files: ${medium_size[*]}"
