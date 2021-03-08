@@ -35,7 +35,7 @@ do
             # name is the output --> name store to the array
             index_medium=${#medium_size[*]}
             medium_size[$index_medium]=$file_name
-        elif test $file_lines -ge100 && test $file_lines -lt 1000
+        elif test $file_lines -ge 100 && test $file_lines -lt 1000
         then 
             index_large=${#large_size[*]}
             large_size[$index_large]=$file_name
