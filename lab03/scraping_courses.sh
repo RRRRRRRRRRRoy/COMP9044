@@ -9,6 +9,10 @@ fi
 if test $1 -ge 2019 && test $1 -le 2021
 then
     :
+elif test $(echo $1 | bc) != $1 
+then
+    echo "$0: argument 1 must be an integer between 2019 and 2021"
+    exit 1
 else
     echo "$0: argument 1 must be an integer between 2019 and 2021"
     exit 1
