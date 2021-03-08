@@ -17,15 +17,19 @@ do
         size=$(echo $line | cut -d' ' -f1)
         file_name=$(echo $line | cut -d' ' -f2)
 
+        # Array operation in Shell
+        # Source: https://stackoverflow.com/questions/1878882/arrays-in-unix-shell
         if test $size -lt 10 
         then
-            :
+            index_s=${#small[*]}
+            small[$index_s]=$file_name
         elif test $size -ge 10 && test $size -lt 100 
         then 
-            :
+            index_m=${#medium[*]}
+            medium[$index_m]=$file_name
         elif test $size -lt 1000
         then 
-            :
+            
         fi
 
         # checking whether go through all the current files in dir
