@@ -6,13 +6,14 @@ then
     exit 1
 fi
 
-if test $1 -ge 2019 && test $1 -le 2021
-then
-    :
-elif [[ $(echo $1 | bc) -ne $1 ]] 2>/dev/null
+if [[ $(echo $1 | bc) -ne $1 ]] 2>/dev/null
 then
     echo "$0: argument 1 must be an integer between 2019 and 2021" 1>&2
     exit 1
+
+elif test $1 -ge 2019 && test $1 -le 2021
+then
+    :
 else
     echo "$0: argument 1 must be an integer between 2019 and 2021"
     exit 1
