@@ -1,35 +1,43 @@
 #!/bin/sh
 
+# COMP9041 Lab02 Exercise3 : File Sizes
 
-small=""
-medium=""
-large=""
+# Creating arrays for 3 kinds of files
+small=()
+medium=()
+large=()
 
+# checking all these lines in the dir
 file_number=$(ls -l | wc -l)
 file_number=$(expr $file_number - 1)
-file_count=0 
+file_counter=0 
 
-# ``this is used to execute the sentence
-wc -l `ls *` | while read line
+wc -l $(ls *) | while read line
 do
-        line_size=`echo $line | cut -d' ' -f1`
-        file_name=`echo $line | cut -d' ' -f2`
-        # Check the file lines and filename print
-        # echo -n $line_size && echo -n ' ' && echo  $file_name
-        if test $line_size -lt 10
+        size=$(echo $line | cut -d' ' -f1)
+        file_name=$(echo $line | cut -d' ' -f2)
+
+        if test $size -lt 10 
         then
-            # appending new string 
-            # Source: https://stackoverflow.com/questions/2250131/how-do-you-append-to-an-already-existing-string
-            small="$small $file"
-        elif test $line_size -ge 10 && test $line_size -lt 100
-        then
-            medium="$medium $file"
-        elif test $line_size -ge 100
-        then
-            large="$large $file"
+            :
+        elif test $size -ge 10 && test $size -lt 100 
+        then 
+            :
+        elif test $size -lt 1000
+        then 
+            :
+        fi
+
+        # checking whether go through all the current files in dir
+        file_counter=$(($file_counter + 1))
+
+        if test $file_counter -ge $file_number
+        then 
+            echo "Small files: "
+            echo "Medium-sized files: "
+            echo "Large files: " 
+            exit 1
         fi
 done
 
-echo "Small files: $small"
-echo "Medium-sized files: $medium"
-echo "large files: $large"
+
