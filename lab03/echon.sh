@@ -17,7 +17,7 @@ str=$2
 # Use bc can check whether the input is a string or not
 # number use bc is still itself but string use bc is 0
 # Source: https://stackoverflow.com/questions/31034540/correct-usage-of-bc-in-a-shell-script
-if test $(echo $num | bc) != $num  # if test "..." != "..."
+if test $(echo $num | bc) != $num 
 then 
     echo "./echon.sh: argument 1 must be a non-negative integer" 1>&2
     exit 1

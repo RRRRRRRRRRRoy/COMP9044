@@ -16,10 +16,13 @@ file_counter=0
 
 # Read line in files
 wc -l $(ls *) | while read line
-do
+do      
+        # Cut 1st line as lines number 
+        # Cut 2nd line as filename
         file_lines=$(echo $line | cut -d' ' -f1)
         file_name=$(echo $line | cut -d' ' -f2)
 
+        # This part is to check the file belongs to which part
         if test $file_lines -lt 10 
         then
             # before start len is 0 so we can store data in the 1st place
@@ -36,7 +39,8 @@ do
             index_medium=${#medium_size[*]}
             medium_size[$index_medium]=$file_name
         elif test $file_lines -ge 100
-        then 
+        then
+            # same way with previous
             index_large=${#large_size[*]}
             large_size[$index_large]=$file_name
         fi
@@ -46,7 +50,8 @@ do
 
         # checking whether go through all the current files in dir
         if test $file_number -le $file_counter
-        then 
+        then
+            # print the result in each part 
             echo "Small files: ${small_size[*]}"
             echo "Medium-sized files: ${medium_size[*]}"
             echo "Large files: ${large_size[*]}" 
