@@ -11,9 +11,10 @@ then
     echo "$0: argument 1 must be an integer between 2019 and 2021" 1>&2
     exit 1
 
-elif test $1 -ge 2019 && test $1 -le 2021
+elif test $1 -lt 2019 && test $1 -gt 2021
 then
-    :
+    echo "$0: argument 1 must be an integer between 2019 and 2021"
+    exit 1
 else
     echo "$0: argument 1 must be an integer between 2019 and 2021"
     exit 1
