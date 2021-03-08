@@ -24,15 +24,15 @@ do
             # before start len is 0 so we can store data in the 1st place
             # Then move to the second place which index is current len is 1
             # In this way this array can be Scalable
-            index_s=${#small[*]}
+            index_s=${#small_size[*]}
             small_size[$index_s]=$file_name
         elif test $size -ge 10 && test $size -lt 100 
         then 
-            index_m=${#medium[*]}
+            index_m=${#medium_size[*]}
             medium_size[$index_m]=$file_name
         elif test $size -lt 1000
         then 
-            index_l=${#large[*]}
+            index_l=${#large_size[*]}
             large_size[$index_l]=$file_name
         fi
 
@@ -42,9 +42,9 @@ do
         # checking whether go through all the current files in dir
         if test $file_counter -ge $file_number
         then 
-            echo "Small files: ${small[*]}"
-            echo "Medium-sized files: ${small[*]}"
-            echo "Large files: ${small[*]}" 
+            echo "Small files: ${small_size[*]}"
+            echo "Medium-sized files: ${medium_size[*]}"
+            echo "Large files: ${large_size[*]}" 
             exit 1
         fi
 done
