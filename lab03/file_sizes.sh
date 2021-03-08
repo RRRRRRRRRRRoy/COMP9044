@@ -14,6 +14,7 @@ file_number=$(ls -l | wc -l)
 file_number=$(expr $file_number - 1)
 file_counter=0 
 
+# Read line in files
 wc -l $(ls *) | while read line
 do
         file_lines=$(echo $line | cut -d' ' -f1)
