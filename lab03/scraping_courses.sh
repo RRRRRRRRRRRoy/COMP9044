@@ -1,7 +1,7 @@
 #!/bin/sh
 
 # check the input value number is 2
-if test $# -lt  2 && test $# -gt 2
+if test $# -lt  2 || test $# -gt 2
 then
     echo "Usage: $0 <year> <course-prefix>" 1>&2
     exit 1
