@@ -16,6 +16,9 @@ do
         music_track=$(echo "$music" | cut -d' ' -f1,1)
         id3 -T "$music_track" "$music" >/dev/null
 
+        # Why using >/dev/null
+        # Different situations of using >/dev/null
+        # Source: https://linuxhint.com/what_is_dev_null/
         music_artist=$(echo "$music" | sed 's/^..*- //'| sed 's/\.mp3//')
         id3 -a "$music_artist" "$music" >/dev/null
         
@@ -25,7 +28,7 @@ do
         music_album=$(echo "$get_current_music_path" | sed 's/^..*\///')
         id3 -A "$music_album" "$music" >/dev/null
 
-        music_year=$(echo "$music_album" | cut -d',' -f2,2 | sed 's/^ //')
+        music_year=$(echo "$music_album" | cut -d',' -f2,2 | sed 's/^.//')
         id3 -y "$music_year" "$music" >/dev/null
         # music_comment="
         # id3 -c "$music_comment" "$music" 
