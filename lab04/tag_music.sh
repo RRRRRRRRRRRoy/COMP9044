@@ -14,7 +14,7 @@ do
         music_artist=$(echo "$music" | sed 's/^.*- //;s/\.mp3//')
         get_current_music_path=$(pwd)
         music_album=$(echo "$get_current_music_path" | sed 's/^.*\///')
-        music_year=$(echo "$music_album" | cut -d',' -f2,2 | sed 's/^ //')
+        music_year=$(echo "$music_album" | cut -d',' -f2 | sed 's/^ //')
         #music_comment=""
 
         id3 -t "$music_title" "$music" 2>/dev/null
