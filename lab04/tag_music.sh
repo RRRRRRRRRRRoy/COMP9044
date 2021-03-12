@@ -4,6 +4,12 @@
 # STEP1: Selecting the string
 # STEP2: Adding the string to the id3 tag
 
+# Why using >/dev/null
+# Different situations of using >/dev/null
+
+# Do not forget to change the dir
+# after solving one folder back to the root and continue
+
 for folder in "$@"
 do  
     root_dir=$(pwd)
