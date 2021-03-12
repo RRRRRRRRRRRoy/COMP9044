@@ -1,7 +1,9 @@
 #!/bin/sh
+# Notice! The directory change dir ---> cd
 
 for folder in "$@"
 do  
+    current_dir=$(pwd)
     cd "$folder"
     # How to use find and the meaning of type f
     # Source: https://explainshell.com/explain?cmd=find+folder+-type+f
@@ -21,4 +23,6 @@ do
         id3 -y "$music_year" "$music" 
         #id3 -c "$music_comment" "$music" 
     done
+    # After finished this folder back to the root and continue
+    cd $current_dir
 done
