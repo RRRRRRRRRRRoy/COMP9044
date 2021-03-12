@@ -17,12 +17,12 @@ then
     do
         if test $counter -gt 0
         then
-            song=`echo "$line" | egrep "^#"`
+            song=$(echo "$line" | egrep "^#")
             if ! test "$song" = ""
             then
-                music_artist=`echo "$line" | sed -r -e 's/\xE2\x80\x93.*?$//;s/\[\[[^]]*?\|([^]]*?)]]/\1/g;s/]//g;s/\[//g;s/^#//;s/^ *//;s/ *$//'`
+                music_artist=$(echo "$line" | sed -r -e 's/\xE2\x80\x93.*?$//'|sed -r -e 's/\[\[[^]]*?\|([^]]*?)]]/\1/g'| sed -r -e 's/]//g'| sed -r -e 's/\[//g' | sed -r -e 's/^#//' | sed -r -e's/^ *//' | sed -r -e 's/ *$//')
                 
-                music_name=`echo "$line" | sed -r -e 's/^.*?\xE2\x80\x93//;s/\[\[[^]]*?\|([^]]*?)]]/\1/g;s/]//g;s/\[//g;s#/#-#g;s/"//g;s/^ *//;s/ *$//'`
+                music_name=$(echo "$line" | sed -r -e 's/^.*?\xE2\x80\x93//;s/\[\[[^]]*?\|([^]]*?)]]/\1/g;s/]//g;s/\[//g;s#/#-#g;s/"//g;s/^ *//;s/ *$//'`
 
                 new_music_file="$counter - $music_name - $music_artist.mp3"
                 counter=$(( $counter + 1 ))
