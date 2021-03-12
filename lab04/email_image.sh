@@ -14,7 +14,8 @@ do
 
     echo "$image sent to $email_address"
 
-    $get_name=$(echo $image| sed 's/[a-zA-Z0-9]*.png/[a-zA-Z0-9]*/g')
+    get_name=$(echo $image|sed 's/[a-zA-Z0-9]*.png/[a-zA-Z0-9]*/g')
+    
     
     echo "$message" | mutt -s "$get_name" -e 'set copy=no' -a "$image" -- "$address"
 done
