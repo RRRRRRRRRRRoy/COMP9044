@@ -15,5 +15,5 @@ do
     echo "$image sent to $email_address"
 
     
-    echo '$message' | mutt -e 'set copy=no' -a "$img" -- "$address"
+    echo "$message" | mutt -e 'set copy=no' -a "$image" -- "$address"
 done
