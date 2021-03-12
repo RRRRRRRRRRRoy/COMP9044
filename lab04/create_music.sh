@@ -9,9 +9,6 @@ then
     if [ ! -d "$2" ]
     then 
         mkdir "$2"
-    # else
-    #     #echo "exist!"
-    #     :
     fi
     cd "$2"
     # How to use wget
@@ -21,7 +18,7 @@ then
         if test $counter -gt 0
         then
             song=`echo "$line" | egrep "^#"`
-            if ["$song" != ""]
+            if ! test "$song" = ""
             then
                 music_artist=`echo "$line" | sed -r -e 's/\xE2\x80\x93.*?$//;s/\[\[[^]]*?\|([^]]*?)]]/\1/g;s/]//g;s/\[//g;s/^#//;s/^ *//;s/ *$//'`
                 
@@ -43,7 +40,7 @@ then
             # Source: https://stackoverflow.com/questions/20075811/what-does-the-operator-mean-in-a-shell-script
             # You can also write 
             # if ! test "$new_album" != ""
-            if ["$new_album" != ""]
+            if ! test "$new_album" = ""
             then
                 # reset the counter and make directory
                 counter=1
