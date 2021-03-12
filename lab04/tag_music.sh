@@ -16,11 +16,11 @@ do
         music_year=$(echo "$album" | cut -d',' -f2,2 | sed 's/^ //')
         #music_comment=""
 
-        id3 -t "$music_title" "$music" 
-        id3 -a "$music_artist" "$music" 
-        id3 -T "$music_track" "$music" 
-        id3 -A "$music_album" "$music" 
-        id3 -y "$music_year" "$music" 
+        id3 -t "$music_title" "$music" 2>/dev/null
+        id3 -a "$music_artist" "$music" 2>/dev/null
+        id3 -T "$music_track" "$music" 2>/dev/null
+        id3 -A "$music_album" "$music" 2>/dev/null
+        id3 -y "$music_year" "$music" 2>/dev/null
         #id3 -c "$music_comment" "$music" 
     done
     # After finished this folder back to the root and continue
