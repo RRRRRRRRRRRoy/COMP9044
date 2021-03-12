@@ -3,8 +3,8 @@
 # How to check the dir exist or not
 # Source: https://www.cyberciti.biz/faq/howto-check-if-a-directory-exists-in-a-bash-shellscript/
 counter=0
-flag=0
-if [ "$#" -eq 2 ]
+
+if test "$#" -eq 2 
 then
     if [ ! -d "$2" ]
     then 
@@ -31,6 +31,7 @@ then
                 counter=$(( $counter + 1 ))
                 cp "../../$1" "$new_music_file"
             fi
+
             if test "$counter" -eq 11
             then
                 counter=0
