@@ -9,6 +9,8 @@ then
     if [ ! -d "$2" ]
     then 
         mkdir "$2"
+    else
+        :
     fi
     cd "$2"
     # How to use wget
@@ -22,7 +24,7 @@ then
             then
                 music_artist=$(echo "$line" | sed -r -e 's/\xE2\x80\x93.*?$//'|sed -r -e 's/\[\[[^]]*?\|([^]]*?)]]/\1/g'| sed -r -e 's/]//g'| sed -r -e 's/\[//g' | sed -r -e 's/^#//' | sed -r -e's/^ *//' | sed -r -e 's/ *$//')
                 
-                music_name=$(echo "$line" | sed -r -e 's/^.*?\xE2\x80\x93//;s/\[\[[^]]*?\|([^]]*?)]]/\1/g;s/]//g;s/\[//g;s#/#-#g;s/"//g;s/^ *//;s/ *$//')
+                music_name=$(echo "$line" | sed -r -e 's/^.*?\xE2\x80\x93//' |sed -r -e 's/\[\[[^]]*?\|([^]]*?)]]/\1/g'| sed -r -e 's/]//g'| sed -r -e 's/\[//g'|sed -r -e 's#/#-#g' |sed -r -e 's/"//g' |sed -r -e 's/^ *//'| sed -r -e 's/ *$//')
 
                 new_music_file="$counter - $music_name - $music_artist.mp3"
                 counter=$(( $counter + 1 ))
@@ -34,7 +36,8 @@ then
                 counter=0
                 cd ..
             fi
-        else
+        fi
+        if test $counter -le 0
             new_album=`echo "$line" | egrep '.*style.*Triple J Hottest 100, [0-9]{4}\|[0-9]{4}' |egrep -o 'Triple J Hottest 100, [0-9]{4}'`
             # How to check null
             # Source: https://stackoverflow.com/questions/20075811/what-does-the-operator-mean-in-a-shell-script
@@ -48,7 +51,5 @@ then
                 cd "$new_album"
             fi
         fi
-
-
     done
 fi
