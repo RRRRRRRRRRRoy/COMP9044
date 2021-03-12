@@ -7,4 +7,7 @@ initial_path=$(echo "$sample_path/$1")
 if [ ! -d "$2" ]
 then 
     mkdir "$2"
+else
+    #echo "exist!"
+    :
 fi
