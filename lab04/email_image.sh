@@ -6,10 +6,10 @@ for image in "$@"
 do
     echo "$image displayed to screen if possible"
 
-    echo -n "Address to e-mail this image to?"
+    echo -n "Address to e-mail this image to? "
     read email_address
 
-    echo -n "Message to accompany image?"
+    echo -n "Message to accompany image? "
     read message
 
     echo "$image sent to $email_address"
