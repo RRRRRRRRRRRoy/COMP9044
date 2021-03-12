@@ -37,7 +37,7 @@ then
 
         if [ $counter -gt 0 ]
         then
-            song=$(echo "$line" | egrep "^#")
+            song=$(echo "$line" | egrep "^#.*")
             if [ "$song" = "" ]
             then
                 :
