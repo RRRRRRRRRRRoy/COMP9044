@@ -38,8 +38,10 @@ then
             song=$(echo "$line" | grep -e "^#.*")
             if ["$song" != ""]
             then
-                music_artist=$(echo "$line" | sed -r -e 's/\xE2\x80\x93.*?$//'| sed -r -e 's/\[\[[^]]*?\|([^]]*?)]]/\1/g'|sed -r -e 's/]//g'| sed -r -e 's/\[//g'| sed -r -e "s/^#//" | sed -r -e 's/^.*//'| sed -r -e 's/.*$//')
-                music_name=$(echo "$line" | sed -r -e 's/^.*?\xE2\x80\x93//'| sed -r -e 's/\[\[[^]]*?\|([^]]*?)]]/\1/g'|sed -r -e 's/]//g'|sed -r -e 's/\[//g'|sed -r -e 's#/#-#g'|sed -r -e 's/"//g'|sed -r -e 's/^.*//'|sed -r -e 's/.*$//')
+                music_artist=$(echo "$line" | sed -r -e 's/\xE2\x80\x93.*?$//;s/\[\[[^]]*?\|([^]]*?)]]/\1/g;s/]//g;s/\[//g;s/^#//;s/^ *//;s/ *$//')
+                
+                music_name=$(echo "$line" | sed -r -e 's/^.*?\xE2\x80\x93//;s/\[\[[^]]*?\|([^]]*?)]]/\1/g;s/]//g;s/\[//g;s#/#-#g;s/"//g;s/^ *//;s/ *$//')
+
                 new_music_file="$counter - $music_name - $music_artist.mp3"
                 counter=$(($counter + 1))
                 cp "../../$1" "$new_music_file"
