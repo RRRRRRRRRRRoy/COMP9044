@@ -17,7 +17,7 @@ do
         
         # The meaning of convert
         # Source: https://explainshell.com/explain?cmd=convert
-        convert "$jpg_picture" "$new_image" 1>&2
+        convert "$jpg_picture" "$new_image" 2>/dev/null
         # How to remove file(recursive and force)?
         # Source: https://explainshell.com/explain?cmd=rm+-rf 
         rm -r --force "$jpg_file"
