@@ -1,3 +1,5 @@
+#!/bin/sh
+
 for folder in "$@"
 do  
     # How to use find and the meaning of type f
