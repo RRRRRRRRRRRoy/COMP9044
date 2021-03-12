@@ -9,14 +9,17 @@ do
     # Source: https://explainshell.com/explain?cmd=find+folder+-type+f
     for music in *
     do
+        # Use the current path can get the info of album
         get_current_music_path=$(pwd)
         music_track=$(echo "$music" | cut -d' ' -f1,1)
         music_title=$(echo "$music" | sed -r 's/^..*?- (.+?) -..*?$/\1/')
         music_artist=$(echo "$music" | sed 's/^..*- //'| sed 's/\.mp3//')
-        music_album=$(echo "$get_current_music_path" | sed 's/^..*\///')
+        music_album=$(echo "$get_current_music_path" | sed 's/^..*\/.*$//')
         music_year=$(echo "$music_album" | cut -d',' -f2,2 | sed 's/^ //')
         # music_comment=""
 
+        # Each tag in id3
+        # Source: https://tldp.org/HOWTO/MP3-HOWTO-13.html
         id3 -t "$music_title" "$music" >/dev/null
         id3 -a "$music_artist" "$music" >/dev/null
         id3 -T "$music_track" "$music" >/dev/null
