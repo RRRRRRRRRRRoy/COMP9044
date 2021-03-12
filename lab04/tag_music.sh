@@ -11,9 +11,9 @@ do
     do
         get_current_music_path=$(pwd)
         music_track=$(echo "$music" | cut -d' ' -f1,1)
-        music_title=$(echo "$music" | sed -r 's/^.+?- (.+?) -.+?$/\1/')
-        music_artist=$(echo "$music" | sed 's/^.+- //;s/\.mp3//')
-        music_album=$(echo "$get_current_music_path" | sed 's/^.+\///')
+        music_title=$(echo "$music" | sed -r 's/^..*?- (.+?) -..*?$/\1/')
+        music_artist=$(echo "$music" | sed 's/^..*- //;s/\.mp3//')
+        music_album=$(echo "$get_current_music_path" | sed 's/^..*\///')
         music_year=$(echo "$music_album" | cut -d',' -f2 | sed 's/^ //')
         #music_comment=""
 
