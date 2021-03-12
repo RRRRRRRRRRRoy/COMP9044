@@ -14,6 +14,6 @@ do
 
     echo "$image sent to $email_address"
 
-    get_mutt_s = sed 's/$image/[a-zA-Z0-9]*/g'
+    $get_mutt_s = sed 's/$image/[a-zA-Z0-9]*/g'
     echo '$message' | mutt -s '$get_mutt_s' -e 'set copy=no' -a "$img" -- "$address"
 done
