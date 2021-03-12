@@ -22,7 +22,7 @@ do
         music_artist=$(echo "$music" | sed 's/^..*- //'| sed 's/\.mp3//')
         id3 -a "$music_artist" "$music" >/dev/null
         
-        music_title=$(echo "$music" | sed -r 's/^..*?- (.+?) -..*?$/\1/')
+        music_title=$(echo "$music" | sed -r 's/^..*?-.(.+?).-..*?$/\1/')
         id3 -t "$music_title" "$music" >/dev/null
 
         music_album=$(echo "$get_current_music_path" | sed 's/^..*\///')
