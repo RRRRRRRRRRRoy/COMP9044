@@ -1,6 +1,4 @@
 #!/bin/dash
-initial_path=$(pwd)
-initial_path=$(echo "$sample_path/$1")
 
 # How to check the dir exist or not
 # Source: https://www.cyberciti.biz/faq/howto-check-if-a-directory-exists-in-a-bash-shellscript/
@@ -24,7 +22,7 @@ then
 
         if test $counter -gt 0
         then
-            song=$(echo "$line" | grep -e "^#")
+            song=$(echo "$line" | egrep "^#")
             if ["$song" != ""]
             then
                 music_artist=$(echo "$line" | sed -r -e 's/\xE2\x80\x93.*?$//;s/\[\[[^]]*?\|([^]]*?)]]/\1/g;s/]//g;s/\[//g;s/^#//;s/^ *//;s/ *$//')
@@ -32,7 +30,7 @@ then
                 music_name=$(echo "$line" | sed -r -e 's/^.*?\xE2\x80\x93//;s/\[\[[^]]*?\|([^]]*?)]]/\1/g;s/]//g;s/\[//g;s#/#-#g;s/"//g;s/^ *//;s/ *$//')
 
                 new_music_file="$counter - $music_name - $music_artist.mp3"
-                counter=$(($counter + 1))
+                counter=$(( $counter + 1 ))
                 cp "../../$1" "$new_music_file"
             fi
             if test "$counter" -eq 11
@@ -40,10 +38,7 @@ then
                 counter=0
                 cd ..
             fi
-        fi
-
-        if test $counter -le 0
-        then
+        else
             new_album=$(echo "$line" | egrep '.*style.*Triple J Hottest 100, [0-9]{4}\|[0-9]{4}' |egrep -o 'Triple J Hottest 100, [0-9]{4}')
             # How to check null
             # Source: https://stackoverflow.com/questions/20075811/what-does-the-operator-mean-in-a-shell-script
