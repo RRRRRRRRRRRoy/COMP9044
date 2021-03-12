@@ -38,6 +38,7 @@ then
             fi
         fi
         if test $counter -le 0
+        then
             new_album=`echo "$line" | egrep '.*style.*Triple J Hottest 100, [0-9]{4}\|[0-9]{4}' |egrep -o 'Triple J Hottest 100, [0-9]{4}'`
             # How to check null
             # Source: https://stackoverflow.com/questions/20075811/what-does-the-operator-mean-in-a-shell-script
