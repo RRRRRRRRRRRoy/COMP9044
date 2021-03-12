@@ -14,7 +14,7 @@
 for img in "$@"
 do
     # using awk to re-arrange the sequence of the time stamp
-    text=`ls -l "$img" | tr -s ' ' | cut -d' ' -f6-8|awk '{print $2,$1,$3}'`
+    text=$(ls -l "$img" | tr -s ' ' | cut -d' ' -f6-8|awk '{print $2,$1,$3}')
     
     convert -gravity south -pointsize 36 -draw "text 0,10 '$text'" "$img" "$img"
     
