@@ -19,7 +19,7 @@ then
     do
         if test $counter -le 0
         then
-            new_album=`echo "$line" | egrep '.*style.*Triple.J.Hottest.100,.[0-9]{4}\|[0-9]{4}' |egrep -o 'Triple.J.Hottest.100,.[0-9]{4}'`
+            new_album=$(echo "$line" | egrep '.*style.*Triple.J.Hottest.100,.[0-9]{4}\|[0-9]{4}' |egrep -o 'Triple.J.Hottest.100,.[0-9]{4}')
             # How to check null
             # Source: https://stackoverflow.com/questions/20075811/what-does-the-operator-mean-in-a-shell-script
             # You can also write 
@@ -30,6 +30,8 @@ then
                 counter=1
                 mkdir "$new_album"
                 cd "$new_album"
+            else
+                :
             fi
         fi
 
@@ -45,12 +47,16 @@ then
                 new_music_file="$counter - $music_name - $music_artist.mp3"
                 counter=$(( $counter + 1 ))
                 cp "../../$1" "$new_music_file"
+            else
+                :
             fi
 
             if test "$counter" -eq 11
             then
                 counter=0
                 cd ..
+            else
+                :
             fi
         fi
 
