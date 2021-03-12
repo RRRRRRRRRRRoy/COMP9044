@@ -12,8 +12,9 @@ do
         music_track=$(echo "$music" | cut -d' ' -f1,1)
         music_title=$(echo "$music" | sed -r 's/^.+?- (.*?) -.+?$/\1/')
         music_artist=$(echo "$music" | sed 's/^.+- //;s/\.mp3//')
-        music_album=$(echo "$path" | sed 's/^.*\///')
-        music_year=$(echo "$album" | cut -d',' -f2,2 | sed 's/^ //')
+        get_current_music_path=$(pwd)
+        music_album=$(echo "$get_current_music_path" | sed 's/^.*\///')
+        music_year=$(echo "$music_album" | cut -d',' -f2,2 | sed 's/^ //')
         #music_comment=""
 
         id3 -t "$music_title" "$music" 2>/dev/null
