@@ -23,14 +23,25 @@ then
         if [$counter -le 0]
         then
             new_album=$(echo "$line" | grep -e '.*style.*Triple.J.Hottest.100,.[0-9]{4}\|[0-9]{4}' |egrep -o 'Triple.J.Hottest.100,.[0-9]{4}')
+            # How to check null
+            # Source: https://stackoverflow.com/questions/20075811/what-does-the-operator-mean-in-a-shell-script
+            # You can also write 
+            # if ! test "$new_album" != ""
             if ["$new_album" != ""]
             then
+                # reset the counter and make directory
                 counter=1
                 mkdir "$new_album"
                 cd "$new_album"
             fi
         else
+            song=$(echo "$line" | grep -e "^#.*")
+            if ["$song" != ""]
+            then
+                music_artist=$(echo "$line" | sed -r -e 's/\xE2\x80\x93.*?$//| sed -r -e 's/\[\[[^]]*?\|([^]]*?)]]/\1/g'|sed -r -e 's/]//g'| sed -r -e 's/\[//g'| sed -r -e "s/^#//" | sed -r -e 's/^.*//'| sed -r -e 's/.*$//')
+                music_name
 
+            fi
         fi
     done
 fi
