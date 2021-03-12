@@ -4,7 +4,8 @@
 
 for image in "$@"
 do
-    echo "$image displayed to screen if possible"
+    #echo "$image displayed to screen if possible"
+    display $image
 
     echo -n "Address to e-mail this image to? "
     read email_address
