@@ -20,7 +20,7 @@ then
     # Source: https://linuxconfig.org/wget-file-download-on-linux
     wget -q -O- 'https://en.wikipedia.org/wiki/Triple_J_Hottest_100?action=raw' | while read line
     do
-        if [$counter -le 0]
+        if [[$counter -le 0]]
         then
             new_album=$(echo "$line" | grep -e '.*style.*Triple.J.Hottest.100,.[0-9]{4}\|[0-9]{4}' |egrep -o 'Triple.J.Hottest.100,.[0-9]{4}')
             # How to check null
@@ -44,7 +44,7 @@ then
                 counter=$(($counter + 1))
                 cp "../../$1" "$new_music_file"
             fi
-            if ["$counter" -eq 11]
+            if [["$counter" -eq 11]]
             then
                 counter=0
                 cd ..
