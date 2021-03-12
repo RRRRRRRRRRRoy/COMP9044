@@ -11,9 +11,9 @@ then
     if [ ! -d "$2" ]
     then 
         mkdir "$2"
-    else
-        #echo "exist!"
-        :
+    # else
+    #     #echo "exist!"
+    #     :
     fi
     cd "$2"
     # How to use wget
@@ -34,7 +34,10 @@ then
                 mkdir "$new_album"
                 cd "$new_album"
             fi
-        else
+        fi
+        
+        if test $counter -gt 0
+        then
             song=$(echo "$line" | grep -e "^#.*")
             if ["$song" != ""]
             then
