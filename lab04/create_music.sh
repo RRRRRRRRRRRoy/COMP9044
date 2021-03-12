@@ -39,7 +39,8 @@ then
             if ["$song" != ""]
             then
                 music_artist=$(echo "$line" | sed -r -e 's/\xE2\x80\x93.*?$//| sed -r -e 's/\[\[[^]]*?\|([^]]*?)]]/\1/g'|sed -r -e 's/]//g'| sed -r -e 's/\[//g'| sed -r -e "s/^#//" | sed -r -e 's/^.*//'| sed -r -e 's/.*$//')
-                music_name
+                music_name=$(echo "$line" | sed -r -e 's/^.*?\xE2\x80\x93//'| sed -r -e 's/\[\[[^]]*?\|([^]]*?)]]/\1/g'|sed -r -e 's/]//g'|sed -r -e s/\[//g|sed -r -e s#/#-#g|sed -r -e s/"//g|sed -r -e s/^.*//|sed -r -e s/.*$//')
+                
 
             fi
         fi
