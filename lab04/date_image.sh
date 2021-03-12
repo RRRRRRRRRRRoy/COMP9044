@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/dash
 
 # exercise 3 date image in lab04
 

@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/dash
 
 # Exercise 1 in lab04: Convert jpg to png
 

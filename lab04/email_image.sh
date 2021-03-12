@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/dash
 
 # exercise 02 for lab04
 

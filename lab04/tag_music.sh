@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/dash
 # Notice! The directory change dir ---> cd
 
 for folder in "$@"
