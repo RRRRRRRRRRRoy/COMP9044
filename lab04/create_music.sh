@@ -22,8 +22,15 @@ then
     do
         if [$counter -le 0]
         then
-            
+            new_album=$(echo "$line" | grep -e '.*style.*Triple.J.Hottest.100,.[0-9]{4}\|[0-9]{4}' |egrep -o 'Triple.J.Hottest.100,.[0-9]{4}')
+            if ["$new_album" != ""]
+            then
+                counter=1
+                mkdir "$new_album"
+                cd "$new_album"
+            fi
         else
+
         fi
     done
 fi
