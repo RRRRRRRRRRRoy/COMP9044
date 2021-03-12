@@ -27,7 +27,7 @@ do
         
         # sed -r
         # Source: https://explainshell.com/explain?cmd=sed+-r+
-        music_title=$(echo "$music" | sed 's/^..*?-.(.+?).-..*?$/\1/')
+        music_title=$(echo "$music" | sed -r 's/^..*?-.(.+?).-..*?$/\1/')
         id3 -t "$music_title" "$music" >/dev/null
 
         music_album=$(echo "$get_current_music_path" | sed 's/^..*\///')
