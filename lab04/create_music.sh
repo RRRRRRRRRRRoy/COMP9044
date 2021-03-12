@@ -18,16 +18,14 @@ then
     # Source: https://linuxconfig.org/wget-file-download-on-linux
     wget -q -O- 'https://en.wikipedia.org/wiki/Triple_J_Hottest_100?action=raw' | while read line
     do
-        
-
         if test $counter -gt 0
         then
-            song=$(echo "$line" | egrep "^#")
+            song=`echo "$line" | egrep "^#"`
             if ["$song" != ""]
             then
-                music_artist=$(echo "$line" | sed -r -e 's/\xE2\x80\x93.*?$//;s/\[\[[^]]*?\|([^]]*?)]]/\1/g;s/]//g;s/\[//g;s/^#//;s/^ *//;s/ *$//')
+                music_artist=`echo "$line" | sed -r -e 's/\xE2\x80\x93.*?$//;s/\[\[[^]]*?\|([^]]*?)]]/\1/g;s/]//g;s/\[//g;s/^#//;s/^ *//;s/ *$//'`
                 
-                music_name=$(echo "$line" | sed -r -e 's/^.*?\xE2\x80\x93//;s/\[\[[^]]*?\|([^]]*?)]]/\1/g;s/]//g;s/\[//g;s#/#-#g;s/"//g;s/^ *//;s/ *$//')
+                music_name=`echo "$line" | sed -r -e 's/^.*?\xE2\x80\x93//;s/\[\[[^]]*?\|([^]]*?)]]/\1/g;s/]//g;s/\[//g;s#/#-#g;s/"//g;s/^ *//;s/ *$//'`
 
                 new_music_file="$counter - $music_name - $music_artist.mp3"
                 counter=$(( $counter + 1 ))
@@ -39,7 +37,7 @@ then
                 cd ..
             fi
         else
-            new_album=$(echo "$line" | egrep '.*style.*Triple J Hottest 100, [0-9]{4}\|[0-9]{4}' |egrep -o 'Triple J Hottest 100, [0-9]{4}')
+            new_album=`echo "$line" | egrep '.*style.*Triple J Hottest 100, [0-9]{4}\|[0-9]{4}' |egrep -o 'Triple J Hottest 100, [0-9]{4}'`
             # How to check null
             # Source: https://stackoverflow.com/questions/20075811/what-does-the-operator-mean-in-a-shell-script
             # You can also write 
