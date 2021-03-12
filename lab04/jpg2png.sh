@@ -5,7 +5,7 @@ ls *.jpg | while read jpg_picture
 do
     # change get the new name of image 
     # This is to check the new image is exist or not
-    new_image=$(echo "$jpg_picture"|sed '///g')
+    new_image=$(echo "$jpg_picture"|sed '/.jpg/.png/g')
     # test -f check the current file exist or not
     if test -f "$new_image"
     then
