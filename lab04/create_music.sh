@@ -17,6 +17,22 @@ then
     # Source: https://linuxconfig.org/wget-file-download-on-linux
     wget -q -O- 'https://en.wikipedia.org/wiki/Triple_J_Hottest_100?action=raw' | while read line
     do
+        if test $counter -le 0
+        then
+            new_album=`echo "$line" | egrep '.*style.*Triple.J.Hottest.100,.[0-9]{4}\|[0-9]{4}' |egrep -o 'Triple.J.Hottest.100,.[0-9]{4}'`
+            # How to check null
+            # Source: https://stackoverflow.com/questions/20075811/what-does-the-operator-mean-in-a-shell-script
+            # You can also write 
+            # if ! test "$new_album" != ""
+            if ! test "$new_album" = ""
+            then
+                # reset the counter and make directory
+                counter=1
+                mkdir "$new_album"
+                cd "$new_album"
+            fi
+        fi
+
         if test $counter -gt 0
         then
             song=$(echo "$line" | egrep "^#")
@@ -37,20 +53,6 @@ then
                 cd ..
             fi
         fi
-        if test $counter -le 0
-        then
-            new_album=`echo "$line" | egrep '.*style.*Triple J Hottest 100, [0-9]{4}\|[0-9]{4}' |egrep -o 'Triple J Hottest 100, [0-9]{4}'`
-            # How to check null
-            # Source: https://stackoverflow.com/questions/20075811/what-does-the-operator-mean-in-a-shell-script
-            # You can also write 
-            # if ! test "$new_album" != ""
-            if ! test "$new_album" = ""
-            then
-                # reset the counter and make directory
-                counter=1
-                mkdir "$new_album"
-                cd "$new_album"
-            fi
-        fi
+
     done
 fi
