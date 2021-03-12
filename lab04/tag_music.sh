@@ -1,6 +1,9 @@
 #!/bin/dash
 # Notice! The directory change dir ---> cd
 
+# STEP1: Selecting the string
+# STEP2: Adding the string to the id3 tag
+
 for folder in "$@"
 do  
     root_dir=$(pwd)
@@ -22,7 +25,9 @@ do
         music_artist=$(echo "$music" | sed 's/^..*- //'| sed 's/\.mp3//')
         id3 -a "$music_artist" "$music" >/dev/null
         
-        music_title=$(echo "$music" | sed -r 's/^..*?-.(.+?).-..*?$/\1/')
+        # sed -r
+        # Source: https://explainshell.com/explain?cmd=sed+-r+
+        music_title=$(echo "$music" | sed 's/^..*?-.(.+?).-..*?$/\1/')
         id3 -t "$music_title" "$music" >/dev/null
 
         music_album=$(echo "$get_current_music_path" | sed 's/^..*\///')
