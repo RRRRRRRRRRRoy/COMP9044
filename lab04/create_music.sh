@@ -24,22 +24,24 @@ then
             # Source: https://stackoverflow.com/questions/20075811/what-does-the-operator-mean-in-a-shell-script
             # You can also write 
             # if ! test "$new_album" != ""
-            if [ "$new_album" != "" ]
+            if [ "$new_album" = "" ]
             then
+                :
+            else
                 # reset the counter and make directory
                 counter=1
                 mkdir "$new_album"
                 cd "$new_album"
-            else
-                :
             fi
         fi
 
         if [ $counter -gt 0 ]
         then
             song=$(echo "$line" | egrep "^#")
-            if [ "$song" != "" ]
+            if [ "$song" = "" ]
             then
+                :
+            else
                 music_artist=$(echo "$line" | sed -r -e 's/\xE2\x80\x93.*?$//'|sed -r -e 's/\[\[[^]]*?\|([^]]*?)]]/\1/g'| sed -r -e 's/]//g'| sed -r -e 's/\[//g' | sed -r -e 's/^#//' | sed -r -e's/^ *//' | sed -r -e 's/ *$//')
                 
                 music_name=$(echo "$line" | sed -r -e 's/^.*?\xE2\x80\x93//' |sed -r -e 's/\[\[[^]]*?\|([^]]*?)]]/\1/g'| sed -r -e 's/]//g'| sed -r -e 's/\[//g'|sed -r -e 's#/#-#g' |sed -r -e 's/"//g' |sed -r -e 's/^ *//'| sed -r -e 's/ *$//')
@@ -47,8 +49,6 @@ then
                 new_music_file="$counter - $music_name - $music_artist.mp3"
                 counter=$(( $counter + 1 ))
                 cp "../../$1" "$new_music_file"
-            else
-                :
             fi
 
             if [ "$counter" -eq 11 ]
