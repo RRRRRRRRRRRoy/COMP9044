@@ -15,8 +15,7 @@ do
         # Source: https://unix.stackexchange.com/questions/42728/what-does-31-12-23-do-in-a-script
         echo "$new_image already exists" 1>&2
         exit 1
-    else
-        
+    else 
         # The meaning of convert
         # Source: https://explainshell.com/explain?cmd=convert
         # Do not forget not printing the warning by using 2>/dev/null

@@ -20,6 +20,10 @@ then
     # Source: https://linuxconfig.org/wget-file-download-on-linux
     wget -q -O- 'https://en.wikipedia.org/wiki/Triple_J_Hottest_100?action=raw' | while read line
     do
-        
+        if [$counter -le 0]
+        then
+            
+        else
+        fi
     done
 fi
