@@ -19,6 +19,7 @@ do
         
         # The meaning of convert
         # Source: https://explainshell.com/explain?cmd=convert
+        # do not forget not printing the warning by using 2>/dev/null
         convert "$jpg_picture" "$new_image" 2>/dev/null
         # How to remove file(recursive and force)?
         # Source: https://explainshell.com/explain?cmd=rm+-rf 
