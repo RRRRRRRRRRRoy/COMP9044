@@ -7,7 +7,7 @@ do
     if test -f "$new_file_name"
     then 
         echo "$new_file_name exists" 1>&2
-        exit
+        exit 1
     else
         mv "$old_name" "$new_file_name" 1>&2
     fi
