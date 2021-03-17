@@ -6,7 +6,7 @@ do
     do
         if test -d "$header"
         then
-            echo c.h included into b.c does not exist
+            echo "$header" included into "$c" does not exist
         else
             continue
         fi
