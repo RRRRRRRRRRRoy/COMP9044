@@ -24,5 +24,5 @@ touch $output_file_name
 while(test "$start_number" -le "$end_number")
 do
     echo "$start_number" >> "$output_file_name"
-    start_number=$(($start_number + 1));
+    $start_number=$(($start_number + 1))
 done
