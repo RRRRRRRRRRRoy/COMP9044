@@ -16,7 +16,13 @@ then
     exit 1;
 fi
 
-start_number=$1; 
-end_number=$2;
+start_number=$1;
+end_number=$2
+output_file_name=$3
 
-output_file_name=$3;
+# create the file
+touch $output_file_name
+
+while(test "$start_number" -le "$end_number")
+do
+done
