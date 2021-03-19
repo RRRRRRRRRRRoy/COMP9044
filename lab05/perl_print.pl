@@ -12,7 +12,7 @@ $input=$ARGV[0];
 if($input =~ /"/){
     $temp = $input;
     $a =~ s/"/\\"/g;
-    print "print \"$a\\n\";";
+    print "print \"$input\\n\";";
 }
 if($input =~ /\\/){
     $temp = $input;
