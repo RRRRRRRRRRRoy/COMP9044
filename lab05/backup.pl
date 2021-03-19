@@ -22,13 +22,15 @@ while(-e "$filename_copy"){
 open my $stdin,'<',"$filename_input" or die "$!";
 open my $stdout,'>',"$filename_copy" or die "$!";
 
-# foreach $content($stdin){
-#     print $stdout "$content";
-# }
-
-while($line = <$stdin>){
-	print $stdout "$line";
+# This part cannot use foreach
+# Reason: https://stackoverflow.com/questions/32073140/print-out-glob-instead-of-variable-name
+foreach $content(<$stdin>){
+    print $stdout "$content";
 }
+
+# while($line = <$stdin>){
+# 	print $stdout "$line";
+# }
 
 print "Backup of '$filename_input' saved as '$filename_copy'\n";
 # close the file stream
