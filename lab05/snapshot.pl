@@ -70,4 +70,20 @@ if($condition eq "load"){
             }
 		}
     }
+    @backup_files = glob("$backup_directory/*");
+	foreach $backupfile(@backup_files){
+		open my $stdin,'<',"$backupfile" or die "$!";
+        # Using the =~ to match the strings
+        # Source: https://stackoverflow.com/questions/10019049/what-does-do-in-perl
+        # This is same as the sed in shell and linux
+        # Source: https://perldoc.perl.org/perlrequick
+		$backupfile =~  s/^.+\/(.+)$/$1/g;
+		open my $stdout,'>',"$backupfile" or die "$!";
+        foreach $content(<$stdin>){
+            print $stdout "$line";
+        }
+        close $stdout;
+        close $stdin;
+	}
+	print "Restoring snapshot $backup_counter\n";
 }
