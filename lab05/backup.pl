@@ -11,7 +11,7 @@ $filename_copy=".$filename.txt.$counter";
 
 # check whether the backup is exist
 # Source: https://alvinalexander.com/blog/post/perl/how-test-file-exists-perl/
-while (-e "$filename_copy"){
+while(-e "$filename_copy"){
     $counter = $counter + 1;
     $filename_copy=".$filename.txt.$counter";
 }
@@ -19,13 +19,13 @@ while (-e "$filename_copy"){
 # How to use the file stream in perl?
 # Source: https://perldoc.perl.org/functions/open
 # If exist read in, otherwise do not read in
-open my ($stdin,'<',"$filename") or die ("$!");
-open my ($stdout,'>',"$filename_copy") or die ("$!");
+open my $stdin,'<',"$filename_input" or die ("$!");
+open my $stdout,'>',"$filename_copy" or die ("$!");
 
 while($content=<$stdin>){
     print $stdout "$content";
 }
 
-print "Backup of '$filename' saved as '$cpname'\n";
+print "Backup of '$filename' saved as '$filename_copy'\n";
 close $stdin;
 close $stdout;
