@@ -4,7 +4,7 @@
 # Source: https://perldoc.perl.org/functions/glob
 @current_file = glob("*");
 $condition=$ARGV[0];
-if (($condition eq "save") || ($condition eq "load")){
+if (($condition eq "save") or ($condition eq "load")){
     # STEP 1 create the directory
     $counter = 0;
 	$filename_copy = ".snapshot.$counter";
@@ -49,7 +49,7 @@ if($condition eq "load"){
     # backup counter
     $backup_counter = $ARGV[1];
     $backup_directory = ".snapshot.$backup_counter";
-    print "Restoring snapshot $backup_counter\n";
+    # print "Restoring snapshot $backup_counter\n";
     foreach $file(@current_file){
         # avoiding copy the same current file in lab05
 		if($file ne "snapshot.pl"){
@@ -77,7 +77,7 @@ if($condition eq "load"){
         # Source: https://stackoverflow.com/questions/10019049/what-does-do-in-perl
         # This is same as the sed in shell and linux
         # Source: https://perldoc.perl.org/perlrequick
-		$backupfile =~  s/^.*\/(.*)$/$1/g;
+		$backupfile =~  s/^.+\/(.+)$/$1/g;
 		open my $stdout,'>',"$backupfile" or die "$!";
         foreach $content(<$stdin>){
             print $stdout "$content";
