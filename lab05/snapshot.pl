@@ -80,7 +80,7 @@ if($condition eq "load"){
 		$backupfile =~  s/^.+\/(.+)$/$1/g;
 		open my $stdout,'>',"$backupfile" or die "$!";
         foreach $content(<$stdin>){
-            print $stdout "$line";
+            print $stdout "$content";
         }
         close $stdout;
         close $stdin;
