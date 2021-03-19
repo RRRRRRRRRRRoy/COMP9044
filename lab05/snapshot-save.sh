@@ -16,16 +16,16 @@ mkdir $directoryname;
 
 for file in *
 do  
-    # avoiding copy the same current file
+    # avoiding copy the same current file in lab05
 	if [ "$file" != "snapshot-save.sh" ] 
     then 
-        # avoiding copy the same current file
+        # avoiding copy the same current file in lab05
         if [ "$file" != "snapshot-load.sh" ]
 	    then
-            # avoiding copy the same current file
+            # avoiding copy the same current file in lab05
             if [ "$file" != "backup.sh" ]
 	        then
-                # avoiding copy the same current file
+                # avoiding copy the same current file in lab05
                 if [ "$file" != "backup.pl" ]
 	            then
 			        cp $file $directoryname

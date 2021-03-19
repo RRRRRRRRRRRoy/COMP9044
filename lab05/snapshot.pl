@@ -14,13 +14,21 @@ if (($condition eq "save") or ($condition eq "load")){
 	}
 	mkdir $cp_dir;
 
+    # Go through the files in the current list
     foreach $file(@current_file){
+        # avoiding copy the same current file in lab05
 		if($file ne "snapshot.pl"){
+            # avoiding copy the same current file in lab05
             if($file ne "snapshot-save.sh"){
+                # avoiding copy the same current file in lab05
                 if($file ne "snapshot-load.sh"){
+                    # avoiding copy the same current file in lab05
                     if($file ne "backup.pl"){
+                        # avoiding copy the same current file in lab05
                         if($file ne "backup.pl"){
+                            # Same way reading the file 
                             open my $stdin,'<',"$file" or die "$!";
+                            # Same way writing the file 
 			                open my $stdout,'>',"$filename_copy/$file" or die "$!";
                             foreach $content(<$stdin>){
 				                print $stdout "$content";
@@ -32,6 +40,6 @@ if (($condition eq "save") or ($condition eq "load")){
                 }
             }
 		}
-        print "Creating snapshot $counter\n";
 	}
+    print "Creating snapshot $counter\n";
 }
