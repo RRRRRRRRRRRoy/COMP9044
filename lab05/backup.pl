@@ -1,6 +1,6 @@
 #!/usr/bin/perl -w
 
-my $filename_input = $ARGV[0];
+$filename_input = $ARGV[0];
 #@filename_cut=();
 $counter = 0;
 @filename_cut=split('\.',$filename_input);
@@ -22,8 +22,12 @@ while(-e "$filename_copy"){
 open my $stdin,'<',"$filename_input" or die "$!";
 open my $stdout,'>',"$filename_copy" or die "$!";
 
-foreach $content($stdin){
-    print $stdout "$content";
+# foreach $content($stdin){
+#     print $stdout "$content";
+# }
+
+while($line = <$in>){
+	print $out "$line";
 }
 
 print "Backup of '$filename_input' saved as '$filename_copy'\n";
