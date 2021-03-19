@@ -77,7 +77,7 @@ if($condition eq "load"){
         # Source: https://stackoverflow.com/questions/10019049/what-does-do-in-perl
         # This is same as the sed in shell and linux
         # Source: https://perldoc.perl.org/perlrequick
-		$backupfile =~  s/^.+\/(.+)$/$1/g;
+		$backupfile =~  s/^.*\/(.*)$/$1/g;
 		open my $stdout,'>',"$backupfile" or die "$!";
         foreach $content(<$stdin>){
             print $stdout "$content";
