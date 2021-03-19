@@ -27,6 +27,6 @@ elsif($input =~ /\\/){
 }
 # print the string
 else{
-    print_sentence = "print \"$input\\n\";"
+    print_sentence = "print \"$input\\n\";";
     print $print_sentence;
 }
