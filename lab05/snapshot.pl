@@ -43,3 +43,11 @@ if (($condition eq "save") or ($condition eq "load")){
 	}
     print "Creating snapshot $counter\n";
 }
+
+# This part is to implemete the load part
+if($condition eq "load"){
+    # backup counter
+    $backup_counter = $ARGV[1];
+    $backup_directory = ".snapshot.$backup_counter";
+    print "Restoring snapshot $backup_counter\n";
+}
