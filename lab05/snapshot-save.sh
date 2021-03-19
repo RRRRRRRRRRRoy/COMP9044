@@ -1,12 +1,36 @@
- #!/bin/dash
+#!/bin/dash
 
- counter=0;
- directoryname=".snapshot.$counter"
+counter=0;
+directoryname=".snapshot.$counter"
 
- while [ -e $directoryname ]
- do
+# check the current directory is exist or not
+while [ -e $directoryname ]
+do
     counter=$(($counter+1))
     directoryname=".snapshot.$counter"
- done
+done
 
- mkdir $directoryname;
+# create the dir if the current directory is not exist
+mkdir $directoryname;
+
+for file in *
+do  
+    # avoiding copy the same current file
+	if [ "$file" != "snapshot-save.sh" ] 
+    then 
+        # avoiding copy the same current file
+        if [ "$file" != "snapshot-load.sh" ]
+	    then
+            # copy the current file
+			cp $file $directoryname;
+	    else
+            # pass
+            :
+        fi
+    else
+        # pass
+        :
+    fi
+done
+
+echo "Creating snapshot $counter";
