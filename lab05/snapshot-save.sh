@@ -9,4 +9,4 @@
     directoryname=".snapshot.$counter"
  done
 
- mkdir $dirname;
+ mkdir $directoryname;
