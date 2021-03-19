@@ -1,6 +1,6 @@
 #!/usr/bin/perl -w
 
-$filename_input = $ARGV[0];
+my $filename_input = $ARGV[0];
 #@filename_cut=();
 $counter = 0;
 @filename_cut=split('\.',$filename_input);
