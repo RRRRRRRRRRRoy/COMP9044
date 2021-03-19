@@ -26,7 +26,7 @@ foreach $content($stdin){
     print $stdout "$content";
 }
 
-print "Backup of '$filename' saved as '$filename_copy'\n";
+print "Backup of '$filename_input' saved as '$filename_copy'\n";
 # close the file stream
 close $stdin;
 close $stdout;
