@@ -19,8 +19,8 @@ while(-e "$filename_copy"){
 # How to use the file stream in perl?
 # Source: https://perldoc.perl.org/functions/open
 # If exist read in, otherwise do not read in
-open my $stdin,'<',"$filename_input" or die ("$!");
-open my $stdout,'>',"$filename_copy" or die ("$!");
+open my $stdin,'<',"$filename_input" or die "$!";
+open my $stdout,'>',"$filename_copy" or die "$!";
 
 foreach $content($stdin){
     print $stdout "$content";
