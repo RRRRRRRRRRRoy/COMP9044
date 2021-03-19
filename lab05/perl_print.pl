@@ -13,7 +13,7 @@ if($input =~ /\"/){
     $temp = $input;
     $temp =~ s/\"/\\"/g;
     print "print \"$temp\n\";";
-}elif($input =~ /\\/){
+}elsif($input =~ /\\/){
     $temp = $input;
     $temp =~ s/\\/\\\\/g;
     print "print \"$temp\\n\";";
