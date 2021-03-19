@@ -13,4 +13,25 @@ if (($condition eq "save") or ($condition eq "load")){
 		$filename_copy = ".snapshot.$counter";
 	}
 	mkdir $cp_dir;
+
+    foreach $file(@current_file){
+		if($file ne "snapshot.pl"){
+            if($file ne "snapshot-save.sh"){
+                if($file ne "snapshot-load.sh"){
+                    if($file ne "backup.pl"){
+                        if($file ne "backup.pl"){
+                            open my $stdin,'<',"$file" or die "$!";
+			                open my $stdout,'>',"$filename_copy/$file" or die "$!";
+                            foreach $content(<$stdin>){
+				                print $stdout "$content";
+			                }
+                            close $stdin;
+			                close $stdout;
+                        }
+                    }
+                }
+            }
+		}
+        print "Creating snapshot $counter\n";
+	}
 }
