@@ -9,14 +9,14 @@
 # Source: https://stackoverflow.com/questions/10405868/what-does-mean-in-perl
 print "#!/usr/bin/perl -w\n";
 $input=$ARGV[0];
-if($input =~ /"/){
+if($input =~ /\"/){
     $temp = $input;
     $temp =~ s/"/\\"/g;
-    print "print \"$input\\n\";";
+    print "print \"$temp\n\";";
 }
 if($input =~ /\\/){
     $temp = $input;
-    $temp =! s/\\/\\\\/g;
-    print "print \"$temp\\n\";"
+    $temp =~ s/\\/\\\\/g;
+    print "print \"$temp\\n\";";
 }
 print "print \"$input\\n\";";
