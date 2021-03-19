@@ -9,7 +9,7 @@
 # Source: https://stackoverflow.com/questions/10405868/what-does-mean-in-perl
 print "#!/usr/bin/perl -w\n";
 $input=$ARGV[0];
-if($input =~ /\"/){
+if($input =~ /"/){
     $temp = $input;
     $a =~ s/"/\\"/g;
     print "print \"$a\\n\";";
