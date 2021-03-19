@@ -7,3 +7,5 @@
 # The kind of the perl program
 print "#!/usr/bin/perl -w\n";
 $input=$ARGV[0]
+
+print "print \"$input\n\""
