@@ -1,4 +1,4 @@
-#!/bin/perl -w
+#!/usr/bin/perl -w
 
 $filename_input = $ARGV[0];
 #@filename_cut=();
