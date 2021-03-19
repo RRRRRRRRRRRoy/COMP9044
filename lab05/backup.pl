@@ -23,5 +23,9 @@ open my ($stdin,'<',"$filename") or die ("$!");
 open my ($stdout,'>',"$filename_copy") or die ("$!");
 
 while($content=<$stdin>){
-    
+    print $stdout "$content";
 }
+
+print "Backup of '$filename' saved as '$cpname'\n";
+close $stdin;
+close $stdout;
