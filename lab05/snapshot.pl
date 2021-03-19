@@ -1,5 +1,6 @@
 #!/usr/bin/perl -w
 
+# The aim of adding more if is to avoid other lab file being affected
 # Getting the files in the current directory
 # Source: https://perldoc.perl.org/functions/glob
 @current_file = glob("*");
