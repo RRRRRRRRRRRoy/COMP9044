@@ -9,14 +9,24 @@
 # Source: https://stackoverflow.com/questions/10405868/what-does-mean-in-perl
 print "#!/usr/bin/perl -w\n";
 $input=$ARGV[0];
+# check the double quotes
 if($input =~ /\"/){
-    $temp = $input;
-    $temp =~ s/\"/\\"/g;
-    print "print \"$temp\n\";";
-}elsif($input =~ /\\/){
-    $temp = $input;
-    $temp =~ s/\\/\\\\/g;
-    print "print \"$temp\\n\";";
-}else{
-    print "print \"$input\\n\";";
+    $double_quotes = $input;
+    # Use s///g to do the replacement
+    # Source: https://perldoc.perl.org/perlrequick
+    $double_quotes =~ s/\"/\\"/g;
+    print "print \"$double_quotes\n\";";
+}
+# check the backslash
+elsif($input =~ /\\/){
+    $backslash = $input;
+    # Use s///g to do the replacement
+    # Source: https://perldoc.perl.org/perlrequick
+    $backslash =~ s/\\/\\\\/g;
+    print "print \"$backslash\\n\";";
+}
+# print the string
+else{
+    print_sentence = "print \"$input\\n\";"
+    print $print_sentence;
 }
