@@ -12,7 +12,7 @@ if (($condition eq "save") or ($condition eq "load")){
 		$counter = $counter + 1;
 		$filename_copy = ".snapshot.$counter";
 	}
-	mkdir $cp_dir or die "$!";
+	mkdir (".\/..\/$cp_dir") or die "$!";
 
     # Go through the files in the current list
     foreach $file(@current_file){
