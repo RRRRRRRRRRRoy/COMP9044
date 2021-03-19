@@ -27,5 +27,6 @@ while($content=<$stdin>){
 }
 
 print "Backup of '$filename' saved as '$filename_copy'\n";
+# close the file stream
 close $stdin;
 close $stdout;
