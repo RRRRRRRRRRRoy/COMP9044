@@ -8,4 +8,4 @@
 print "#!/usr/bin/perl -w\n";
 $input=$ARGV[0]
 
-print "print \"$input\n\""
+print "print \"$input\\n\""
