@@ -5,7 +5,7 @@
  # get the file name
  filename_cut=$(echo $filename | sed "s/.txt//g")
  filename_copy=".$filename_cut.txt.$number"
- contain=$(ls $filename_copy)
+ contain=`ls $filename_copy`
  while [ 1 ]
  do
     if [ "$contain" == "" ]
@@ -15,7 +15,7 @@
         counter=$(($counter+1))
         filename_copy=".$filename_cut.txt.$number"
         contain=$(ls $filename_copy)
-    done
+    fi
 done 
 
 # copy files
