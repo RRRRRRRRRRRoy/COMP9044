@@ -13,6 +13,7 @@ done
 # create the dir if the current directory is not exist
 mkdir $directoryname;
 
+
 for file in *
 do  
     # avoiding copy the same current file
@@ -21,8 +22,19 @@ do
         # avoiding copy the same current file
         if [ "$file" != "snapshot-load.sh" ]
 	    then
-            
-			cp $file $directoryname;
+            if [ "$file" != "backup.sh" ]
+	        then
+                if [ "$file" != "backup.pl" ]
+	            then
+			        cp $file $directoryname
+                else
+                    # pass
+                    :
+                fi
+            else
+                # pass
+                :
+            fi
         else
             # pass
             :
@@ -33,4 +45,4 @@ do
     fi
 done
 
-echo "Creating snapshot $counter";
+echo "Creating snapshot $counter"
