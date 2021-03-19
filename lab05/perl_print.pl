@@ -13,10 +13,10 @@ if($input =~ /\"/){
     $temp = $input;
     $temp =~ s/\"/\\"/g;
     print "print \"$temp\n\";";
-}
-if($input =~ /\\/){
+}elif($input =~ /\\/){
     $temp = $input;
     $temp =~ s/\\/\\\\/g;
     print "print \"$temp\\n\";";
+}else{
+    print "print \"$input\\n\";";
 }
-print "print \"$input\\n\";";
