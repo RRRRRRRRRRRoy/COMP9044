@@ -21,8 +21,26 @@ do
         # avoiding copy the same current file
         if [ "$file" != "snapshot-load.sh" ]
 	    then
-            # copy the current file
-			cp $file $directoryname;
+            if [ "$file" != "backup.sh" ]
+            then
+                if [ "$file" != "backup.pl" ]
+                then
+                    if [ "$file" != "snapshot.pl" ]
+                    then
+                        # copy the current file
+			            cp $file $directoryname;
+                    else
+                        # pass
+                        :
+                    fi
+                else
+                    # pass
+                    :
+                fi
+            else
+                # pass
+                :
+            fi
 	    else
             # pass
             :
