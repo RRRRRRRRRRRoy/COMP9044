@@ -26,8 +26,8 @@ open my $stdout,'>',"$filename_copy" or die "$!";
 #     print $stdout "$content";
 # }
 
-while($line = <$in>){
-	print $out "$line";
+while($line = <$stdin>){
+	print $stdout "$line";
 }
 
 print "Backup of '$filename_input' saved as '$filename_copy'\n";
