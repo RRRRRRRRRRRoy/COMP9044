@@ -22,8 +22,10 @@ do
         # avoiding copy the same current file
         if [ "$file" != "snapshot-load.sh" ]
 	    then
+            # avoiding copy the same current file
             if [ "$file" != "backup.sh" ]
 	        then
+                # avoiding copy the same current file
                 if [ "$file" != "backup.pl" ]
 	            then
 			        cp $file $directoryname

@@ -17,8 +17,10 @@ do
         # avoiding copy the same current file
         if [ "$file" != "snapshot-load.sh" ]
 	    then
+            # avoiding copy the same current file
             if [ "$file" != "backup.sh" ]
 	        then
+                # avoiding copy the same current file
                 if [ "$file" != "backup.pl" ]
 	            then
 			        rm $file
@@ -40,6 +42,7 @@ do
     fi
 done
 
+# restore the file with the backup
 back_dir=".snapshot.$counter_bp"
 for backup_file in $back_dir/*
 do
