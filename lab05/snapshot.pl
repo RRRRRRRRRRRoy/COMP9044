@@ -50,4 +50,24 @@ if($condition eq "load"){
     $backup_counter = $ARGV[1];
     $backup_directory = ".snapshot.$backup_counter";
     print "Restoring snapshot $backup_counter\n";
+    foreach $file(@current_file){
+        # avoiding copy the same current file in lab05
+		if($file ne "snapshot.pl"){
+            # avoiding copy the same current file in lab05
+            if($file ne "snapshot-save.sh"){
+                # avoiding copy the same current file in lab05
+                if($file ne "snapshot-load.sh"){
+                    # avoiding copy the same current file in lab05
+                    if($file ne "backup.pl"){
+                        # avoiding copy the same current file in lab05
+                        if($file ne "backup.pl"){
+                            # Use unlink to delete the file
+                            # Source: https://perldoc.perl.org/functions/unlink
+                            unlink $file
+                        }
+                    }
+                }
+            }
+		}
+    }
 }
