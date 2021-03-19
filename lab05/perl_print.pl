@@ -11,7 +11,7 @@ print "#!/usr/bin/perl -w\n";
 $input=$ARGV[0];
 if($input =~ /"/){
     $temp = $input;
-    $a =~ s/"/\\"/g;
+    $temp =~ s/"/\\"/g;
     print "print \"$input\\n\";";
 }
 if($input =~ /\\/){
