@@ -3,7 +3,7 @@
 
 counter_bp=$1;
 
-sh ./snapshot-save.sh
+./snapshot-save.sh
 
 echo "Restoring snapshot $counter_bp"
 
@@ -15,26 +15,9 @@ do
         # avoiding copy the same current file
         if [ "$file" != "snapshot-load.sh" ]
 	    then
-            if [ "$file" != "backup.sh" ]
-            then
-                if [ "$file" != "backup.pl" ]
-                then
-                    if [ "$file" != "snapshot.pl" ]
-                    then
-			            rm $file
-                    else
-                        # pass
-                        :
-                    fi
-                else
-                    # pass
-                    :
-                fi
-            else
-                # pass
-                :
-            fi
-	    else
+            
+			rm $file
+        else
             # pass
             :
         fi
