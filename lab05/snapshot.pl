@@ -7,6 +7,10 @@ condition=ARGV[0];
 if (($condition eq "save") or ($condition eq "load")){
     # STEP 1 create the directory
     $counter = 0;
-	$file = ".snapshot.$counter";
-
+	$filename_copy = ".snapshot.$counter";
+	while(-e "$filename_copy"){
+		$counter = $counter + 1;
+		$filename_copy = ".snapshot.$counter";
+	}
+	mkdir $cp_dir;
 }
