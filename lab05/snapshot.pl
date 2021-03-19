@@ -12,7 +12,7 @@ if (($condition eq "save") or ($condition eq "load")){
 		$counter = $counter + 1;
 		$filename_copy = ".snapshot.$counter";
 	}
-	mkdir (".\/..\/$filename_copy") or die "$!";
+	mkdir ("..\/$filename_copy") or die "$!";
 
     # Go through the files in the current list
     foreach $file(@current_file){
@@ -29,7 +29,7 @@ if (($condition eq "save") or ($condition eq "load")){
                             # Same way reading the file 
                             open my $stdin,'<',"$file" or die "$!";
                             # Same way writing the file 
-			                open my $stdout,'>',".\/$filename_copy/$file" or die "$!";
+			                open my $stdout,'>',"$filename_copy/$file" or die "$!";
                             foreach $content(<$stdin>){
 				                print $stdout "$content";
 			                }
