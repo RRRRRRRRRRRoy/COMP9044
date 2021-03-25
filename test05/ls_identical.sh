@@ -13,6 +13,7 @@ do
     fi
 
     if [ -e "$directory2/$filename" ]
+    then
         is_different=$(diff "$files" "$directory2/$filename"|wc -l)
         # check the differences flag
         if [ $is_different -ne 0 ]
