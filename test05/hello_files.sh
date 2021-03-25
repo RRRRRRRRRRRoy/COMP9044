@@ -8,10 +8,10 @@ then
     :
 else
     exit 1
+fi
 
-
-$counter=1
-while [ $counter -le $number ]
+counter=1
+while [[ "$counter" -le "$number" ]]
 do
     echo "hello $name" >> "hello$counter".txt
 done
