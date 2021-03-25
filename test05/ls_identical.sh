@@ -8,7 +8,8 @@ do
 	filename=`echo "$files"|sed 's|.*\/||g'`
 	if [ -e "$2/$filename" ] 
 	then
-		is_different=$(diff "$files" "$directory2/$filename"|wc -l)
+        get_diff=`diff "$files" "$directory2/$filename"`
+		is_different=$($get_diff|wc -l)
 		
         if [ "$is_different" -eq 0 ]
         then
