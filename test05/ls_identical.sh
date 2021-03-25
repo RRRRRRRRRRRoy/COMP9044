@@ -9,10 +9,7 @@ do
 	if [ -e "$2/$filename" ] 
 	then
 		is_different=$(diff "$files" "$directory2/$filename"|wc -l)
-		if [ "$is_different" -nq 0 ]
-		then
-			:
-		fi
+		
         if [ "$is_different" -eq 0 ]
         then
 			echo "$filename"
