@@ -13,5 +13,5 @@ else
 $counter=1
 while [ $counter -le $number ]
 do
-
+    echo "hello $name" >> "hello$counter".txt
 done
