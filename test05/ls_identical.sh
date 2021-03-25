@@ -1,7 +1,7 @@
 #!/bin/dash
 
-directory1=$ARGV[1]
-directory2=$ARGV[2]
+directory1=$1
+directory2=$2
 
 for files in $directory1/*
 do
