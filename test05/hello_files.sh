@@ -9,6 +9,7 @@ then
 else
     exit 1
 
+
 $counter=1
 while [ $counter -le $number ]
 do
