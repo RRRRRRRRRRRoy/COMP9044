@@ -5,19 +5,21 @@ directory2=$ARGV[2]
 
 for files in $directory1/*
 do
-    filename=$(echo "$filename" | sed 's|.+\/||g') 
+    filename=$(echo "$filename" | sed 's/.+\///g') 
     # if exist
     if [ ! -e "$directory2/$filename" ]
     then
         :
-    else
+    fi
+
+    if [ -e "$directory2/$filename" ]
         is_different=$(diff "$files" "$directory2/$filename"|wc -l)
         # check the differences flag
-        if [ $is_different -eq 0 ]
+        if [ $is_different -ne 0 ]
         then
-            echo "$filename"
-        else
             :
+        else
+            echo "$filename"
         fi
     fi
 done
