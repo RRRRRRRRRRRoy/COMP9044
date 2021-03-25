@@ -7,11 +7,6 @@ for files in $directory1/*
 do
     filename=$(echo "$filename" | sed 's/.+\///g') 
     # if exist
-    if [ ! -e "$directory2/$filename" ]
-    then
-        :
-    fi
-
     if [ -e "$directory2/$filename" ]
     then
         is_different=$(diff "$files" "$directory2/$filename"|wc -l)
