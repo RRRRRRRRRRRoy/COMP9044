@@ -14,9 +14,16 @@ fi
 mkdir ".girt"
 
 # create the master branch as git
+# U can find the structure of git from the following website
+# Source: https://digitalvarys.com/git-basics-and-beginners-guide/
 mkdir .girt/repository
 mkdir .girt/branch
 mkdir .girt/branch/master
+# Therefore, we need to create the index file in the repository
+mkdir .shrug/branch/master/index
+# The repository in the master branch
+mkdir .shrug/branch/master/repository
+
 
 # This is the same from the instruction
 echo "Initialized empty girt repository in .girt";
