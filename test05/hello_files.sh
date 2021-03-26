@@ -3,15 +3,13 @@
 number=$ARGV[0]
 name=$ARGV[1]
 
-if [ $number -gt 0 ]
+if  "$number" -lt 0
 then
-    :
-else
     exit 1
 fi
 
-counter=1
-while [[ "$counter" -le "$number" ]]
+counter=0
+while test "$counter" -le "$number" 
 do
-    echo "hello $name" >> "hello$counter".txt
+    echo "hello $name" >> "hello$($counter+1)".txt
 done
