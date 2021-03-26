@@ -20,9 +20,9 @@ mkdir .girt/repository
 mkdir .girt/branch
 mkdir .girt/branch/master
 # Therefore, we need to create the index file in the repository
-mkdir .shrug/branch/master/index
+mkdir .girt/branch/master/index
 # The repository in the master branch
-mkdir .shrug/branch/master/repository
+mkdir .girt/branch/master/repository
 
 
 # This is the same from the instruction
