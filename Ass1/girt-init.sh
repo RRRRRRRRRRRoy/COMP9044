@@ -15,7 +15,7 @@
 # create the dir call girt
 if [ -d ".girt" ]
 then
-    echo "girt-init: error: .girt already exist"
+    echo "girt-init: error: .girt already exists"
 	exit 1
 else 
     :
