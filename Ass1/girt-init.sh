@@ -29,14 +29,19 @@ mkdir ".girt"
 # U can find the structure of git from the following website
 # Source: https://digitalvarys.com/git-basics-and-beginners-guide/
 mkdir .girt/repository
+# the location of the file on the branch(may not use)
+mkdir .girt/head
+# comit the staged files
+mkdir .girt/commit
+
+# branch
 mkdir .girt/branch
 mkdir .girt/branch/master
 # Therefore, we need to create the index file in the repository
 mkdir .girt/branch/master/index
 # The repository in the master branch
 mkdir .girt/branch/master/repository
-mkdir .girt/head
-mkdir .girt/commit
+
 
 
 # This is the same from the instruction
