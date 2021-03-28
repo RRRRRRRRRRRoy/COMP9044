@@ -1,5 +1,17 @@
 #!/bin/dash
 
+# .girt
+# |-- All repository
+# |-- branch
+#     |-- master branch
+#         |-- index
+#         |-- repository
+#     |-- new branch
+# |-- head(the location on branch)
+# |-- commit
+#     |-- msg
+#
+
 # create the dir call girt
 if [ -d ".girt" ]
 then
@@ -23,6 +35,8 @@ mkdir .girt/branch/master
 mkdir .girt/branch/master/index
 # The repository in the master branch
 mkdir .girt/branch/master/repository
+mkdir .girt/head
+mkdir .girt/commit
 
 
 # This is the same from the instruction
