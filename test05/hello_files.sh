@@ -1,15 +1,29 @@
 #!/bin/dash
 
-number=$ARGV[0]
-name=$ARGV[1]
+number=$1
+name=$2
 
-if  "$number" -lt 0
+# echo "$number"
+
+# echo "$name"
+
+if test "$number" -le 0
 then
+    # echo "0error"
     exit 1
 fi
 
-counter=0
-while test "$counter" -le "$number" 
+# if test -f "hello*".txt
+# then 
+#     echo "not exist"
+#     exit 1
+# fi 
+
+
+while test "$number" -gt 0 
 do
-    echo "hello $name" >> "hello$($counter+1)".txt
+    filename="hello${number}" 
+    # echo $filename.txt
+    echo "hello $name" > "$filename".txt
+    number=$(($number - 1))
 done
