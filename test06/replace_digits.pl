@@ -3,7 +3,8 @@
 $file=$ARGV[0];
 
 # copy from the question 2
-open $stdin_stream,'<',$file or die "$!";
+# Source: https://perldoc.perl.org/functions/open
+open ($stdin_stream,'<',$file) or die "$!";
 foreach $line(<$stdin_stream>){
     # How to select the digital 
     # Source: https://perldoc.perl.org/5.8.9/perlre
@@ -14,7 +15,8 @@ foreach $line(<$stdin_stream>){
 }
 
 # copy from the question 1
-open $stdout_stream,'>',$file or die "$!";
+# Source: https://perldoc.perl.org/functions/open
+open ($stdout_stream,'>',$file) or die "$!";
 foreach $line(@new_contents){
     print $stdout_stream "$line";
 }

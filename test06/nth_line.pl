@@ -3,7 +3,9 @@ $name = $ARGV[1];
 $nth_number = $ARGV[0];
 
 # Copy from question1 in test6 do not forget to change the arrow
-open $filestream,'<',$name or die $!;
+# Source: https://perldoc.perl.org/functions/open
+open ($filestream,'<',$name) or die $!;
+
 
 # using the array to read the data 
 @numbers = <$filestream>;

@@ -14,7 +14,8 @@ $name = $ARGV[2];
 
 if($start_number <= $end_number ){
     # file stream in the previous lab and test
-    open $filestream,'>',$name or die $!;
+    # Source: https://perldoc.perl.org/functions/open
+    open ($filestream,'>',$name) or die $!;
     while($start_number <= $end_number){
 	    print $filestream "$start_number\n";
         $start_number=$start_number+1;
