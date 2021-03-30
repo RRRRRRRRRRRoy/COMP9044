@@ -17,3 +17,11 @@ $end_number = $ARGV[1];
 # name
 $name = $ARGV[2];
 
+# file stream
+open $filestream,'>',$name or die $!;
+while($start_number <= $end_number){
+	print $filestream "$start_number\n";
+    $start_number=$start_number+1;
+}
+
+close("$filestream");
