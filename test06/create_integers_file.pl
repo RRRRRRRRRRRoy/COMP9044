@@ -2,7 +2,7 @@
 
 # check the inputs are numbers
 if($#ARGV != 2){
-    exit 1;
+    exit 0;
 }
 
 # start number
@@ -13,7 +13,7 @@ $end_number = $ARGV[1];
 $name = $ARGV[2];
 
 if($start_number <= $end_number ){
-    # file stream
+    # file stream in the previous lab and test
     open $filestream,'>',$name or die $!;
     while($start_number <= $end_number){
 	    print $filestream "$start_number\n";
