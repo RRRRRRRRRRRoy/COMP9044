@@ -17,8 +17,8 @@ then
 fi
 
 #get the number before : and fileaname after :.
-num=`echo $1|sed 's/:.*$//g'`;
-filename=`echo $1|sed 's/^.*://g'`;
+num=`echo $1|sed 's/:[a-zA-Z0-9].*$//g'`;
+filename=`echo $1|sed 's/^[0-9]*://g'`;
 
 #test if the required num beyond maximum repository num
 max_num=`ls -c .girt/repository|wc -l|sed 's/ //g'`;
