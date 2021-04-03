@@ -34,18 +34,18 @@ check_option_a=$1
 # check whether there is a -a option
 if [ "$check_option_a" = "-a" ]
 then
-    for file in $(ls .girt/branch/$current_branch/index)
+    for file in .girt/branch/$current_branch/index/*
     do  
         # this part is copied from the girt-commit line 68-70
         filename_a=filename=$(echo $file|cut -d'/' -f5)
-        file_in_dir=$(ls $filename 2>/dev/null)
+        file_in_dir_a=$(ls $filename 2>/dev/null)
         # current list is empty
-        if [ "$file_in_dir"="" ]
+        if [ "$file_in_dir_a"="" ]
         then
             rm "$file"
         fi
         # current list is not empty
-        if [ "$file_in_dir"!="" ]
+        if [ "$file_in_dir_a"!="" ]
         then
             cp "$filename_a" "$file"
         fi
