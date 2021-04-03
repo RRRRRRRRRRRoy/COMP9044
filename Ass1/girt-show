@@ -9,7 +9,7 @@ fi
 
 #test for format num:repository
 content=$1;
-match=`echo $1|egrep '^[0-9]*:.+'`;
+match=`echo $1|egrep '^[0-9]*:.*'`;
 if test "$match" = ""
 then
     echo "girt-show: error: invalid object $1";
