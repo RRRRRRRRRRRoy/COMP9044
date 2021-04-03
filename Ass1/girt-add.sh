@@ -17,6 +17,8 @@ do
     then
         echo "girt-add: error:"
         exit 1;
+    else
+        :
     fi
 done
 
@@ -33,7 +35,11 @@ do
         then
             echo "girt-add: error: can not open '$file'" > /dev/stderr;
             exit 1;
+        else
+            :
         fi
+    else
+        :
     fi
 done
 
