@@ -1,7 +1,8 @@
 #!/bin/dash
+# 3 April local coding and testing on MacOS
+
 
 filelist=$@
-
 # check .girt directory is exist or not
 if [ ! -d .girt/ ]
 then

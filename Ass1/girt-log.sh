@@ -1,4 +1,5 @@
 #!/bin/dash
+# 3 April local coding and testing on MacOS
 
 # checking the .girt is exist or not
 # copy girt-commit.sh checking the .girt
