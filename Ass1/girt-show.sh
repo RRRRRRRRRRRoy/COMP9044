@@ -11,17 +11,19 @@ then
 fi
 
 # here is the printing details
-print_content_regex=$1;
+print_content_slice=$1
 # using the grep to check whether it is in the good format
-match=$(echo $print_content_regex|grep -e '^[0-9]*:.+')
-if test "$match" != ""
+match=$(echo $print_content_slice|egrep '^[0-9]*:.*$')
+if [ "$match" = "" ]
 then
-    # matched not empty
-    :
-else
     # matched is empty 
-    echo "girt-show: error: invalid object $print_content_regex"
+    echo "girt-show: error: invalid object $print_content_slice"
     exit 1
 fi
 
+#get the number before : and fileaname after :.
+printing_number=$(echo $print_content_slice|sed 's/:[a-zA-Z0-9].*$//g')
+printing_filename=$(echo $print_content_slice|sed 's/^[0-9].*://g')
 
+echo "$printing_number"
+echo "$printing_filename"
