@@ -1,4 +1,4 @@
-#!/usr/bin/env dash
+#!/bin/dash
 # 3 April local coding and testing on MacOS
 
 # Checking the current directory is exist or not

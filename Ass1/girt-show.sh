@@ -1,5 +1,4 @@
 #!/bin/dash
-#!/usr/bin/env dash
 
 # checking the .girt is exist or not
 # copy girt-commit.sh checking the .girt
