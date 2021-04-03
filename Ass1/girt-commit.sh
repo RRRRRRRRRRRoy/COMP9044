@@ -59,7 +59,7 @@ then
                 changes_counter=1
                 break
             else
-                difference_in_repository=$(diff $file .shrug/branch/$now_branch/repo/$latest_branch/$filename)
+                difference_in_repository=$(diff $file .girt/branch/$now_branch/repository/$latest_branch/$filename)
 
                 current_diff_file_repository = $($difference_in_repository|wc -w)
                 if [ "$current_diff_file_repository" -le 0 ]
@@ -85,3 +85,6 @@ else
     echo "nothing to commit";
     exit 1;
 fi
+
+mkdir ".girt/repository/$changes_number";
+mkdir ".girt/repository/$current_branch/repository/$changes_number";
