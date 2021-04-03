@@ -117,3 +117,7 @@ then
     touch .girt/branch/$current_branch/log;
 else
     # log exist pass
+    :
+fi
+
+echo "$changes_number $message" >> .girt/branch/$current_branch/log;
