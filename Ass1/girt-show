@@ -2,8 +2,10 @@
 
 # checking the .girt is exist or not
 # copy girt-commit.sh checking the .girt
-if [ ! -d .girt/ ]
+if [ -d .girt/ ]
 then
+    :
+else
     # Do not forget to change to girt-show function
     echo "girt-show: error: no .girt directory containing girt repository exists"
     exit 1
@@ -12,8 +14,10 @@ fi
 #test for format num:repository
 print_content_slice=$1;
 match_string=$(echo $print_content_slice|egrep '^[0-9]*:.*$')
-if test "$match_string" = ""
+if test "$match_string" != ""
 then
+    :
+else
     echo "girt-show: error: invalid object $print_content_slice"
     exit 1
 fi
