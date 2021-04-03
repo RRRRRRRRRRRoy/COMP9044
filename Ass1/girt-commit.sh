@@ -88,3 +88,14 @@ fi
 
 mkdir ".girt/repository/$changes_number";
 mkdir ".girt/repository/$current_branch/repository/$changes_number";
+
+has_file=`ls .girt/branch/$current_branch/index|wc -l|sed 's/ //g'`;
+if test $has_file -gt 0
+then
+    index_source="girt/branch/$current_branch/index/*"
+    repository_destination=".girt/repository/$changes_number/"
+    branch_destination=".girt/branch/$current_branch/repository/$changes_number/"
+    cp -r $index_source  $repository_destination;
+    cp -r $index_source  $branch_destination ;
+fi
+echo "Committed as commit $changes_number";
