@@ -31,8 +31,8 @@ current_branch=$(cat .girt/current_branch)
 
 if test "$printing_number" = ""
 then
-    files_in_directory_emp=$(ls .girt/branch/$current_branch/index/$filename 2>/dev/null);
-    if test "$files_in_directory_emp" != ""
+    contain=$(ls .girt/branch/$current_branch/index/$filename 2>/dev/null);
+    if test "$contain" != ""
     then
         cat ".girt/branch/$current_branch/index/$filename";
     else
@@ -44,8 +44,8 @@ else
         echo "girt-show: error: unknown commit '$printing_number'";
         exit 1;
     else
-        files_in_directory=$(ls .girt/repository/$printing_number/$filename 2>/dev/null)
-        if test "$files_in_directory" != ""
+        contain=$(ls .girt/repository/$printing_number/$filename 2>/dev/null)
+        if test "$contain" != ""
         then
             cat ".girt/repository/$printing_number/$filename";
         else
