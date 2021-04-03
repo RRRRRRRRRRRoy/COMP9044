@@ -148,3 +148,13 @@ else
     touch .girt/branch/$current_branch/log
 fi
 echo "$change_number $message" >> .girt/branch/$current_branch/log
+
+check_option_a=$1
+index_dir = .girt/branch/$current_branch/index/*
+# check whether there is a -a option
+if [ "$check_option_a" = "-a" ]
+then
+    for file in index_dir
+    do
+    done
+fi
