@@ -11,12 +11,19 @@ else
     exit 1
 fi
 
-#check .girt/log exists
-current_branch=`cat .girt/now_branch`
+# check .girt/log exists
+current_branch=`cat .girt/current_branch`
 
 
-if [ ! -e  .girt/branch/$current_branch/log ]
+# This is to check the current log file is exist or not
+if [ -e  .girt/branch/$current_branch/log ]
 then
+    # if exists continue
+    :
+else
+    # if not exist ----> no commit there is not log file
     echo "girt-log: error: your repository does not have any commits yet"
     exit 1
 fi
+
+# The sequence of print is from the latest commit to the earler commit
