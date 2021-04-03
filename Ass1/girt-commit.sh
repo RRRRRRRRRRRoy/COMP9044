@@ -38,11 +38,11 @@ if [ $change_number -ne 0 ]
 then
     # checking the last modify
     # sorting and get the last one
-    latest_branch=$(ls .girt/branch/$current_branch/repository|sort |tail -n 1)
+    latest_modified_branch=$(ls .girt/branch/$current_branch/repository|sort |tail -n 1)
     # getting the index changes
     file_index_changes=$(ls .girt/branch/$current_branch/index/ |wc -l)
     # This is to compare with the index changes
-    repository_branch_change=$(ls .girt/branch/$current_branch/repository/$latest_branch|wc -l)
+    repository_branch_change=$(ls .girt/branch/$current_branch/repository/$latest_modified_branch|wc -l)
     if [ "$file_index_changes" -eq "$repository_branch_change" ]
     then
         # if no changes in index
@@ -64,8 +64,10 @@ then
         # checking file is exist or not in the dir
         for file in .girt/branch/$current_branch/index/*
         do
+            # cutting the file name
             filename=$(echo $file|cut -d'/' -f5);
-            file_in_dir=$(ls .girt/branch/$current_branch/repository/$latest_branch/$filename 2>/dev/null)
+            # getting the file in the 
+            file_in_dir=$(ls .girt/branch/$current_branch/repository/$latest_modified_branch/$filename 2>/dev/null)
             # file is not exists
             if [ "$file_in_dir" = "" ]
             then
@@ -76,7 +78,7 @@ then
                 # checking the difference
                 # How to use difference
                 # Source: https://www.geeksforgeeks.org/diff-command-linux-examples/
-                difference_repository=$(diff $file .girt/branch/$current_branch/repository/$latest_branch/$filename|wc -w)
+                difference_repository=$(diff $file .girt/branch/$current_branch/repository/$latest_modified_branch/$filename|wc -w)
                 if [ $difference_repository -gt 0 ]
                 then
                     changes_counter=1
@@ -125,6 +127,7 @@ else
 fi
 echo "Committed as commit $change_number"
 
+# check whether there is a -a in the command
 if [ $number_input -eq 4 ]
 then
     # if adding the -a option
@@ -149,13 +152,16 @@ else
 fi
 echo "$change_number $message" >> .girt/branch/$current_branch/log
 
+# -a could be the second parameter
 check_option_a=$1
+# the files in the index folder used to loop files
 index_dir = .girt/branch/$current_branch/index/*
 # check whether there is a -a option
 if [ "$check_option_a" = "-a" ]
 then
     for file in index_dir
-    do
+    do  
+
         filename_a=filename=$(echo $file|cut -d'/' -f5);
         file_in_dir=$(ls $filename 2>/dev/null)
         if [ "$file_in_dir"="" ]
