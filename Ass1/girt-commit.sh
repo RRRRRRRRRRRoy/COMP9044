@@ -31,13 +31,30 @@ then
     # sorting and getting latest braches
     branch_list=$(ls .girt/branch/$current_branch/repository|sort)
     latest_modify_branch=$(echo $branch_list|tail -n 1)
-    #need to check if index and latest repo contain same number of files.
+    # get the number changes of the index
     file_index_number=$(ls .girt/branch/$current_branch/index/|wc -l)
-    #repo_file_c=`ls .girt/repo/$latest|wc -l`;
+    # get the number changes of the index
     repository_branch_number=$(ls .girt/branch/$current_branch/repository/$latest_modify_branch|wc -l)
     if [ "$file_index_number" -eq "$repository_branch_number" ]
     then
-        :
+        if [ $file_index_number -eq 0 ]
+        then  
+            if [ $repository_branch_number -eq 0]
+            then
+                echo "nothing to commit"
+                exit 1
+            else 
+                :
+            fi
+        else
+            :
+        fi
+
+        for file in .girt/branch/$current_branch/index/*
+        do
+            filename=$(echo $file | cur -d'/' -f5,5)
+            current_file_in_list=$(ls .girt/branch/$current_branch/repository/$latest_modify_branch/$filename 2>/dev/null)
+                
     else
         changes_counter=1
     fi
