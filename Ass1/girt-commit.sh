@@ -37,7 +37,7 @@ then
     for file in $(ls .girt/branch/$current_branch/index)
     do  
         # this part is copied from the girt-commit line 68-70
-        filename_a=filename=$(echo $file|cut -d'/' -f5,5);
+        filename_a=filename=$(echo $file|cut -d'/' -f5)
         file_in_dir=$(ls $filename 2>/dev/null)
         # current list is empty
         if [ "$file_in_dir"="" ]
@@ -91,7 +91,7 @@ then
         for file in .girt/branch/$current_branch/index/*
         do
             # cutting the file name
-            filename=$(echo $file|cut -d'/' -f5,5);
+            filename=$(echo $file|cut -d'/' -f5);
             # getting the file in the 
             file_in_dir=$(ls .girt/branch/$current_branch/repository/$latest_modified_branch/$filename 2>/dev/null)
             # file is not exists
