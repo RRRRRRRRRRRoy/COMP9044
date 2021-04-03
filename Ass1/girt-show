@@ -46,7 +46,7 @@ else
         echo "girt-show: error: unknown commit '$printing_number'";
         exit 1;
     else
-        contain=$(ls .girt/repository/$printing_number/$filename 2>/dev/null`
+        contain=$(ls .girt/repository/$printing_number/$filename 2>/dev/null)
         if test "$contain" != ""
         then
             cat ".girt/repository/$printing_number/$filename";
