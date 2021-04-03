@@ -7,6 +7,8 @@ if [ ! -d .girt/ ]
 then
     echo "girt-add: error: no .girt directory containing girt repository exists" >/dev/stderr
     exit 1;
+else
+    :
 fi
 
 # check the validation of the file name
@@ -27,8 +29,8 @@ current_branch=$(cat .girt/current_branch)
 # check the file is located in the directory
 for file in $filelist
 do
-    current_file_index=$(ls $file) 
-    current_file_dir=$(ls .girt/branch/$current_branch/index/$file)
+    current_file_index=$(ls $file 2>/dev/null) 
+    current_file_dir=$(ls .girt/branch/$current_branch/index/$file 2>/dev/null)
     if [ "$current_file_dir" = '' ]
     then 
         if [ "$current_file_index" = '' ]
@@ -47,7 +49,7 @@ done
 # this is the girt-add operation
 for file in $filelist
 do
-    current_file_dir=$(ls $file)
+    current_file_dir=$(ls $file) 2>/dev/null
     if [ "current_file_dir" = '' ]
     then
         rm ".girt/branch/$current_branch/index/$file";
