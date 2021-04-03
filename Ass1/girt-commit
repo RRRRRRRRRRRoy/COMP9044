@@ -32,20 +32,20 @@ check_option_a=$1
 # the files in the index folder used to loop files
 # index_dir = ".girt/branch/$current_branch/index/*"
 # check whether there is a -a option
-if [ "$check_option_a" = "-a" ]
+if [ "$1" = "-a" ]
 then
-    for file in .girt/branch/$current_branch/index/*
+    for file_a in .girt/branch/$current_branch/index/*
     do  
         # this part is copied from the girt-commit line 68-70
-        filename_a=filename=$(echo $file|cut -d'/' -f5)
-        file_in_dir_a=$(ls $filename 2>/dev/null)
+        filename_a=$(echo $file_a|cut -d'/' -f5)
+        file_in_dir_a=$(ls $filename_a 2>/dev/null)
         # current list is empty
-        if [ "$file_in_dir_a"="" ]
+        if [ "$file_in_dir_a"!="" ]
         then
-            rm "$file"
-        # current list is not empty
+            # current list is not empty
+            cp "$filename_a" "$file_a"
         else
-            cp -r "$filename_a" "$file"
+            rm "$file_a"
         fi
     done
 fi
@@ -146,8 +146,8 @@ then
     :
 else
     # Copy filies
-    cp -r $current_branch_source  $repository_destination 
-    cp -r $current_branch_source  $current_branch_destination 
+    cp $current_branch_source  $repository_destination 
+    cp $current_branch_source  $current_branch_destination 
 fi
 echo "Committed as commit $change_number"
 
