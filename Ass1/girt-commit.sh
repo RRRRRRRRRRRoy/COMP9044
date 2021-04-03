@@ -1,31 +1,41 @@
 #!/usr/bin/env dash
 
+# Checking the current directory is exist or not
 if [ -d .girt/ ]
 then
+    # if exist continue
     :
 else
+    # not exist raising error
     echo "girt-commit: error: no .girt directory containing girt repository exists"
     exit 1
 fi
 
+# get the directory info of current branch
 current_branch=$(cat .girt/current_branch)
 
 
-
+# check the index is exist or not
 if [ -d ".girt/branch/$current_branch/index" ]
 then
+    # exist continue
     :
 else
+    # not exist ---> untracked
     echo "nothing added to commit but untracked files present"
     exit 1;
 fi
 
+# getting the parameters ----> for the subset1 of commit -a
 number_input=$#
+# symbol for checking changes
 changes_counter=0
+# changing file numbers
 change_number=$(ls -c .girt/repository|wc -l|sed 's/ //g')
+# -ne 0 ----> has changes
 if [ $change_number -ne 0 ]
 then
-    modified_sorted_branch=$()
+    
     latest_branch=$(ls .girt/branch/$current_branch/repository|sort |tail -n 1)
 
     index_file_c=$(ls .girt/branch/$current_branch/index/ |wc -l)
@@ -49,8 +59,8 @@ then
         for file in .girt/branch/$current_branch/index/*
         do
             filename=$(echo $file|cut -d'/' -f5);
-            contain=$(ls .girt/branch/$current_branch/repository/$latest_branch/$filename 2>/dev/null)
-            if [ "$contain" = "" ]
+            file_in_dir=$(ls .girt/branch/$current_branch/repository/$latest_branch/$filename 2>/dev/null)
+            if [ "$file_in_dir" = "" ]
             then
                 changes_counter=1
                 break
@@ -66,7 +76,8 @@ then
     else
         changes_counter=1
     fi
-    
+
+# -eq 0 no changes
 else
     changes_counter=1
 fi
@@ -109,4 +120,4 @@ then
 else
     touch .girt/branch/$current_branch/log
 fi
-echo "$change_number $mess" >> .girt/branch/$current_branch/log
+echo "$change_number $message" >> .girt/branch/$current_branch/log
