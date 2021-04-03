@@ -15,14 +15,26 @@ do
     match_regex=$(echo "$file" | egrep "^[0-9a-zA-Z][0-9a-zA-Z\.\-]+*$")
     if [ "" == "$match_regex" ]
     then
-        echo "shrug-add: error:"
+        echo "girt-add: error:"
         exit 1;
     fi
 done
 
-# check the files are located in the directory
+current_branch=$(cat .girt/current_branch)
+
+# check the file is located in the directory
 for file in $filelist
 do
+    current_file_index=$(ls $file) 
+    current_file_dir=$(ls .girt/branch/$current_branch/index/$file)
+    if [ "$current_file_dir" == '' ]
+    then 
+        if [ "$current_file_index" == '' ]
+        then
+            echo "girt-add: error: can not open '$file'" > /dev/stderr;
+            exit 1;
+        fi
+    fi
 done
 
 # copy the file to the branch
