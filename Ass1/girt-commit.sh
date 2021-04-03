@@ -1,4 +1,5 @@
 #!/usr/bin/env dash
+# 3 April local coding and testing on MacOS
 
 # Checking the current directory is exist or not
 if [ -d .girt/ ]
@@ -35,18 +36,22 @@ change_number=$(ls -c .girt/repository|wc -l|sed 's/ //g')
 # -ne 0 ----> has changes
 if [ $change_number -ne 0 ]
 then
-    
+    # checking the last modify
+    # sorting and get the last one
     latest_branch=$(ls .girt/branch/$current_branch/repository|sort |tail -n 1)
-
-    index_file_c=$(ls .girt/branch/$current_branch/index/ |wc -l)
-
+    # getting the index changes
+    file_index_changes=$(ls .girt/branch/$current_branch/index/ |wc -l)
+    # This is to compare with the index changes
     repository_branch_change=$(ls .girt/branch/$current_branch/repository/$latest_branch|wc -l)
-    if [ "$index_file_c" -eq "$repository_branch_change" ]
+    if [ "$file_index_changes" -eq "$repository_branch_change" ]
     then
-        if [ $index_file_c -eq 0 ]
+        # if no changes in index
+        if [ $file_index_changes -eq 0 ]
         then
+            # if file repository has no changes
             if [ $repository_branch_change -eq 0 ]
             then
+                # print error
                 echo "nothing to commit"
                 exit 1
             else
@@ -55,18 +60,24 @@ then
         else
             :
         fi
-
+        
+        # checking file is exist or not in the dir
         for file in .girt/branch/$current_branch/index/*
         do
             filename=$(echo $file|cut -d'/' -f5);
             file_in_dir=$(ls .girt/branch/$current_branch/repository/$latest_branch/$filename 2>/dev/null)
+            # file is not exists
             if [ "$file_in_dir" = "" ]
             then
                 changes_counter=1
                 break
             else
-                dif_now_repo=$(diff $file .girt/branch/$current_branch/repository/$latest_branch/$filename|wc -w)
-                if [ $dif_now_repo -gt 0 ]
+                # file is exists
+                # checking the difference
+                # How to use difference
+                # Source: https://www.geeksforgeeks.org/diff-command-linux-examples/
+                difference_repository=$(diff $file .girt/branch/$current_branch/repository/$latest_branch/$filename|wc -w)
+                if [ $difference_repository -gt 0 ]
                 then
                     changes_counter=1
                     break
@@ -76,48 +87,64 @@ then
     else
         changes_counter=1
     fi
-
 # -eq 0 no changes
 else
     changes_counter=1
 fi
 
+# if changes counter has changed
 if [ $changes_counter -ne 0 ]
 then
     :
 else
+    # no changes in counter
     echo "nothing to commit"
     exit 1
 fi
 
+# based on the counter create the dir for changes files
 mkdir ".girt/repository/$change_number"
+# create the same folder in the repository to store
 mkdir ".girt/branch/$current_branch/repository/$change_number"
 
-has_file=$(ls .girt/branch/$current_branch/index|wc -l|sed 's/ //g')
+# Getting changes files
+changes_files=$(ls .girt/branch/$current_branch/index|wc -l|sed 's/ //g')
 
+# These 3 pathes is for the file moving
+# Coping and removing
 current_branch_source=".girt/branch/$current_branch/index/*"
 repository_destination=".girt/repository/$change_number/"
 current_branch_destination=".girt/branch/$current_branch/repository/$change_number/"
-if [ $has_file -le 0 ]
+if [ $changes_files -le 0 ]
 then
     :
 else
-    cp $current_branch_source  $repository_destination 
-    cp $current_branch_source  $current_branch_destination 
+    # Copy filies
+    cp -r $current_branch_source  $repository_destination 
+    cp -r $current_branch_source  $current_branch_destination 
 fi
 echo "Committed as commit $change_number"
 
 if [ $number_input -eq 4 ]
 then
+    # if adding the -a option
+    # the message is in the 4th location
     message=$3
 else
+    # if not adding the -a option
+    # the message is in the 3rd option
     message=$2
 fi
 
+# checking the current log is exist or not
 if [ -e ".girt/branch/$current_branch/log" ]
 then
+    # exist adding the content to the log
     :
 else
+    # create the file to the current branch
+    # How to create file
+    # source: https://www.geeksforgeeks.org/touch-command-in-linux-with-examples/
     touch .girt/branch/$current_branch/log
 fi
 echo "$change_number $message" >> .girt/branch/$current_branch/log
