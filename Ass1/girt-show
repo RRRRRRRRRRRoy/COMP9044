@@ -1,20 +1,23 @@
-#!/usr/bin/env dash
+#!/bin/dash
 
-#check .girt exists
-if ! test -d .girt/
+# checking the .girt is exist or not
+# copy girt-commit.sh checking the .girt
+if [ ! -d .girt/ ]
 then
-    echo "girt-show: error: no .girt directory containing girt repository exists";
+    # Do not forget to change to girt-show function
+    echo "girt-show: error: no .girt directory containing girt repository exists"
     exit 1;
 fi
 
 #test for format num:repository
 content=$1;
-match=`echo $1|egrep '^[0-9]*:.*'`;
+match=`echo $1|egrep '^[0-9]*:.*$'`;
 if test "$match" = ""
 then
     echo "girt-show: error: invalid object $1";
     exit 1;
 fi
+
 
 #get the number before : and fileaname after :.
 num=`echo $1|sed 's/:[a-zA-Z0-9].*$//g'`;
