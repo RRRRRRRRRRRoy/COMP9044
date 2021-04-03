@@ -52,5 +52,6 @@ do
     then
         rm ".girt/branch/$current_branch/index/$file";
     else
-        cp "$file"  .shrug/branch/$current_branch/index/
+        cp "$file"  .girt/branch/$current_branch/index/
+    fi
 done
