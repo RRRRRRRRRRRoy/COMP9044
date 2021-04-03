@@ -20,17 +20,20 @@ fi
 
 
 #get the number before : and fileaname after :.
-num=`echo $1|sed 's/:[a-zA-Z0-9].*$//g'`;
-filename=`echo $1|sed 's/^[0-9]*://g'`;
+num=$(echo $1|sed 's/:[a-zA-Z0-9].*$//g')
+filename=$(echo $1|sed 's/^[0-9]*://g')
+#get the number before : and fileaname after :.
+printing_number=$(echo $print_content_slice|sed 's/:[a-zA-Z0-9].*$//g')
+printing_filename=$(echo $print_content_slice|sed 's/^[0-9]*://g')
 
 #test if the required num beyond maximum repository num
-max_num=`ls -c .girt/repository|wc -l|sed 's/ //g'`;
+max_num=$(ls -c .girt/repository|wc -l|sed 's/ //g')
 max_repo=$(($max_num - 1));
-current_branch=`cat .girt/current_branch`;
-#whatever num is "" or a number,we all should test if the file does exist in index or repository we ask for.
-if test "$num" = ""
+current_branch=$(cat .girt/current_branch)
+
+if test "$printing_number" = ""
 then
-    contain=`ls .girt/branch/$current_branch/index/$filename 2>/dev/null`;
+    contain=$(ls .girt/branch/$current_branch/index/$filename 2>/dev/null);
     if test "$contain" != ""
     then
         cat ".girt/branch/$current_branch/index/$filename";
@@ -38,17 +41,17 @@ then
         echo "girt-show: error: '$filename' not found in index";
     fi
 else
-    if test $num -gt $max_repo
+    if test $printing_number -gt $max_repo
     then
-        echo "girt-show: error: unknown commit '$num'";
+        echo "girt-show: error: unknown commit '$printing_number'";
         exit 1;
     else
-        contain=`ls .girt/repository/$num/$filename 2>/dev/null`;
+        contain=$(ls .girt/repository/$printing_number/$filename 2>/dev/null)
         if test "$contain" != ""
         then
-            cat ".girt/repository/$num/$filename";
+            cat ".girt/repository/$printing_number/$filename";
         else
-            echo "girt-show: error: '$filename' not found in commit $num";
+            echo "girt-show: error: '$filename' not found in commit $printing_number";
         fi
     fi
 fi
