@@ -38,11 +38,11 @@ current_branch=$(cat .girt/current_branch)
 if test "$printing_number" = ""
 then
     files_in_directory=$(ls .girt/branch/$current_branch/index/$filename 2>/dev/null)
-    if test "$files_in_directory" != ""
+    if test "$files_in_directory" = ""
     then
-        cat ".girt/branch/$current_branch/index/$filename"
-    else
         echo "girt-show: error: '$filename' not found in index"
+    else
+        cat ".girt/branch/$current_branch/index/$filename"
     fi
 else
     if test $printing_number -le $max_repository_number
