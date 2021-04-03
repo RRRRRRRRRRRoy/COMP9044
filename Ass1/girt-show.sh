@@ -29,3 +29,16 @@ printing_filename=$(echo $print_content_slice|sed 's/^[0-9].*://g')
 # echo "$printing_number"
 # checking the print filename
 # echo "$printing_filename"
+
+# getting the max number of repository
+max_number=$(ls -c .girt/repository|wc -l|sed 's/ //g')
+# getting the max repository
+max_repository_number=$(($max_number - 1))
+current_branch=$(cat .girt/current_branch)
+
+if [ "$printing_number" != "" ]
+then
+    # If the printing number is not 0
+else
+    # If the printing number is not 0
+fi
