@@ -41,4 +41,10 @@ done
 # this is the girt-add operation
 for file in $filelist
 do
+    current_file_dir=$(ls $file)
+    if [ "current_file_dir" == '' ]
+    then
+        rm ".girt/branch/$current_branch/index/$file";
+    else
+        cp "$file"  .shrug/branch/$current_branch/index/
 done
