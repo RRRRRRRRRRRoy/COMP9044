@@ -29,3 +29,5 @@ fi
 # The sequence of print is from the latest commit to the earler commit
 # Source: https://www.computerhope.com/unix/tac.htm
 tac .girt/branch/$current_branch/log;
+# Can also use the following code to print
+# cat .girt/branch/$current_branch/log|sort -r
