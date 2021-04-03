@@ -156,5 +156,15 @@ if [ "$check_option_a" = "-a" ]
 then
     for file in index_dir
     do
+        filename_a=filename=$(echo $file|cut -d'/' -f5);
+        file_in_dir=$(ls $filename 2>/dev/null)
+        if [ "$file_in_dir"="" ]
+        then
+            rm "$file"
+        fi
+        if [ "$file_in_dir"!="" ]
+        then
+            cp "$filename_a" "$file"
+        fi
     done
 fi
