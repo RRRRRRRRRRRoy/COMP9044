@@ -24,6 +24,9 @@ fi
 
 
 #get the number before : and fileaname after :.
+num=$(echo $1|sed 's/:[a-zA-Z0-9].*$//g')
+filename=$(echo $1|sed 's/^[0-9]*://g')
+#get the number before : and fileaname after :.
 printing_number=$(echo $print_content_slice|sed 's/:[a-zA-Z0-9].*$//g')
 printing_filename=$(echo $print_content_slice|sed 's/^[0-9]*://g')
 
@@ -37,9 +40,9 @@ then
     files_in_directory=$(ls .girt/branch/$current_branch/index/$filename 2>/dev/null)
     if test "$files_in_directory" = ""
     then
-        echo "girt-show: error: '$filename' not found in index"
-    else
         cat ".girt/branch/$current_branch/index/$filename"
+    else
+        echo "girt-show: error: '$filename' not found in index"
     fi
 else
     if test $printing_number -le $max_repository_number
