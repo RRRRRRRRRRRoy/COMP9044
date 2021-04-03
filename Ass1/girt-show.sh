@@ -38,7 +38,27 @@ current_branch=$(cat .girt/current_branch)
 
 if [ "$printing_number" != "" ]
 then
-    # If the printing number is not 0
+    # If the printing number is not empty
+    # comparing the max number with the printing number
+    if test $printing_number -le $max_repository_number
+    then
+        # getting the files in the dir and raising the exception
+        files_in_directory=$(ls .girt/repository/$printing_number/$printing_filename 2>/dev/null)
+        # files_in_directory is empty
+        if test "$files_in_directory" = ""
+        then
+            # empty ----> not include the file
+            echo "girt-show: error: '$printing_filename' not found in commit $printing_number"
+        else
+            # not empty show the files
+            cat ".girt/repository/$printing_number/$printing_filename"
+        fi
+    else
+        # printing number is too large ----> error 
+        echo "girt-show: error: unknown commit '$printing_number'"
+        exit 1
+    fi
 else
-    # If the printing number is not 0
+    # If the printing number is empty
+    
 fi
