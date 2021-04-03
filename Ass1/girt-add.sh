@@ -5,7 +5,7 @@ filelist=$@
 # check .girt directory is exist or not
 if [ ! -d .girt/ ]
 then
-    echo "girt-add: error: no .girt directory containing girt repository exists" >/dev/stderr
+    echo "girt-add: error: girt repository directory .girt not found" >/dev/stderr
     exit 1;
 else
     :
