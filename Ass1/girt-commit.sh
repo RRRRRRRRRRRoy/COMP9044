@@ -27,6 +27,32 @@ else
     exit 1;
 fi
 
+# -a could be the second parameter
+check_option_a=$1
+# the files in the index folder used to loop files
+# index_dir = ".girt/branch/$current_branch/index/*"
+# check whether there is a -a option
+if [ "$check_option_a" = "-a" ]
+then
+    for file in $(ls .girt/branch/$current_branch/index)
+    do  
+        # this part is copied from the girt-commit line 68-70
+        filename_a=filename=$(echo $file|cut -d'/' -f5,5);
+        file_in_dir=$(ls $filename 2>/dev/null)
+        # current list is empty
+        if [ "$file_in_dir"="" ]
+        then
+            rm "$file"
+        fi
+        # current list is not empty
+        if [ "$file_in_dir"!="" ]
+        then
+            cp "$filename_a" "$file"
+        fi
+    done
+fi
+
+
 # getting the parameters ----> for the subset1 of commit -a
 number_input=$#
 # symbol for checking changes
@@ -151,28 +177,3 @@ else
     touch .girt/branch/$current_branch/log
 fi
 echo "$change_number $message" >> .girt/branch/$current_branch/log
-
-# -a could be the second parameter
-check_option_a=$1
-# the files in the index folder used to loop files
-# index_dir = ".girt/branch/$current_branch/index/*"
-# check whether there is a -a option
-if [ "$check_option_a" = "-a" ]
-then
-    for file in $(ls .girt/branch/$current_branch/index)
-    do  
-        # this part is copied from the girt-commit line 68-70
-        filename_a=filename=$(echo $file|cut -d'/' -f5,5);
-        file_in_dir=$(ls $filename 2>/dev/null)
-        # current list is empty
-        if [ "$file_in_dir"="" ]
-        then
-            rm "$file"
-        fi
-        # current list is not empty
-        if [ "$file_in_dir"!="" ]
-        then
-            cp "$filename_a" "$file"
-        fi
-    done
-fi
