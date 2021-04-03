@@ -10,11 +10,11 @@ then
 fi
 
 #test for format num:repository
-content=$1;
-match=`echo $1|egrep '^[0-9]*:.*$'`;
-if test "$match" = ""
+print_content_slice=$1;
+match_string=$(echo $print_content_slice|egrep '^[0-9]*:.*$');
+if test "$match_string" = ""
 then
-    echo "girt-show: error: invalid object $1";
+    echo "girt-show: error: invalid object $print_content_slice";
     exit 1;
 fi
 
