@@ -43,11 +43,9 @@ then
         if [ "$file_in_dir_a"="" ]
         then
             rm "$file"
-        fi
         # current list is not empty
-        if [ "$file_in_dir_a"!="" ]
-        then
-            cp "$filename_a" "$file"
+        else
+            cp -r "$filename_a" "$file"
         fi
     done
 fi
