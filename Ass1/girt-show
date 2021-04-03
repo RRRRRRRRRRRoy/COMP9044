@@ -6,16 +6,16 @@ if [ ! -d .girt/ ]
 then
     # Do not forget to change to girt-show function
     echo "girt-show: error: no .girt directory containing girt repository exists"
-    exit 1;
+    exit 1
 fi
 
 #test for format num:repository
 print_content_slice=$1;
-match_string=$(echo $print_content_slice|egrep '^[0-9]*:.*$');
+match_string=$(echo $print_content_slice|egrep '^[0-9]*:.*$')
 if test "$match_string" = ""
 then
-    echo "girt-show: error: invalid object $print_content_slice";
-    exit 1;
+    echo "girt-show: error: invalid object $print_content_slice"
+    exit 1
 fi
 
 
@@ -27,31 +27,31 @@ printing_number=$(echo $print_content_slice|sed 's/:[a-zA-Z0-9].*$//g')
 printing_filename=$(echo $print_content_slice|sed 's/^[0-9]*://g')
 
 #test if the required num beyond maximum repository num
-max_num=$(ls -c .girt/repository|wc -l|sed 's/ //g')
-max_repo=$(($max_num - 1));
+max_number=$(ls -c .girt/repository|wc -l|sed 's/ //g')
+max_repository_number=$(($max_number - 1));
 current_branch=$(cat .girt/current_branch)
 
 if test "$printing_number" = ""
 then
-    contain=$(ls .girt/branch/$current_branch/index/$filename 2>/dev/null);
+    contain=$(ls .girt/branch/$current_branch/index/$filename 2>/dev/null)
     if test "$contain" != ""
     then
-        cat ".girt/branch/$current_branch/index/$filename";
+        cat ".girt/branch/$current_branch/index/$filename"
     else
-        echo "girt-show: error: '$filename' not found in index";
+        echo "girt-show: error: '$filename' not found in index"
     fi
 else
-    if test $printing_number -gt $max_repo
+    if test $printing_number -gt $max_repository_number
     then
-        echo "girt-show: error: unknown commit '$printing_number'";
-        exit 1;
+        echo "girt-show: error: unknown commit '$printing_number'"
+        exit 1
     else
         contain=$(ls .girt/repository/$printing_number/$filename 2>/dev/null)
         if test "$contain" != ""
         then
-            cat ".girt/repository/$printing_number/$filename";
+            cat ".girt/repository/$printing_number/$filename"
         else
-            echo "girt-show: error: '$filename' not found in commit $printing_number";
+            echo "girt-show: error: '$filename' not found in commit $printing_number"
         fi
     fi
 fi
