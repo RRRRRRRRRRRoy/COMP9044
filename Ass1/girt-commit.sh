@@ -65,7 +65,7 @@ then
         for file in .girt/branch/$current_branch/index/*
         do
             # cutting the file name
-            filename=$(echo $file|cut -d'/' -f5);
+            filename=$(echo $file|cut -d'/' -f5,5);
             # getting the file in the 
             file_in_dir=$(ls .girt/branch/$current_branch/repository/$latest_modified_branch/$filename 2>/dev/null)
             # file is not exists
@@ -161,13 +161,15 @@ if [ "$check_option_a" = "-a" ]
 then
     for file in index_dir
     do  
-
-        filename_a=filename=$(echo $file|cut -d'/' -f5);
+        # this part is copied from the girt-commit line 68-70
+        filename_a=filename=$(echo $file|cut -d'/' -f5,5);
         file_in_dir=$(ls $filename 2>/dev/null)
+        # current list is empty
         if [ "$file_in_dir"="" ]
         then
             rm "$file"
         fi
+        # current list is not empty
         if [ "$file_in_dir"!="" ]
         then
             cp "$filename_a" "$file"
