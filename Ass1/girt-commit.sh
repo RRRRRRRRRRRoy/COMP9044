@@ -54,10 +54,34 @@ then
         do
             filename=$(echo $file | cur -d'/' -f5,5)
             current_file_in_list=$(ls .girt/branch/$current_branch/repository/$latest_modify_branch/$filename 2>/dev/null)
-                
+            if [ $current_file_in_list == "" ]
+            then 
+                changes_counter=1
+                break
+            else
+                difference_in_repository=$(diff $file .shrug/branch/$now_branch/repo/$latest_branch/$filename)
+
+                current_diff_file_repository = $($difference_in_repository|wc -w)
+                if [ "$current_diff_file_repository" -le 0 ]
+                then
+                    :
+                else
+                    changes_counter=1
+                    break
+                fi
+            fi
+        done
     else
         changes_counter=1
     fi
 else
-    changes_counter=1;
+    changes_counter=1
+fi
 
+if [ $changes_counter -ne 0 ]
+then
+    :
+else
+    echo "nothing to commit";
+    exit 1;
+fi
