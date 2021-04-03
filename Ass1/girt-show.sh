@@ -25,5 +25,7 @@ fi
 printing_number=$(echo $print_content_slice|sed 's/:[a-zA-Z0-9].*$//g')
 printing_filename=$(echo $print_content_slice|sed 's/^[0-9].*://g')
 
-echo "$printing_number"
-echo "$printing_filename"
+# checking the printing number
+# echo "$printing_number"
+# checking the print filename
+# echo "$printing_filename"
