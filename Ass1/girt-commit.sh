@@ -95,7 +95,25 @@ then
     index_source="girt/branch/$current_branch/index/*"
     repository_destination=".girt/repository/$changes_number/"
     branch_destination=".girt/branch/$current_branch/repository/$changes_number/"
-    cp -r $index_source  $repository_destination;
-    cp -r $index_source  $branch_destination ;
+    cp -r $index_source  $repository_destination
+    cp -r $index_source  $branch_destination 
 fi
-echo "Committed as commit $changes_number";
+echo "Committed as commit $changes_number"
+
+# consider adding -a
+if [ $# -eq 4 ]
+then 
+    # including -a
+    message=$3
+else
+    # not including -a
+    message=$2
+fi
+
+# checking log exist , putting the message to the log file in the girt
+if [ -e ".girt/branch/$current_branch/log" ]
+then
+    # using touch create the log file
+    touch .girt/branch/$current_branch/log;
+else
+    # log exist pass
