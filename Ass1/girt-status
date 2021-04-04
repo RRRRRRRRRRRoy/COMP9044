@@ -32,9 +32,9 @@ directory_index=".girt/branch/$current_branch/index"
 directory_current_repository=".girt/branch/$current_branch/repository/$latest_modified_branch"
 
 # list to directory cutting and sorting the name of the file
-sorted_file_name=$(ls * $directory_index/* $directory_current_repository/* 2>/dev/null|sed 's/^\..*\///g'|sort|uniq)
+# sorted_file_name=$()
 # go through each file in the previous sorted_file_name
-echo "$sorted_file_name" | while read filename
+ls * $directory_index/* $directory_current_repository/* 2>/dev/null|sed 's/^\..*\///g'|sort|uniq | while read filename
 do
     file_index="$directory_index/$filename"
 	file_repository="$directory_current_repository/$filename"
