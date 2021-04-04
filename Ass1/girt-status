@@ -27,7 +27,7 @@ fi
 # change_counter=1
 # These codes are from the girt-rm
 change_line=$(ls -c .girt/repository|wc -l)
-change_number=$(cat $change_line|sed 's/ //g')
+change_number=$(echo $change_line|sed 's/ //g')
 latest_modified_branch=$(ls .girt/branch/$current_branch/repository|sort|tail -n 1)
 directory_index=".girt/branch/$current_branch/index"
 directory_current_repository=".girt/branch/$current_branch/repository/$latest_modified_branch"
