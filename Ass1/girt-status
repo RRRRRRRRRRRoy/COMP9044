@@ -34,7 +34,7 @@ directory_current_repository=".girt/branch/$current_branch/repository/$latest_mo
 # list to directory cutting and sorting the name of the file
 # sorted_file_name=$()
 # go through each file in the previous sorted_file_name
-ls * $directory_index/* $directory_current_repository/* 2>/dev/null|sed 's/^\.+*\///g'|sort|uniq | while read filename
+ls * $directory_index/* $directory_current_repository/* 2>/dev/null|sed 's/^\..*\///g'|sort|uniq | while read filename
 do
     file_index="$directory_index/$filename"
 	file_repository="$directory_current_repository/$filename"
@@ -84,13 +84,13 @@ do
 			if [ -e "$filename" ]
 			then
 				current_index_difference=$(diff "$filename" "$file_index"|wc -w)
-				if [ $current_index_difference -ne 0 ]
+				if [ $current_index_difference -eq 0 ]
 				then
-					# current_index_difference != 0 ----> get changes
-					echo "$filename - added to index, file changed"
-				else
                     # current_index_difference = 0 ----> no changes
 					echo "$filename - added to index"
+				else
+                    # current_index_difference != 0 ----> get changes
+					echo "$filename - added to index, file changed"
 				fi
 			else
                 # file is not exist
