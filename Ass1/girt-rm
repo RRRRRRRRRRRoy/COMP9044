@@ -138,3 +138,12 @@ then
 fi
 
 # checking both flag of cached and forced are not changed
+if [ $cached_flag -eq 0]
+then
+    if [ $force_flag -eq 0 ]
+    then
+        for file in $filelist
+        do
+        done
+    fi
+fi
