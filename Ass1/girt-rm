@@ -206,6 +206,16 @@ else
 				fi
 			fi
 		done
-			
+		for file in $filelist
+		do
+			current_del_directory=".girt/branch/$current_branch/index/$file"
+			# remove
+			rm -r "$current_del_directory"
+			# exist then delete
+			if [ -e $file ]
+			then
+				rm -r "$file"
+			fi
+		done
 	fi
 fi
