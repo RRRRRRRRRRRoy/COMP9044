@@ -37,7 +37,6 @@ then
 	fi
 fi
 
-
 # This is to check the option of --cached
 if [ "$1" = "--cached" ]
 then
@@ -48,13 +47,14 @@ then
 	shift
 fi
 
-
 #first check all files are in index
 for filename in "$@"
 do
 	# file exist
-	if [ ! -e .girt/branch/$current_branch/index/$filename ]
+	if [ -e .girt/branch/$current_branch/index/$filename ]
 	then
+		:
+	else
 		# file not exists ----> exit and print error
 		echo "girt-rm: error: '$filename' is not in the girt repository"
 		exit 1
@@ -71,7 +71,8 @@ then
 	# if flag = 1 remove file in the index dir
 	for file in "$@"
 	do
-		rm ".girt/branch/$current_branch/index/$file"
+		rm_file_dir=".girt/branch/$current_branch/index/$file"
+		rm $rm_file_dir
 	done
 	# checking the flag for cached
 	if [ $cached_flag -eq 0 ]
@@ -82,8 +83,10 @@ then
 		for file in "$@"
 		do
 			# if exist, then remove the file
-			if [ -e  $file ]
+			if [ ! -e  $file ]
 			then 
+				:
+			else
 				# remove the file in the filelist
 				rm "$file" 
 			fi
