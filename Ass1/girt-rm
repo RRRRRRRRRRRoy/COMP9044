@@ -163,6 +163,49 @@ else
 	else
 		for file in "$filelist"
 		do
+			# checking the file is exist or not
+			if [ -e $file ]
+			then
+				# compart the current file with the index dir
+				current_dir_difference=$(diff $file  .girt/branch/$current_branch/index/$file|wc -w)
+				if [ $current_dir_difference -ne 0 ]
+				then
+					if [ $change_number -gt 0 ]
+					then
+						if [ -e .girt/branch/$current_branch/repository/$latest_modified_branch/$file ]
+						then
+							current_repo_difference=$(diff .girt/branch/$current_branch/index/$file .girt/branch/$current_branch/repository/$latest_modified_branch/$file|wc -w)
+							if [ $current_repo_difference -eq 0 ]
+							then
+								echo "girt-rm: error: '$file' in repository is different to working file";
+								exit 1;
+						fi
+					fi
+				else
+					# current_dir_difference eq 0
+					if [ $change_number -eq 0 ]
+					then
+						echo "girt-rm: error: '$file' has changes staged in the index";
+						exit 1;
+					else
+						#if the latest repository does not have the file ,then quit
+						if [ ! -e .girt/branch/$current_branch/repository/$latest_modified_branch/$file ]
+						then
+							echo "girt-rm: error: '$file' has changes staged in the index";
+							exit 1;
+						else
+							#does not the same file
+							difference_repository=$(diff .girt/branch/$current_branch/index/$file .girt/branch/$current_branch/repository/$latest_modified_branch/$file|wc -w);
+							if [ $difference_repository -gt 0 ]
+							then
+								echo "girt-rm: error: '$file' has changes staged in the index";
+								exit 1;
+							fi
+						fi
+					fi
+				fi
+			fi
 		done
+			
 	fi
 fi
