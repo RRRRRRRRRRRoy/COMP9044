@@ -34,7 +34,7 @@ check_option_a=$1
 # check whether there is a -a option
 if [ "$check_option_a" = "-a" ]
 then
-    for file_a in .girt/branch/$current_branch/index/*
+    for file_a in $(ls .girt/branch/$current_branch/index)
     do  
         # this part is copied from the girt-commit line 68-70
         filename_a=$(echo $file_a|cut -d'/' -f5)
