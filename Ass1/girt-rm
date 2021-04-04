@@ -64,7 +64,8 @@ then
 	# if flag = 1 remove file in the index dir
 	for file in "$filelist"
 	do
-		rm ".girt/branch/$current_branch/index/$file"
+		current_del_directory=".girt/branch/$current_branch/index/$file"
+		rm -r $current_del_directory
 	done
 fi
 # checking the flag for cached
@@ -142,6 +143,26 @@ if [ $change_counter -eq 1 ]
 then
 	if [ $cached_flag -eq 1 ]
 	then
-		# removed the file in the index directory	
+		# removed the file in the index directory
+		for file in "$filelist"
+		do
+			current_del_directory=".girt/branch/$current_branch/index/$file"
+			rm -r $current_del_directory
+		done
+	fi
+fi
+
+# no changes of flags, check whether the index files are committed
+if [ $force_flag -ne 0 ]
+then
+	:
+else
+	if [ $cached_flag -ne 0 ]
+	then
+		:
+	else
+		for file in "$filelist"
+		do
+		done
 	fi
 fi
