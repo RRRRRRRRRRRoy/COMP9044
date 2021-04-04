@@ -15,7 +15,7 @@ fi
 force_flag=0
 cached_flag=0
 input_argv=$1
-current_branch=$(cat .shrug/current_branch)
+current_branch=$(cat .girt/current_branch)
 filelist=$@
 
 # check whether the argv is force
@@ -38,12 +38,35 @@ fi
 
 # go through the files
 for file in $filelist
-do
-    if [ -e .girt/branch/$current_branch/index/$file ]
+do  
+    # check the directory
+    check_dir=".girt/branch/$current_branch/index/$file"
+    if [ -e $check_dir ]
 	then
+        # the current dir is exist
         :
     else
-		echo "girt-rm: error: '$file' is not in the shrug repository";
+        # the current dir is not exist
+		echo "girt-rm: error: '$file' is not in the girt repository";
 		exit 1;
 	fi
 done
+
+# check the flag of force 
+# if the flag is 1 then rm force
+# else do not remove
+if [ $force_flag -eq 1 ]
+then
+    for file in $filelist
+    do
+        rm ".girt/branch/$current_branch/index/$file"
+    done
+fi
+
+# no cached file in the dir ----> remove
+if [ $cached_flag -eq 0 ]
+then
+    for file in $filelist
+    do
+    done
+fi
