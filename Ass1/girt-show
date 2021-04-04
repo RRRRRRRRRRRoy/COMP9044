@@ -26,9 +26,7 @@ else
 fi
 
 
-#get the number before : and fileaname after :.
-# num=$(echo $1|sed 's/:[a-zA-Z0-9].*$//g')
-# filename=$(echo $1|sed 's/^[0-9]*://g')
+
 #get the number before : and fileaname after :.
 printing_number=$(echo $1|sed 's/:[a-zA-Z0-9].*$//g')
 printing_filename=$(echo $1|sed 's/^[0-9]*://g')
@@ -44,14 +42,14 @@ then
     if [ $printing_number -le $max_repository_number ]
     then
         # getting the files in the dir and raising the exception
-        files_in_directory=$(ls .girt/repository/$printing_number/$filename 2>/dev/null)
+        files_in_directory=$(ls .girt/repository/$printing_number/$printing_filename 2>/dev/null)
         if [ "$files_in_directory" = "" ]
         then
             #  empty show the error
-            echo "girt-show: error: '$filename' not found in commit $printing_number"
+            echo "girt-show: error: '$printing_filename' not found in commit $printing_number"
         else
             # not empty show the files
-            cat ".girt/repository/$printing_number/$filename"
+            cat ".girt/repository/$printing_number/$printing_filename"
         fi
     else
         # the number is over maximum
@@ -61,14 +59,14 @@ then
 else
     # If the printing number is empty
     # getting the files in the dir and raising the exception
-    files_in_directory=$(ls .girt/branch/$current_branch/index/$filename 2>/dev/null)
+    files_in_directory=$(ls .girt/branch/$current_branch/index/$printing_filename 2>/dev/null)
     # check file is empty or not
     if [ "$files_in_directory" != "" ]
     then
         # files_in_directory is not empty
-        cat ".girt/branch/$current_branch/index/$filename"
+        cat ".girt/branch/$current_branch/index/$printing_filename"
     else
         # files_in_directory is empty
-        echo "girt-show: error: '$filename' not found in index"
+        echo "girt-show: error: '$printing_filename' not found in index"
     fi
 fi
