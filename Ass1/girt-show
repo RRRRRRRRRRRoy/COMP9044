@@ -4,6 +4,7 @@
 # copy girt-commit.sh checking the .girt
 if [ -d .girt/ ]
 then
+    # .girt exists
     :
 else
     # Do not forget to change to girt-show function
@@ -16,8 +17,10 @@ print_content_slice=$1;
 match_string=$(echo $print_content_slice|egrep '^[0-9]*:.*$')
 if [ "$match_string" != "" ]
 then
+    # matched is not empty continue 
     :
 else
+    # matched is empty 
     echo "girt-show: error: invalid object $print_content_slice"
     exit 1
 fi
@@ -37,25 +40,35 @@ current_branch=$(cat .girt/current_branch)
 
 if [ "$printing_number" != "" ]
 then
+    # comparing the max number with the printing number
     if [ $printing_number -le $max_repository_number ]
     then
+        # getting the files in the dir and raising the exception
         files_in_directory=$(ls .girt/repository/$printing_number/$filename 2>/dev/null)
         if [ "$files_in_directory" != "" ]
         then
+            # not empty show the files
             cat ".girt/repository/$printing_number/$filename"
         else
+            # not empty show the error
             echo "girt-show: error: '$filename' not found in commit $printing_number"
         fi
     else
+        # the number is over maximum
         echo "girt-show: error: unknown commit '$printing_number'"
         exit 1
     fi
 else
+    # If the printing number is empty
+    # getting the files in the dir and raising the exception
     files_in_directory=$(ls .girt/branch/$current_branch/index/$filename 2>/dev/null)
+    # check file is empty or not
     if [ "$files_in_directory" != "" ]
     then
+        # files_in_directory is not empty
         cat ".girt/branch/$current_branch/index/$filename"
     else
+        # files_in_directory is empty
         echo "girt-show: error: '$filename' not found in index"
     fi
 fi
