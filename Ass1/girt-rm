@@ -18,8 +18,6 @@ cached_flag=0
 input_argv=$1
 # current_files=$@
 current_branch=$(cat .girt/current_branch)
-force_option="--force"
-cached_flag="--cached"
 
 # I just wondered that is there a situation which has force and cached at the same time
 # Notice: Whether there is a situation that
@@ -73,8 +71,7 @@ then
 	# if flag = 1 remove file in the index dir
 	for file in "$@"
 	do
-		rm_file_dir=".girt/branch/$current_branch/index/$file"
-		rm $rm_file_dir
+		rm ".girt/branch/$current_branch/index/$file"
 	done
 	# checking the flag for cached
 	if [ $cached_flag -eq 0 ]
@@ -85,10 +82,8 @@ then
 		for file in "$@"
 		do
 			# if exist, then remove the file
-			if [ ! -e  $file ]
+			if [ -e  $file ]
 			then 
-				:
-			else
 				# remove the file in the filelist
 				rm "$file" 
 			fi
