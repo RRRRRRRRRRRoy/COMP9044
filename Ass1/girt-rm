@@ -3,53 +3,63 @@
 #check .girt exists
 if [ -d .girt/ ]
 then
-    # current .girt exists
-    :
+	# current .girt exists
+	:
 else
-    # current .girt does not exist ----> print error
-    echo "girt-rm: error: no .girt directory containing girt repository exists";
-    exit 1;
+	# current .girt does not exist ----> print error
+    echo "girt-rm: error: no .girt directory containing girt repository exists"
+    exit 1
 fi
 
 # There are 2 argvs in remove the first is force the second is cached
 force_flag=0
 cached_flag=0
+# getting the second variable
 input_argv=$1
+current_files=$@
 current_branch=$(cat .girt/current_branch)
-filelist=$@
-force_option="--force"
-cached_option="--cached"
-
 
 # I just wondered that is there a situation which has force and cached at the same time
 # Notice: Whether there is a situation that
 # check the option of --force
-if [ "$input_argv" = "$force_option" ]
+if [ "$input_argv" = "--force" ]
 then
 	force_flag=1
 	# How to use shift in the shell
 	# this shift is for moving to next one
 	# Source: https://unix.stackexchange.com/questions/174566/what-is-the-purpose-of-using-shift-in-shell-scripts
 	shift
+	# if [ "$input_argv" = "--cached" ]
+	# then
+	# 	cached_flag=1
+	# 	shift
+	# fi
 fi
 
+
 # This is to check the option of --cached
-if [ "$input_argv" = "$cached_option" ]
+if [ "$input_argv" = "--cached" ]
 then
 	cached_flag=1
-	# See the previous annotation
+	# How to use shift in the shell
+	# this shift is for moving to next one
+	# Source: https://unix.stackexchange.com/questions/174566/what-is-the-purpose-of-using-shift-in-shell-scripts
 	shift
 fi
 
-for filename in "$filelist"
-do	
-	if ! test -e .girt/branch/$current_branch/index/$filename
+
+#first check all files are in index
+for filename in "$@"
+do
+	# file exist
+	if [ ! -e .girt/branch/$current_branch/index/$filename ]
 	then
 		# file not exists ----> exit and print error
-		echo "girt-rm: error: '$filename' is not in the girt repository";
-		exit 1;
+		echo "girt-rm: error: '$filename' is not in the girt repository"
+		exit 1
 	fi
 done
+
 
 # checking the flag of force and cached
 # checking the flag for force
@@ -58,10 +68,9 @@ then
 	# This is from webcms3
 	# --force option overrides this, and will carry out the removal even if the user will lose work.
 	# if flag = 1 remove file in the index dir
-	for file in "$filelist"
+	for file in "$@"
 	do
-		current_del_directory=".girt/branch/$current_branch/index/$file"
-		rm -r "$current_del_directory"
+		rm ".girt/branch/$current_branch/index/$file"
 	done
 	# checking the flag for cached
 	if [ $cached_flag -eq 0 ]
@@ -69,8 +78,8 @@ then
 		# This is from webcms3
 		# --cached option, the file is removed only from the index, and not from the current directory.
 		# if no catch flag in the previous operation, remove the files in the current directory
-		for file in "$filelist"
-		do	
+		for file in "$@"
+		do
 			# if exist, then remove the file
 			if [ -e  $file ]
 			then 
@@ -79,36 +88,43 @@ then
 			fi
 		done
 	fi
-	exit 0;
+	exit 0
 fi
 
-change_counter=1;
+# these part of codes are similar to girt-commit
+change_counter=1
 #then check for if the contents different between index and current dir or index and repo
 change_number=$(ls -c .girt/repository|wc -l|sed 's/ //g')
 latest_modified_branch=$(ls .girt/branch/$current_branch/repository|sort -r|head -n1)
-for file in "$filelist"
+
+# checking if the content in files are different from index directory and current directory or index directory and repository
+for file in "$@"
 do
+	# checking whether the file is exist or not
 	if [ -e $file ]
 	then
-		
-		current_index_difference=$(diff $file .girt/branch/$current_branch/index/$file|wc -w);
+		# Using the difference to check the difference
+		# Source: https://www.geeksforgeeks.org/diff-command-linux-examples/
+		current_index_difference=$(diff $file .girt/branch/$current_branch/index/$file|wc -w)
 		if [ $current_index_difference -gt 0 ]
 		then
 			if [ $change_number -eq 0 ]
 			then
-				if [ $if_dcurrent_index_differenceif_curr -gt 0 ]
+				if [ $current_index_difference -gt 0 ]
 				then
-					change_counter=0;
+					change_counter=0
 				fi
 			else
 				if [ ! -e  .girt/branch/$current_branch/repository/$latest_modified_branch/$file ]
 				then
-					change_counter=0;
+					change_counter=0
 				else
-					repository_difference=$(diff .girt/branch/$current_branch/index/$file .girt/branch/$current_branch/repository/$latest_modified_branch/$file|wc -w);
+					# using the word counter provided by wc
+					# Source: https://explainshell.com/explain?cmd=wc+-w
+					repository_difference=$(diff .girt/branch/$current_branch/index/$file .girt/branch/$current_branch/repository/$latest_modified_branch/$file|wc -w)
 					if [ $repository_difference -gt 0 ]
 					then
-						change_counter=0;
+						change_counter=0
 					fi
 				fi
 			fi
@@ -116,82 +132,84 @@ do
 	fi
 	if [ $change_counter -eq 0 ]
 	then
-		echo "girt-rm: error: '$file' in index is different to both to the working file and the repository";
-		exit 1;
+		# totally different
+		echo "girt-rm: error: '$file' in index is different to both to the working file and the repository"
+		exit 1
 	fi
 done
 
 
-#only cached flag,then only rm the index file
-if [ $cached_flag -eq 1
+# Getting the cached flag and remove the file in the directory
+# check both cached flag and change counter 
+if [ $cached_flag -eq 1 ] && [ $change_counter -eq 1 ]
 then
-	if [ $change_counter -eq 1 ]
-	then
-		for file in "$filelist"
-		do
-			rm ".girt/branch/$current_branch/index/$file";
-		done
-	fi
+	# removed the file in the index directory
+	for file in "$@"
+	do
+		rm ".girt/branch/$current_branch/index/$file"
+	done
 fi
 
 
-#no flag at all, then need to check if the index files already be committed
+# no changes of flags, check whether the index files are committed
 #and need to mention that if the file already be removed from the current dir,then just directly remove the index one.
-if [ $cached_flag -eq 0 ]
+if [ $cached_flag -eq 0 ] && [ $force_flag -eq 0 ]
 then
-	if [ $cached_flag -eq 0 ]
-	then
-		for file in "$filelist"
-		do
-			if [ -e $file ]
+	for file in "$@"
+	do
+		# checking the file is exist or not
+		if [ -e $file ]
+		then
+			# compart the current file with the index dir
+			current_index_difference=$(diff $file  .girt/branch/$current_branch/index/$file|wc -w)
+			if [ $current_index_difference -eq 0 ]
 			then
-				#check the repo
-				if_dif_curr=`diff $file  .girt/branch/$current_branch/index/$file|wc -w`;
-				if [ $if_dif_curr -eq 0 ]
+			#if 0 repo,then quit
+				if [ $change_number -eq 0 ]
 				then
-				#if 0 repo,then quit
-					if [ $change_number -eq 0 ]
+					echo "girt-rm: error: '$file' has staged changes in the index"
+					exit 1
+				else
+					#if the latest repo does not have the file ,then quit
+					if [ ! -e .girt/branch/$current_branch/repository/$latest_modified_branch/$file ]
 					then
-						echo "girt-rm: error: '$file' has staged changes in the index";
-						exit 1;
+						echo "girt-rm: error: '$file' has staged changes in the index"
+						exit 1
 					else
-						#if the latest repo does not have the file ,then quit
-						if [ ! -e .girt/branch/$current_branch/repository/$latest_modified_branch/$file ]
+					#does not the same file
+						repository_difference=$(diff .girt/branch/$current_branch/index/$file .girt/branch/$current_branch/repository/$latest_modified_branch/$file|wc -w)
+						if [ $repository_difference -gt 0 ]
 						then
-							echo "girt-rm: error: '$file' has staged changes in the index";
-							exit 1;
-						else
-						#does not the same file
-							if_dif_repo=`diff .girt/branch/$current_branch/index/$file .girt/branch/$current_branch/repository/$latest_modified_branch/$file|wc -w`;
-							if [ $if_dif_repo -gt 0 ]
-							then
-								echo "girt-rm: error: '$file' has staged changes in the index";
-								exit 1;
-							fi
+							echo "girt-rm: error: '$file' has staged changes in the index"
+							exit 1
 						fi
 					fi
-				else
-					if [ $change_number -gt 0 ]
+				fi
+			else
+				# current_dir_difference eq 0
+				if [ $change_number -gt 0 ]
+				then
+					if [ -e .girt/branch/$current_branch/repository/$latest_modified_branch/$file ]
 					then
-						if [ -e .girt/branch/$current_branch/repository/$latest_modified_branch/$file ]
+						repository_difference=$(diff .girt/branch/$current_branch/index/$file .girt/branch/$current_branch/repository/$latest_modified_branch/$file|wc -w)
+						if [ $repository_difference -eq 0 ]
 						then
-							if_dif_repo=`diff .girt/branch/$current_branch/index/$file .girt/branch/$current_branch/repository/$latest_modified_branch/$file|wc -w`;
-							if [ $if_dif_repo -eq 0 ]
-							then
-								echo "girt-rm: error: '$file' in the repository is different to the working file";
-								exit 1;
-							fi
+							#if the latest repository has no file ,then quit the program
+							echo "girt-rm: error: '$file' in the repository is different to the working file"
+							exit 1
 						fi
 					fi
 				fi
 			fi
-		done
-	for file in "$filelist"
+		fi
+	done
+	for file in "$@"
 	do
-		rm ".girt/branch/$current_branch/index/$file";
+		rm ".girt/branch/$current_branch/index/$file"
+		# remove
 		if [ -e $file ]
 		then
-			rm "$file";
+			rm "$file"
 		fi
 	done
 fi
