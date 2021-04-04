@@ -14,7 +14,7 @@ fi
 #test for format num:repository
 print_content_slice=$1;
 match_string=$(echo $print_content_slice|egrep '^[0-9]*:.*$')
-if test "$match_string" != ""
+if [ "$match_string" != "" ]
 then
     :
 else
@@ -35,20 +35,20 @@ max_number=$(ls -c .girt/repository|wc -l|sed 's/ //g')
 max_repository_number=$(($max_number - 1));
 current_branch=$(cat .girt/current_branch)
 
-if test "$printing_number" = ""
+if [ "$printing_number" = "" ]
 then
     files_in_directory=$(ls .girt/branch/$current_branch/index/$filename 2>/dev/null)
-    if test "$files_in_directory" != ""
+    if [ "$files_in_directory" != "" ]
     then
         cat ".girt/branch/$current_branch/index/$filename"
     else
         echo "girt-show: error: '$filename' not found in index"
     fi
 else
-    if test $printing_number -le $max_repository_number
+    if [ $printing_number -le $max_repository_number ]
     then
         files_in_directory=$(ls .girt/repository/$printing_number/$filename 2>/dev/null)
-        if test "$files_in_directory" != ""
+        if [ "$files_in_directory" != "" ]
         then
             cat ".girt/repository/$printing_number/$filename"
         else
