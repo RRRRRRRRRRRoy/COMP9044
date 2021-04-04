@@ -43,15 +43,11 @@ fi
 
 for filename in "$filelist"
 do	
-	# file exist
-	if [ -e .girt/branch/$current_branch/index/$filename ]
+	if ! test -e .girt/branch/$current_branch/index/$filename
 	then
-		# continue
-		:
-	else
 		# file not exists ----> exit and print error
-		echo "girt-rm: error: '$filename' is not in the girt repository"
-		exit 1
+		echo "girt-rm: error: '$filename' is not in the girt repository";
+		exit 1;
 	fi
 done
 
