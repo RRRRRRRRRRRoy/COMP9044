@@ -72,11 +72,11 @@ do
 				fi
 			else
 				repository_difference=$(diff "$file_repository" "$file_index"|wc -w)
-				if [ $repository_difference -gt 0 ]
+				if [ $repository_difference -le 0 ]
 				then
-					echo "$filename - file deleted, defferent changes staged for commit"
-				else
 					echo "$filename - file deleted"
+				else
+					echo "$filename - file deleted, defferent changes staged for commit"
 				fi
 			fi
 		else
@@ -84,13 +84,13 @@ do
 			if [ -e "$filename" ]
 			then
 				current_index_difference=$(diff "$filename" "$file_index"|wc -w)
-				if [ $current_index_difference -eq 0 ]
+				if [ $current_index_difference -ne 0 ]
 				then
+					# current_index_difference != 0 ----> get changes
+					echo "$filename - added to index, file changed"
+				else
                     # current_index_difference = 0 ----> no changes
 					echo "$filename - added to index"
-				else
-                    # current_index_difference != 0 ----> get changes
-					echo "$filename - added to index, file changed"
 				fi
 			else
                 # file is not exist
