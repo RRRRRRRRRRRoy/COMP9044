@@ -35,7 +35,7 @@ directory_current_repository=".girt/branch/$current_branch/repository/$latest_mo
 # list to directory cutting and sorting the name of the file
 list_file_name=$(ls * $directory_index/* $directory_current_repository/* 2>/dev/null)
 # go through each file in the previous sorted_file_name
-ls * $directory_index/* $directory_current_repository/* 2>/dev/null|sed 's/^\...*\///g'|sort|uniq | while read filename
+ls * $directory_index/* $directory_current_repository/* 2>/dev/null|sed 's/^\....*\///g'|sort|uniq | while read filename
 do
     file_index="$directory_index/$filename"
 	file_repository="$directory_current_repository/$filename"
@@ -51,16 +51,25 @@ do
 			then
 				index_repository_difference=$(diff $file_repository $file_index|wc -w)
 				index_current_file_difference=$(diff $file_index $filename|wc -w)
+				# Here are the situation
+				# 								    / index_repository_difference = 0 same of the repository
+				# index_current_file_difference = 0
+				# 								    \ index_repository_difference > 0 changed, staged for commit
 				if [ $index_current_file_difference -eq 0 ]
                 then
                     if [ $index_repository_difference -eq 0 ]
 				    then
+						# Notice!!! do not use repository to instead
 					    echo "$filename - same as repo"
 				    elif [ $index_repository_difference -gt 0 ]
 				    then
 					    echo "$filename - file changed, changes staged for commit"
                     fi
                 fi
+				# Here are the situation
+				# 								    / index_repository_difference = 0 changed, not staged
+				# index_current_file_difference > 0
+				# 								    \ index_repository_difference > 0 changed, staged
 				if [ $index_current_file_difference -gt 0 ]
                 then
                     if [ $index_repository_difference -eq 0 ]
@@ -72,11 +81,14 @@ do
                     fi
 				fi
 			else
+				# checking the difference
 				repository_difference=$(diff "$file_repository" "$file_index"|wc -w)
 				if [ $repository_difference -le 0 ]
 				then
+					# repository_difference <= 0 file deleted
 					echo "$filename - file deleted"
 				else
+					# repository_difference > 0 staged for commit
 					echo "$filename - file deleted, defferent changes staged for commit"
 				fi
 			fi
