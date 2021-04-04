@@ -45,13 +45,13 @@ then
     then
         # getting the files in the dir and raising the exception
         files_in_directory=$(ls .girt/repository/$printing_number/$filename 2>/dev/null)
-        if [ "$files_in_directory" != "" ]
+        if [ "$files_in_directory" = "" ]
         then
+            #  empty show the error
+            echo "girt-show: error: '$filename' not found in commit $printing_number"
+        else
             # not empty show the files
             cat ".girt/repository/$printing_number/$filename"
-        else
-            # not empty show the error
-            echo "girt-show: error: '$filename' not found in commit $printing_number"
         fi
     else
         # the number is over maximum
