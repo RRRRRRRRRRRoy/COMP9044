@@ -88,7 +88,7 @@ do
                 then
                     if [ $index_repository_difference -eq 0 ]
 				    then
-					    echo "$filename - same as repository"
+					    echo "$filename - same as repo"
 				    elif [ $index_repository_difference -gt 0 ]
 				    then
 					    echo "$filename - file changed, changes staged for commit"
