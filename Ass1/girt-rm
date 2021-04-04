@@ -52,21 +52,25 @@ do
 	fi
 done
 
-# check the flag of force 
-# if the flag is 1 then rm force
-# else do not remove
-if [ $force_flag -eq 1 ]
-then
-    for file in $filelist
-    do
-        rm ".girt/branch/$current_branch/index/$file"
-    done
-fi
 
-# no cached file in the dir ----> remove
-if [ $cached_flag -eq 0 ]
-then
-    for file in $filelist
-    do
-    done
-fi
+# looping file in the dir and check the flag
+for file_in_list in $filelist
+do
+    # check the flag of force 
+    # if the flag is 1 then rm force
+    # else do not remove
+    if [ $force_flag -eq 1 ]
+    then
+        rm ".girt/branch/$current_branch/index/$file"
+    fi
+    # no cached file in the dir ----> remove
+    if [ $cached_flag -eq 0 ]
+    then
+        if [ ! -e $file_in_list ]
+        then
+            :
+        else
+            rm "$file_in_list"
+        fi
+    fi
+done
