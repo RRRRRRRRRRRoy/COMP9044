@@ -209,7 +209,8 @@ then
 	done
 	for file in "$@"
 	do
-		rm ".girt/branch/$current_branch/index/$file"
+		current_branch_index=".girt/branch/$current_branch/index/$file"
+		rm "$current_branch_index"
 		# remove
 		if [ -e $file ]
 		then
