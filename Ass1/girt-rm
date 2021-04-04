@@ -67,22 +67,23 @@ then
 		current_del_directory=".girt/branch/$current_branch/index/$file"
 		rm -r "$current_del_directory"
 	done
-fi
-# checking the flag for cached
-if [ $cached_flag -eq 0 ]
-then
-	# This is from webcms3
-	# --cached option, the file is removed only from the index, and not from the current directory.
-	# if no catch flag in the previous operation, remove the files in the current directory
-	for file in "$filelist"
-	do	
-		# if exist, then remove the file
-		if [ -e  $file ]
-		then 
-			# remove the file in the filelist
-			rm "$file" 
-		fi
-	done
+	# checking the flag for cached
+	if [ $cached_flag -eq 0 ]
+	then
+		# This is from webcms3
+		# --cached option, the file is removed only from the index, and not from the current directory.
+		# if no catch flag in the previous operation, remove the files in the current directory
+		for file in "$filelist"
+		do	
+			# if exist, then remove the file
+			if [ -e  $file ]
+			then 
+				# remove the file in the filelist
+				rm "$file" 
+			fi
+		done
+	fi
+	exit 0;
 fi
 
 # these part of codes are similar to girt-commit

@@ -52,5 +52,59 @@ do
 			echo "$filename - untracked"
 		fi
 	else
-        
+        if [ ! -e "$file_repository" ]
+		then
+            # file is exist
+			if [ -e "$filename" ]
+			then
+				current_index_difference=$(diff "$filename" "$file_index"|wc -w)
+				if [ $current_index_difference -eq 0 ]
+				then
+                    # current_index_difference = 0 ----> no changes
+					echo "$filename - added to index"
+				else
+                    # current_index_difference != 0 ----> get changes
+					echo "$filename - added to index, file changed"
+				fi
+			else
+                # file is not exist
+				echo "$filename - added to index, file deleted"
+			fi
+		else
+            # file name is not existed
+			if [ ! -e "$filename" ]
+			then
+				repository_difference=$(diff "$file_repository" "$file_index"|wc -w)
+				if [ $repository_difference -gt 0 ]
+				then
+					echo "$filename - file deleted, defferent changes staged for commit"
+				else
+					echo "$filename - file deleted"
+				fi
+			else
+				index_repository_difference=$(diff $file_repository $file_index|wc -w)
+				index_current_file_difference=$(diff $file_index $filename|wc -w)
+				if [ $index_current_file_difference -eq 0 ]
+                then
+                    if [ $index_repository_difference -eq 0 ]
+				    then
+					    echo "$filename - same as repository"
+				    elif [ $index_repository_difference -gt 0 ]
+				    then
+					    echo "$filename - file changed, changes staged for commit"
+                    fi
+                fi
+				if [ $index_current_file_difference -gt 0 ]
+                then
+                    if [ $index_repository_difference -eq 0 ]
+				    then
+					    echo "$filename - file changed, changes not staged for commit"
+                    elif [ $index_repository_difference -gt 0 ]
+                    then
+					    echo "$filename - file changed, different changes staged for commit"
+                    fi
+				fi
+			fi
+		fi
+    fi
 done
