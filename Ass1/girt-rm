@@ -83,5 +83,16 @@ change_number=$(ls -c .girt/repository|wc -l|sed 's/ //g')
 latest_modified_branch=$(ls .girt/branch/$current_branch/repository|sort |tail -n 1)
 for file in $filelist
 do
-    
+    if [ -e $file ]
+    then
+        # check the difference of the index folder
+        difference_index=$(diff $file .girt/branch/$current_branch/index/$file|wc -w)
+        if [ difference_index -le 0 ]
+        then
+            # difference is not exist difference_index <= 0
+            :
+        else
+            # difference is exist difference_index > 0
+        fi
+    fi
 done
