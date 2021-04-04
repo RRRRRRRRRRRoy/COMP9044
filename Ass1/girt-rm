@@ -15,11 +15,35 @@ fi
 force_flag=0
 cached_flag=0
 input_argv=$1
+current_branch=$(cat .shrug/current_branch)
+filelist=$@
 
+# check whether the argv is force
 if [ "$input_argv" = "--force" ]
 then
+    force_flag=1
+    # Using shife to move
+    # Source: https://unix.stackexchange.com/questions/174566/what-is-the-purpose-of-using-shift-in-shell-scripts
+    shift
 fi
 
+# check whether the argv is cached
 if [ "$input_argv" = "--cached" ]
 then
+    cached_flag=1
+    # Using shife to move
+    # Source: https://unix.stackexchange.com/questions/174566/what-is-the-purpose-of-using-shift-in-shell-scripts
+    shift
 fi
+
+# go through the files
+for file in $filelist
+do
+    if [ -e .girt/branch/$current_branch/index/$file ]
+	then
+        :
+    else
+		echo "girt-rm: error: '$file' is not in the shrug repository";
+		exit 1;
+	fi
+done
