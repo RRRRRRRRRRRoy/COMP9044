@@ -54,6 +54,7 @@ done
 
 
 # looping file in the dir and check the flag
+# ???need test ???
 for file_in_list in $filelist
 do
     # check the flag of force 
@@ -73,4 +74,14 @@ do
             rm "$file_in_list"
         fi
     fi
+done
+
+# These variable is copied from girt-commit
+changes_counter=1
+# changing file numbers
+change_number=$(ls -c .girt/repository|wc -l|sed 's/ //g')
+latest_modified_branch=$(ls .girt/branch/$current_branch/repository|sort |tail -n 1)
+for file in $filelist
+do
+    
 done
