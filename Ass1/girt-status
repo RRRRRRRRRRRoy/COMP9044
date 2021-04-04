@@ -43,36 +43,11 @@ do
     # if the file is not in the idnex folder it is untracked file
     if [ -e "$file_index" ]
 	then
-		if [ ! -e "$file_repository" ]
+		if [ -e "$file_repository" ]
 		then
-            # file is exist
+            # file name is not existed
 			if [ -e "$filename" ]
 			then
-				current_index_difference=$(diff "$filename" "$file_index"|wc -w)
-				if [ $current_index_difference -eq 0 ]
-				then
-                    # current_index_difference = 0 ----> no changes
-					echo "$filename - added to index"
-				else
-                    # current_index_difference != 0 ----> get changes
-					echo "$filename - added to index, file changed"
-				fi
-			else
-                # file is not exist
-				echo "$filename - added to index, file deleted"
-			fi
-		else
-            # file name is not existed
-			if [ ! -e "$filename" ]
-			then
-				repository_difference=$(diff "$file_repository" "$file_index"|wc -w)
-				if [ $repository_difference -gt 0 ]
-				then
-					echo "$filename - file deleted, defferent changes staged for commit"
-				else
-					echo "$filename - file deleted"
-				fi
-			else
 				index_repository_difference=$(diff $file_repository $file_index|wc -w)
 				index_current_file_difference=$(diff $file_index $filename|wc -w)
 				if [ $index_current_file_difference -eq 0 ]
@@ -95,7 +70,33 @@ do
 					    echo "$filename - file changed, different changes staged for commit"
                     fi
 				fi
+			else
+				repository_difference=$(diff "$file_repository" "$file_index"|wc -w)
+				if [ $repository_difference -gt 0 ]
+				then
+					echo "$filename - file deleted, defferent changes staged for commit"
+				else
+					echo "$filename - file deleted"
+				fi
 			fi
+		else
+			# file is exist
+			if [ -e "$filename" ]
+			then
+				current_index_difference=$(diff "$filename" "$file_index"|wc -w)
+				if [ $current_index_difference -eq 0 ]
+				then
+                    # current_index_difference = 0 ----> no changes
+					echo "$filename - added to index"
+				else
+                    # current_index_difference != 0 ----> get changes
+					echo "$filename - added to index, file changed"
+				fi
+			else
+                # file is not exist
+				echo "$filename - added to index, file deleted"
+			fi
+
 		fi
 	else
 		if [ ! -e "$filename" ]
