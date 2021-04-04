@@ -92,7 +92,49 @@ do
             # difference is not exist difference_index <= 0
             :
         else
-            # difference is exist difference_index > 0
+            # checking the difference
+            if [ $change_number -eq 0 ]
+			then
+				if [ $difference_index -gt 0 ]
+				then
+					changes_counter=0;
+				fi
+			else
+                # directory of latest change
+                latest_modified_file=".girt/branch/$current_branch/repo/$latest_modified_branch/$file"
+				if [ -e $latest_modified_file ]
+				then
+                    difference_repository=$(diff .girt/branch/$current_branch/index/$file .girt/branch/$current_branch/repository/$latest_modified_branch/$file|wc -w)
+					if test $difference_repository -gt 0
+					then
+						changes_counter=0;
+					fi
+				else
+					changes_counter=0;
+				fi
+			fi
         fi
     fi
+    if [ $changes_counter -eq 0 ]
+	then
+        # checking the different with 2 files
+		echo "girt-rm: error: '$file' in index is different to both working file and repository";
+		exit 1;
+	fi
 done
+
+# checking cached flag, only remove the index file
+if [ $flag_c -eq 1 ]
+then 
+    # checking the counter is change or not
+    if [ $changes_counter -eq 1 ]
+    then
+        # romoving file in the filelist
+	    for file in "$filelist"
+	    do
+		    rm ".girt/branch/$current_branch/index/$file";
+	    done
+    fi
+fi
+
+# checking both flag of cached and forced are not changed
