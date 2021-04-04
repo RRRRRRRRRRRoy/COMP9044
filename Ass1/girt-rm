@@ -98,7 +98,8 @@ fi
 change_counter=1
 #then check for if the contents different between index and current dir or index and repo
 change_number=$(ls -c .girt/repository|wc -l|sed 's/ //g')
-latest_modified_branch=$(ls .girt/branch/$current_branch/repository|sort|tail -n 1)
+sort_branches=$(ls .girt/branch/$current_branch/repository|sort)
+latest_modified_branch=$(echo $sort_branches|tail -n 1)
 
 # checking if the content in files are different from index directory and current directory or index directory and repository
 for file in "$@"
