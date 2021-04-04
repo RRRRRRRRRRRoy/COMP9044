@@ -86,7 +86,7 @@ then
         fi
         
         # checking file is exist or not in the dir
-        for file in .girt/branch/$current_branch/index/*
+        for file in $(ls .girt/branch/$current_branch/index/*)
         do
             # cutting the file name
             filename=$(echo $file|cut -d'/' -f5);
