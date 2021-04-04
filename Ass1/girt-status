@@ -26,7 +26,7 @@ fi
 # these part of codes are similar to girt-commit
 # change_counter=1
 # These codes are from the girt-rm
-change_number=$(ls -c .girt/repository|wc -l|sed 's/ //g')
+change_number=$(ls -c .girt/repository|wc -l|sed 's/[ ]//g')
 latest_modified_branch=$(ls .girt/branch/$current_branch/repository|sort|tail -n 1)
 directory_index=".girt/branch/$current_branch/index"
 directory_current_repository=".girt/branch/$current_branch/repository/$latest_modified_branch"
@@ -34,7 +34,7 @@ directory_current_repository=".girt/branch/$current_branch/repository/$latest_mo
 # list to directory cutting and sorting the name of the file
 # sorted_file_name=$()
 # go through each file in the previous sorted_file_name
-ls * $directory_index/* $directory_current_repository/* 2>/dev/null|sed 's/^\..*\///g'|sort|uniq | while read filename
+ls * $directory_index/* $directory_current_repository/* 2>/dev/null|sed 's/^\.+.*\///g'|sort|uniq | while read filename
 do
     file_index="$directory_index/$filename"
 	file_repository="$directory_current_repository/$filename"
