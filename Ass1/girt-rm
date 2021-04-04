@@ -108,7 +108,8 @@ do
 	then
 		# Using the difference to check the difference
 		# Source: https://www.geeksforgeeks.org/diff-command-linux-examples/
-		current_index_difference=$(diff $file .girt/branch/$current_branch/index/$file|wc -w)
+		current_branch_diff=".girt/branch/$current_branch/index/$file"
+		current_index_difference=$(diff $file $current_branch_diff|wc -w)
 		if [ $current_index_difference -gt 0 ]
 		then
 			if [ $change_number -ne 0 ]
@@ -119,7 +120,9 @@ do
 				then
 					# using the word counter provided by wc
 					# Source: https://explainshell.com/explain?cmd=wc+-w
-					repository_difference=$(diff .girt/branch/$current_branch/index/$file .girt/branch/$current_branch/repository/$latest_modified_branch/$file|wc -w)
+					current_branch_diff=".girt/branch/$current_branch/index/$file"
+					latest_modified_diff=".girt/branch/$current_branch/repository/$latest_modified_branch/$file"
+					repository_difference=$(diff $current_branch_diff $latest_modified_diff|wc -w)
 					if [ $repository_difference -le 0 ]
 					then
 						:
