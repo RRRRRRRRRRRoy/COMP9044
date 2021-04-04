@@ -2,7 +2,12 @@
 
 # getting the filename from the input
 $filename=$ARGV[1];
-
+# getting the input type of whiles
+$while_type=$ARGV[0];
+# counting the number of pods
+$pods=0;
+# counting the individual_oberservation
+$individual_oberservation=0;
 # setting counter
 $sum=0;
 
@@ -18,12 +23,7 @@ while($line = <$stdin>){
     push @whale_list, $line;
 }
 
-# getting the input type of whiles
-$while_type=$ARGV[0];
-# counting the number of pods
-$pods=0;
-# counting the individual_oberservation
-$individual_oberservation=0;
+
 foreach $line (@whale_list){
     # How to using m//
     # Source: https://stackoverflow.com/questions/10019049/what-does-do-in-perl
