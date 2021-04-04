@@ -41,18 +41,9 @@ do
 
     # checking whether the file is in the index folder, 
     # if the file is not in the idnex folder it is untracked file
-    if [ ! -e "$file_index" ]
+    if [ -e "$file_index" ]
 	then
-		if [ ! -e "$filename" ]
-		then
-            # If this file is not existed set as ----> deleted
-            echo "$filename - deleted"
-		else
-            # If this file is existed set as ----> untracked
-			echo "$filename - untracked"
-		fi
-	else
-        if [ ! -e "$file_repository" ]
+		if [ ! -e "$file_repository" ]
 		then
             # file is exist
 			if [ -e "$filename" ]
@@ -105,6 +96,15 @@ do
                     fi
 				fi
 			fi
+		fi
+	else
+		if [ ! -e "$filename" ]
+		then
+            # If this file is not existed set as ----> deleted
+            echo "$filename - deleted"
+		else
+            # If this file is existed set as ----> untracked
+			echo "$filename - untracked"
 		fi
     fi
 done
