@@ -10,3 +10,11 @@ Due to GSOE9820, Change to tomorrow
 adding the dir head and commit into the .girt file
 local testing
 Tomorrow will start the following part
+
+4.3
+finish add commit show log
+doing the local test and vlab test 
+
+4.4
+finish commit-a rm status
+doing the local test and vlab test 
