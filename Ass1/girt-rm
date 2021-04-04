@@ -16,13 +16,13 @@ force_flag=0
 cached_flag=0
 # getting the second variable
 input_argv=$1
-current_files=$@
+# current_files=$@
 current_branch=$(cat .girt/current_branch)
 
 # I just wondered that is there a situation which has force and cached at the same time
 # Notice: Whether there is a situation that
 # check the option of --force
-if [ "$input_argv" = "--force" ]
+if [ "$1" = "--force" ]
 then
 	force_flag=1
 	# How to use shift in the shell
@@ -30,7 +30,7 @@ then
 	# Source: https://unix.stackexchange.com/questions/174566/what-is-the-purpose-of-using-shift-in-shell-scripts
 	shift
 	# This is for subset1_19 2 parameters stay together
-	if [ "$input_argv" = "--cached" ]
+	if [ "$1" = "--cached" ]
 	then
 		cached_flag=1
 		shift
@@ -39,7 +39,7 @@ fi
 
 
 # This is to check the option of --cached
-if [ "$input_argv" = "--cached" ]
+if [ "$1" = "--cached" ]
 then
 	cached_flag=1
 	# How to use shift in the shell
