@@ -30,6 +30,8 @@ then
 	# Source: https://unix.stackexchange.com/questions/174566/what-is-the-purpose-of-using-shift-in-shell-scripts
 	shift
 	# This is for subset1_19 2 parameters stay together
+	# Adding this part is for both force and cached 
+	# Which is --force --cached
 	if [ "$1" = "--cached" ]
 	then
 		cached_flag=1
@@ -147,7 +149,8 @@ then
 	# removed the file in the index directory
 	for file in "$@"
 	do
-		rm ".girt/branch/$current_branch/index/$file"
+		current_branch_index=".girt/branch/$current_branch/index/$file"
+		rm "$current_branch_index"
 	done
 fi
 
