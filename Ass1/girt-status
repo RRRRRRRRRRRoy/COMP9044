@@ -1,1 +1,32 @@
 #!/bin/dash
+
+# check .girt directory is exist or not
+if [ -d .girt/ ]
+then
+    :
+else
+    # if .girt directory is not exist printing error
+    # this is similar to the ohter gir-* files
+    echo "girt-status: error: no .girt directory containing girt repository exists"
+    exit 1
+fi
+
+#check .girt/log exists
+current_branch=`cat .girt/current_branch`;
+log_directory=".girt/branch/$current_branch/log"
+if [ -e $log_directory ]
+then
+    :
+else
+    # if there is no commit, the girt-commit will not create log file
+    echo "girt-status: error: your repository does not have any commits yet"
+    exit 1
+fi
+
+# these part of codes are similar to girt-commit
+# change_counter=1
+# These codes are from the girt-rm
+change_number=$(ls -c .girt/repository|wc -l|sed 's/ //g')
+latest_modified_branch=$(ls .girt/branch/$current_branch/repository|sort|tail -n 1)
+dir_index=".girt/branch/$current_branch/index";
+dir_now_repo=".girt/branch/$current_branch/repository/$latest_modified_branch";
