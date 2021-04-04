@@ -118,10 +118,10 @@ do
 					change_counter=0
 				fi
 			else
-				if [ ! -e  .girt/branch/$current_branch/repository/$latest_modified_branch/$file ]
+				# latest_modified_file
+				latest_modified_file=".girt/branch/$current_branch/repository/$latest_modified_branch/$file"
+				if [ -e $latest_modified_file ]
 				then
-					change_counter=0
-				else
 					# using the word counter provided by wc
 					# Source: https://explainshell.com/explain?cmd=wc+-w
 					repository_difference=$(diff .girt/branch/$current_branch/index/$file .girt/branch/$current_branch/repository/$latest_modified_branch/$file|wc -w)
@@ -129,6 +129,8 @@ do
 					then
 						change_counter=0
 					fi
+				else
+					change_counter=0
 				fi
 			fi
 		fi
