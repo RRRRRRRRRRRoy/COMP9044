@@ -179,7 +179,8 @@ then
 			if [ -e $file ]
 			then
 				# compart the current file with the index dir
-				current_index_difference=$(diff $file  .girt/branch/$current_branch/index/$file|wc -w)
+				current_branch_diff=".girt/branch/$current_branch/index/$file"
+				current_index_difference=$(diff $file  $current_branch_diff|wc -w)
 				if [ $current_index_difference -eq 0 ]
 				then
 				#if 0 repo,then quit
@@ -192,8 +193,10 @@ then
 						#if the latest repo does not have the file ,then quit
 						if [ -e "$latest_modified_file" ]
 						then
+							current_branch_diff=".girt/branch/$current_branch/index/$file"
+							latest_modified_diff=".girt/branch/$current_branch/repository/$latest_modified_branch/$file"
 							#does not the same file
-							repository_difference=$(diff .girt/branch/$current_branch/index/$file .girt/branch/$current_branch/repository/$latest_modified_branch/$file|wc -w)
+							repository_difference=$(diff $current_branch_diff $latest_modified_diff|wc -w)
 							if [ $repository_difference -gt 0 ]
 							then
 								echo "girt-rm: error: '$file' has staged changes in the index"
@@ -211,7 +214,9 @@ then
 						current_latest_dir=".girt/branch/$current_branch/repository/$latest_modified_branch/$file "
 						if [ -e $current_latest_dir ]
 						then
-							repository_difference=$(diff .girt/branch/$current_branch/index/$file .girt/branch/$current_branch/repository/$latest_modified_branch/$file|wc -w)
+							current_branch_diff=".girt/branch/$current_branch/index/$file"
+							latest_modified_diff=".girt/branch/$current_branch/repository/$latest_modified_branch/$file"
+							repository_difference=$(diff $current_branch_diff $latest_modified_diff|wc -w)
 							if [ $repository_difference -eq 0 ]
 							then
 								#if the latest repository has no file ,then quit the program
