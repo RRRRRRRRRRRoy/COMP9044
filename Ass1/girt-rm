@@ -185,26 +185,28 @@ then
 						echo "girt-rm: error: '$file' has staged changes in the index"
 						exit 1
 					else
+						latest_modified_file=".girt/branch/$current_branch/repository/$latest_modified_branch/$file"
 						#if the latest repo does not have the file ,then quit
-						if [ ! -e .girt/branch/$current_branch/repository/$latest_modified_branch/$file ]
+						if [ -e "$latest_modified_file" ]
 						then
-							echo "girt-rm: error: '$file' has staged changes in the index"
-							exit 1
-						else
-						#does not the same file
+							#does not the same file
 							repository_difference=$(diff .girt/branch/$current_branch/index/$file .girt/branch/$current_branch/repository/$latest_modified_branch/$file|wc -w)
 							if [ $repository_difference -gt 0 ]
 							then
 								echo "girt-rm: error: '$file' has staged changes in the index"
 								exit 1
 							fi
+						else
+							echo "girt-rm: error: '$file' has staged changes in the index"
+							exit 1
 						fi
 					fi
 				else
 					# current_dir_difference eq 0
 					if [ $change_number -gt 0 ]
 					then
-						if [ -e .girt/branch/$current_branch/repository/$latest_modified_branch/$file ]
+						current_latest_dir=".girt/branch/$current_branch/repository/$latest_modified_branch/$file "
+						if [ -e $current_latest_dir ]
 						then
 							repository_difference=$(diff .girt/branch/$current_branch/index/$file .girt/branch/$current_branch/repository/$latest_modified_branch/$file|wc -w)
 							if [ $repository_difference -eq 0 ]
