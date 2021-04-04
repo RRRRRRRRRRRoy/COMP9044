@@ -111,13 +111,8 @@ do
 		current_index_difference=$(diff $file .girt/branch/$current_branch/index/$file|wc -w)
 		if [ $current_index_difference -gt 0 ]
 		then
-			if [ $change_number -eq 0 ]
+			if [ $change_number -ne 0 ]
 			then
-				if [ $current_index_difference -gt 0 ]
-				then
-					change_counter=0
-				fi
-			else
 				# latest_modified_file
 				latest_modified_file=".girt/branch/$current_branch/repository/$latest_modified_branch/$file"
 				if [ -e $latest_modified_file ]
@@ -125,10 +120,19 @@ do
 					# using the word counter provided by wc
 					# Source: https://explainshell.com/explain?cmd=wc+-w
 					repository_difference=$(diff .girt/branch/$current_branch/index/$file .girt/branch/$current_branch/repository/$latest_modified_branch/$file|wc -w)
-					if [ $repository_difference -gt 0 ]
+					if [ $repository_difference -le 0 ]
 					then
+						:
+					else
 						change_counter=0
 					fi
+				else
+					change_counter=0
+				fi
+			else
+				if [ $current_index_difference -le 0 ]
+				then
+					:
 				else
 					change_counter=0
 				fi
@@ -146,14 +150,17 @@ done
 
 # Getting the cached flag and remove the file in the directory
 # check both cached flag and change counter 
-if [ $cached_flag -eq 1 ] && [ $change_counter -eq 1 ]
+if [ $cached_flag -eq 1 ]
 then
-	# removed the file in the index directory
-	for file in "$@"
-	do
-		current_branch_index=".girt/branch/$current_branch/index/$file"
-		rm "$current_branch_index"
-	done
+	if [ $change_counter -eq 1 ]
+	then
+		# removed the file in the index directory
+		for file in "$@"
+		do
+			current_branch_index=".girt/branch/$current_branch/index/$file"
+			rm "$current_branch_index"
+		done
+	fi
 fi
 
 
