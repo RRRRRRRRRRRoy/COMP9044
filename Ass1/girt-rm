@@ -25,17 +25,50 @@ cached_option="--cached"
 # check the option of --force
 if [ "$input_argv" = "$force_option" ]
 then
-	force_flag=1;
+	force_flag=1
 	# How to use shift in the shell
 	# this shift is for moving to next one
 	# Source: https://unix.stackexchange.com/questions/174566/what-is-the-purpose-of-using-shift-in-shell-scripts
-	shift;
+	shift
 fi
 
 # This is to check the option of --cached
 if [ "$input_argv" = "$cached_option" ]
 then
-	cached_flag=1;
+	cached_flag=1
 	# See the previous annotation
-	shift;
+	shift
+fi
+
+#first check all files are in index
+for filename in "$filelist"
+do	
+	# file exist
+	if [ -e .girt/branch/$current_branch/index/$filename ]
+	then
+		# continue
+		:
+	else
+		# file not exists ----> exit and print error
+		echo "girt-rm: error: '$filename' is not in the girt repository"
+		exit 1
+	fi
+done
+
+# checking the flag of force and cached
+# checking the flag for force
+if [ $force_flag -eq 1 ]
+then
+	# This is from webcms3
+	# --force option overrides this, and will carry out the removal even if the user will lose work.
+	# if flag = 1 remove file in the index dir
+	
+fi
+# checking the flag for cached
+if [ $cached_flag -eq 0 ]
+then
+	# This is from webcms3
+	# --cached option, the file is removed only from the index, and not from the current directory.
+	# if no catch flag in the previous operation, remove the files in the current directory
+
 fi
