@@ -18,12 +18,18 @@ while($line = <$stdin>){
     push @whale_list, $line;
 }
 
+# getting the input type of whiles
 $while_type=$ARGV[0];
+# counting the number of pods
 $pods=0;
+# counting the individual_oberservation
 $individual_oberservation=0;
 foreach $line (@whale_list){
+    # How to using m//
+    # Source: https://stackoverflow.com/questions/10019049/what-does-do-in-perl
     if($line =~ m"$while_type"){
         $pods = $pods + 1;
+        # This is samilar with the previous orca.pl
         @info = split / +/, $line;
         # print "@info";
         $individual_oberservation = $info[1] + $individual_oberservation;
