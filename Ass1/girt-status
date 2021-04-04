@@ -12,7 +12,7 @@ else
 fi
 
 #check .girt/log exists
-current_branch=`cat .girt/current_branch`;
+current_branch=$(cat .girt/current_branch)
 log_directory=".girt/branch/$current_branch/log"
 if [ -e $log_directory ]
 then
@@ -28,5 +28,29 @@ fi
 # These codes are from the girt-rm
 change_number=$(ls -c .girt/repository|wc -l|sed 's/ //g')
 latest_modified_branch=$(ls .girt/branch/$current_branch/repository|sort|tail -n 1)
-dir_index=".girt/branch/$current_branch/index";
-dir_now_repo=".girt/branch/$current_branch/repository/$latest_modified_branch";
+directory_index=".girt/branch/$current_branch/index"
+directory_current_repository=".girt/branch/$current_branch/repository/$latest_modified_branch"
+
+# list to directory cutting and sorting the name of the file
+sorted_file_name=$(ls * $directory_index/* $directory_current_repository/* 2>/dev/null|sed 's/^\..*\///g'|sort|uniq)
+# go through each file in the previous sorted_file_name
+echo "$sorted_file_name" | while read filename
+do
+    file_index="$directory_index/$filename"
+	file_repository="$directory_current_repository/$filename"
+
+    # checking whether the file is in the index folder, 
+    # if the file is not in the idnex folder it is untracked file
+    if [ ! -e "$file_index" ]
+	then
+		if [ ! -e "$filename" ]
+		then
+            # If this file is not existed set as ----> deleted
+            echo "$filename - deleted"
+		else
+            # If this file is existed set as ----> untracked
+			echo "$filename - untracked"
+		fi
+	else
+        
+done
