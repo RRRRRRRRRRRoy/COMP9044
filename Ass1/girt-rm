@@ -1,2 +1,25 @@
 #!/bin/dash
 
+#check .girt exists
+if [ -d .girt/ ]
+then
+    # current .girt exists
+    :
+else
+    # current .girt does not exist ----> print error
+    echo "girt-rm: error: no .girt directory containing girt repository exists";
+    exit 1;
+fi
+
+# There are 2 argvs in remove the first is force the second is cached
+force_flag=0
+cached_flag=0
+input_argv=$1
+
+if [ "$input_argv" = "--force" ]
+then
+fi
+
+if [ "$input_argv" = "--cached" ]
+then
+fi
