@@ -28,8 +28,8 @@ fi
 
 
 #get the number before : and fileaname after :.
-printing_number=$(echo $1|sed 's/:[a-zA-Z0-9].*$//g')
-printing_filename=$(echo $1|sed 's/^[0-9]*://g')
+printing_number=$(echo $print_content_slice|sed 's/:[a-zA-Z0-9].*$//g')
+printing_filename=$(echo $print_content_slice|sed 's/^[0-9]*://g')
 
 #test if the required num beyond maximum repository num
 max_number=$(ls -c .girt/repository|wc -l|sed 's/ //g')
