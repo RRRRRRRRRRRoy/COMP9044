@@ -88,14 +88,60 @@ fi
 change_counter=1
 change_number=$(ls -c .girt/repository|wc -l|sed 's/ //g')
 latest_modified_branch=$(ls .girt/branch/$current_branch/repository|sort|tail -n 1)
-#checking file in the filelist
+# checking if the content in files are different from index directory and current directory or index directory and repository
 for file in "$filelist"
 do
 	# checking whether the file is exist or not
 	if [ -e $file ]
 	then
-		
+		# Using the difference to check the difference
+		# Source: https://www.geeksforgeeks.org/diff-command-linux-examples/
+		current_index_difference=$(diff $file .girt/branch/$current_branch/index/$file|wc -w)
+		if [ $current_index_difference -gt 0 ]
+		then
+			if [ $change_number -ne 0 ]
+			then
+				if [ -e  .girt/branch/$current_branch/repository/$latest_modified_branch/$file ]
+				then
+					# using the word counter provided by wc
+					# Source: https://explainshell.com/explain?cmd=wc+-w
+					current_repository_difference=$(diff .girt/branch/$current_branch/index/$file .girt/branch/$current_branch/repository/$latest_modified_branch/$file|wc -w);
+					if [ $current_repository_difference -gt 0 ]
+					then
+						change_counter=0;
+					fi
+				else
+					change_counter=0;
+				fi
+			else
+				if [ $current_index_difference -gt 0 ]
+				then
+					change_counter=0
+				else
+					:
+				fi
+			fi
+		fi
 	else
 		:
 	fi
+	if [ $change_counter -ne 0 ]
+	then
+		# has similarity
+		:
+	else
+		# totally different
+		echo "girt-rm: error: '$file' in index is different to both working file and repository";
+		exit 1;
+	fi
 done
+
+# Getting the cached flag and remove the file in the directory
+# check both cached flag and change counter 
+if [ $change_counter -eq 1 ]
+then
+	if [ $cached_flag -eq 1 ]
+	then
+		# removed the file in the index directory	
+	fi
+fi
