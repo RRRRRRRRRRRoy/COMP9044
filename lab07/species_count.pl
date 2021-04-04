@@ -22,10 +22,11 @@ $while_type=$ARGV[0];
 $pods=0;
 $individual_oberservation=0;
 foreach $line (@whale_list){
-    if($line =~ m/$while_type/){
+    if($line =~ m"$while_type"){
         $pods = $pods + 1;
-        @info = split / /, $pod;
-        $individual_oberservation = $info[0] + $individual_oberservation;
+        @info = split / +/, $line;
+        # print "@info";
+        $individual_oberservation = $info[1] + $individual_oberservation;
     }
 }
 print "$while_type observations: $pods pods, $individual_oberservation individuals\n";
