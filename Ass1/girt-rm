@@ -7,8 +7,8 @@ then
     :
 else
     # current .girt does not exist ----> print error
-    echo "girt-rm: error: no .girt directory containing girt repository exists";
-    exit 1;
+    echo "girt-rm: error: no .girt directory containing girt repository exists"
+    exit 1
 fi
 
 # There are 2 argvs in remove the first is force the second is cached
@@ -17,133 +17,25 @@ cached_flag=0
 input_argv=$1
 current_branch=$(cat .girt/current_branch)
 filelist=$@
+force_option="--force"
+cached_option="--cached"
 
-# check whether the argv is force
-if [ "$input_argv" = "--force" ]
+# I just wondered that is there a situation which has force and cached at the same time
+# Notice: Whether there is a situation that
+# check the option of --force
+if [ "$input_argv" = "$force_option" ]
 then
-    force_flag=1
-    # Using shife to move
-    # Source: https://unix.stackexchange.com/questions/174566/what-is-the-purpose-of-using-shift-in-shell-scripts
-    shift
+	force_flag=1;
+	# How to use shift in the shell
+	# this shift is for moving to next one
+	# Source: https://unix.stackexchange.com/questions/174566/what-is-the-purpose-of-using-shift-in-shell-scripts
+	shift;
 fi
 
-# check whether the argv is cached
-if [ "$input_argv" = "--cached" ]
+# This is to check the option of --cached
+if [ "$input_argv" = "$cached_option" ]
 then
-    cached_flag=1
-    # Using shife to move
-    # Source: https://unix.stackexchange.com/questions/174566/what-is-the-purpose-of-using-shift-in-shell-scripts
-    shift
-fi
-
-# go through the files
-for file in $filelist
-do  
-    # check the directory
-    check_dir=".girt/branch/$current_branch/index/$file"
-    if [ -e $check_dir ]
-	then
-        # the current dir is exist
-        :
-    else
-        # the current dir is not exist
-		echo "girt-rm: error: '$file' is not in the girt repository";
-		exit 1;
-	fi
-done
-
-
-# looping file in the dir and check the flag
-# ???need test ???
-for file_in_list in $filelist
-do
-    # check the flag of force 
-    # if the flag is 1 then rm force
-    # else do not remove
-    if [ $force_flag -eq 1 ]
-    then
-        rm ".girt/branch/$current_branch/index/$file"
-    fi
-    # no cached file in the dir ----> remove
-    if [ $cached_flag -eq 0 ]
-    then
-        if [ ! -e $file_in_list ]
-        then
-            :
-        else
-            rm "$file_in_list"
-        fi
-    fi
-done
-
-# These variable is copied from girt-commit
-changes_counter=1
-# changing file numbers
-change_number=$(ls -c .girt/repository|wc -l|sed 's/ //g')
-latest_modified_branch=$(ls .girt/branch/$current_branch/repository|sort |tail -n 1)
-for file in $filelist
-do
-    if [ -e $file ]
-    then
-        # check the difference of the index folder
-        difference_index=$(diff $file .girt/branch/$current_branch/index/$file|wc -w)
-        if [ difference_index -le 0 ]
-        then
-            # difference is not exist difference_index <= 0
-            :
-        else
-            # checking the difference
-            if [ $change_number -eq 0 ]
-			then
-				if [ $difference_index -gt 0 ]
-				then
-					changes_counter=0;
-				fi
-			else
-                # directory of latest change
-                latest_modified_file=".girt/branch/$current_branch/repo/$latest_modified_branch/$file"
-				if [ -e $latest_modified_file ]
-				then
-                    difference_repository=$(diff .girt/branch/$current_branch/index/$file .girt/branch/$current_branch/repository/$latest_modified_branch/$file|wc -w)
-					if test $difference_repository -gt 0
-					then
-						changes_counter=0;
-					fi
-				else
-					changes_counter=0;
-				fi
-			fi
-        fi
-    fi
-    if [ $changes_counter -eq 0 ]
-	then
-        # checking the different with 2 files
-		echo "girt-rm: error: '$file' in index is different to both working file and repository";
-		exit 1;
-	fi
-done
-
-# checking cached flag, only remove the index file
-if [ $flag_c -eq 1 ]
-then 
-    # checking the counter is change or not
-    if [ $changes_counter -eq 1 ]
-    then
-        # romoving file in the filelist
-	    for file in "$filelist"
-	    do
-		    rm ".girt/branch/$current_branch/index/$file";
-	    done
-    fi
-fi
-
-# checking both flag of cached and forced are not changed
-if [ $cached_flag -eq 0]
-then
-    if [ $force_flag -eq 0 ]
-    then
-        for file in $filelist
-        do
-        done
-    fi
+	cached_flag=1;
+	# See the previous annotation
+	shift;
 fi
