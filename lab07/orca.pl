@@ -11,9 +11,30 @@ $sum=0;
 open (my $stdin,'<',"$filename") or die "$!";
 
 # list to store the data of input stream
-@whale_records=();
+@whale_list=();
 while($line = <$stdin>){
-    # push operation
+    # push operation of array
     # Source: https://www.geeksforgeeks.org/perl-push-function/
-    push @whale_records, $line;
+    push @whale_list, $line;
 }
+
+foreach $line (@whale_list){
+    # checking the reading of record
+    # print($record);
+    # Source: https://perldoc.perl.org/functions/substr
+    $line_name=substr($line,12);
+    # check the recode name
+    # print($record_name);
+    # String matching
+    # Source: https://www.tutorialspoint.com/perl/perl_regular_expressions.htm
+    if ($line_name =~ "Orca"){
+        # Split in perl
+        # Source: https://perldoc.perl.org/functions/split
+        @info = split / +/, $line;
+        # This is for local test
+        # print "$info[0] $info[1] $info[2]\n";
+        $sum= $sum + $info[1];
+    }
+}
+
+print "$sum Orcas reported in whales.txt";
