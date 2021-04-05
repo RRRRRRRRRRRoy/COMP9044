@@ -37,4 +37,4 @@ foreach $line (@whale_list){
     }
 }
 
-print "$sum Orcas reported in $filename";
+print "$sum Orcas reported in $filename\n";
