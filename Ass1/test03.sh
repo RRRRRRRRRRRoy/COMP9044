@@ -2,14 +2,14 @@
 
 sh ./girt-init
 sh ./girt-checkout b1
-echo COMP9044 looks Cool > a
-echo perl is the best lang > b
+echo COMP9044looksCool > a
+echo perlisthebestlang > b
 sh ./girt-commit -m "commit-0"
 sh ./girt-add a b
 sh ./girt-commit -m "commit-1"
 seq 1 23 > a
 sh ./girt-commit -a -m "commit-2"
-echo Shell is better >> b
+echo Shellisbetter >> b
 sh ./girt-add b
 sh ./girt-status
 sh ./girt-commit -m "commit-3"
