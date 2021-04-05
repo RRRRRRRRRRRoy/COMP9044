@@ -116,18 +116,18 @@ then
 					exit 1
 				else
 					# doing the delete opearion
-					input_branch_dir=".girt/branch/$input_branch_name"
+					input_branch_dir=".girt/branch/$input_branch_name1"
                     # notice rm -rf can delete the hole directory
                     # Dangerous operation
                     # Differen kinds of deletion can seek the following link
                     # Source: https://linuxize.com/post/how-to-remove-files-and-directories-using-linux-command-line/
 					rm -rf $input_branch_dir
-					echo "Deleted branch '$input_branch_name'"
+					echo "Deleted branch '$input_branch_name1'"
 				fi
 
 			else
 				# !!!!!!! the branch is invalid !!!!!!!!!
-				echo "girt-branch: error: invalid branch name '$input_branch_name'" >/dev/stderr
+				echo "girt-branch: error: invalid branch name '$input_branch_name1'" >/dev/stderr
 				exit 1
 			fi
 		fi
