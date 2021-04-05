@@ -27,12 +27,13 @@ fi
 
 
 
-#get the number before : and fileaname after :.
+# get the number before : and fileaname after :.
 printing_number=$(echo $print_content_slice|sed 's/:[a-zA-Z0-9].*$//g')
 printing_filename=$(echo $print_content_slice|sed 's/^[0-9]*://g')
 
 #test if the required num beyond maximum repository num
 max_number=$(ls -c .girt/repository|wc -l|sed 's/ //g')
+# notice!! doing the calculation in shell should use double layer $(())
 max_repository_number=$(($max_number - 1));
 current_branch=$(cat .girt/current_branch)
 

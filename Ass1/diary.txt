@@ -21,7 +21,7 @@ Date	        Start	    Stop	    Activity	        Comments
 04/04/21        08:00       10:30       Coding              Adding -a option for girt-commit
 04/04/21        11:00       11:20       Debuging            Checking the error in -a option
 04/04/21        11:30       11:40       Remote Testing      Finding output error in testing subset1_13 subset1_14
-04/04/21        11:45       13:30       Debuging            !!!!! Finding the error was due to the variable in girt-add !!!!!
+04/04/21        11:45       13:30       Debuging            !!!!! Finding the error was due to the variable in girt-add !!!!! Cause the directory error.
 04/04/21        13:40       14:50       Coding              Redirecting the varibale, change the variable 'Filelist' to "#@" can solve this problem
 04/04/21        15:00       15:20       Testing             Pass the local Testing
 04/04/21        15:20       17:20       Coding              Coding girt-rm.sh
@@ -47,6 +47,9 @@ Date	        Start	    Stop	    Activity	        Comments
 
 
 Technical Conclusions
-1.
-2.
-3.
+1. In girt-add, using $@ instead of creating variable. Due to the change of directory, it will bring error to commit-a.
+2. In girt-rm, reducing the time of setting variable can reduce the prossibility of redirecting error.
+3. A good assignment for designing the basement of the system. Nice designing can reduce the future changes of the basement.
+4. Before coding, well prepared the structure of the system.
+5. How to use cp and rm with different parameters(different option) without error is important
+6. Using shift can increase the efficiency of getting value.
