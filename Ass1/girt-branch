@@ -81,10 +81,50 @@ then
 					echo "girt-branch: error: internal error error: Cannot delete branch '$input_branch_name' checked out" >/dev/stderr
 					exit 1
 				fi
-
+                # #check the status of input branch which is selected
+				change_counter=0
+				latest_modified_repository=$(ls .girt/branch/$input_branch_name/repository|sort|tail -n 1)
+                
+                # checking the directory in the branch
+                for directory in .girt/branch/*
+				do  
+                    # compare with the target branch
+					if [ "$directory" != ".girt/branch/$input_branch_name" ]
+					then
+                        # check the branch's repository
+						repository_directory="$directory/repository/*"
+						for repository in $repository_directory
+						do
+                            # Getting the number
+							num_repository=$(echo $repository|cut -d'/' -f5,5)
+							if [ $num_repository -eq $latest_modified_repository ]
+							then
+                                # if the number is same
+                                # This means the current branch's repository has been modified
+								change_counter=1
+							fi
+						done
+					fi
+				done
+                # checking the change counter like previous
+				if [ $change_counter -ne 1 ]
+				then
+                    # if no changes
+					echo "girt-branch: error: branch '$input_branch_name' has unmerged changes" >/dev/stderr
+					exit 1
+				else
+                    # doing the delete opearion
+					input_branch_dir=".girt/branch/$input_branch_name"
+                    # notice rm -rf can delete the hole directory
+                    # Dangerous operation
+                    # Differen kinds of deletion can seek the following link
+                    # Source: https://linuxize.com/post/how-to-remove-files-and-directories-using-linux-command-line/
+					rm -rf $input_branch_dir
+					echo "Deleted branch '$input_branch_name'"
+				fi
             fi
         else
-            # the branch is invalid
+            # !!!!!!! the branch is invalid !!!!!!!!!
         fi
     else
         # in without the -d option check the create a new branch
