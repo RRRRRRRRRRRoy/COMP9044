@@ -49,6 +49,39 @@ then
 			if [ "$branch_match_string2" = "" ]
 			then
                 # the branch name is correct
+                # NOTICE DO NOT DELETE MASTER BRANCH!!!
+                if [ "$input_branch_name" != "master" ]
+				then
+					# not master branch
+                    :
+				else
+                    # if it is master branch, print error!!!
+					echo "girt-branch: error: can not delete branch 'master'" >/dev/stderr
+					exit 1
+				fi
+				#check if the input branch is exist
+                input_branch_dir=".girt/branch/$input_branch_name"
+				if [ ! -d $input_branch_dir ]
+				then
+                    # not exist print error
+					echo "girt-branch: error: branch '$input_branch_name' doesn't exist" >/dev/stderr
+					exit 1
+				else
+                    # exist continue
+					:
+				fi
+                # This is because the current is occupied the branch
+                # Therefore, connot delete the current branch
+				if [ "$input_branch_name" != "$current_branch" ]
+				then
+                    # continue
+					:
+				else
+                    # targeting branch is current branch
+					echo "girt-branch: error: internal error error: Cannot delete branch '$input_branch_name' checked out" >/dev/stderr
+					exit 1
+				fi
+
             fi
         else
             # the branch is invalid
