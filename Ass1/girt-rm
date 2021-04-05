@@ -190,7 +190,7 @@ then
 				current_index_difference=$(diff $file  $current_branch_diff|wc -w)
 				if [ $current_index_difference -eq 0 ]
 				then
-				#if 0 repo,then quit
+				# if no chenge repository,then quit
 					if [ $change_number -eq 0 ]
 					then
 						echo "girt-rm: error: '$file' has staged changes in the index"
@@ -204,12 +204,14 @@ then
 							latest_modified_diff=".girt/branch/$current_branch/repository/$latest_modified_branch/$file"
 							# does not have the same file
 							repository_difference=$(diff $current_branch_diff $latest_modified_diff|wc -w)
+							# Exist difference
 							if [ $repository_difference -gt 0 ]
 							then
 								echo "girt-rm: error: '$file' has staged changes in the index"
 								exit 1
 							fi
 						else
+							# no latest_modification
 							echo "girt-rm: error: '$file' has staged changes in the index"
 							exit 1
 						fi
@@ -219,11 +221,13 @@ then
 					if [ $change_number -gt 0 ]
 					then
 						current_latest_dir=".girt/branch/$current_branch/repository/$latest_modified_branch/$file "
+						# latest_modified_branch exist
 						if [ -e $current_latest_dir ]
 						then
 							current_branch_diff=".girt/branch/$current_branch/index/$file"
 							latest_modified_diff=".girt/branch/$current_branch/repository/$latest_modified_branch/$file"
 							repository_difference=$(diff $current_branch_diff $latest_modified_diff|wc -w)
+							# differences exists
 							if [ $repository_difference -eq 0 ]
 							then
 								# if the latest modified repository have no the file ,then quit
