@@ -9,7 +9,7 @@ $pods=0;
 # counting the individual_oberservation
 $individual_oberservation=0;
 # setting counter
-$sum=0;
+# $sum=0;
 
 # setting filestream to read file from the filename
 # Source: http://perltraining.com.au/tips/2005-11-17.html
