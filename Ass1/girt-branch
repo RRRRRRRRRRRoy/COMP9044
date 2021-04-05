@@ -122,11 +122,11 @@ then
 					rm -rf $input_branch_dir
 					echo "Deleted branch '$input_branch_name'"
 				fi
+            else
+                # !!!!!!! the branch is invalid !!!!!!!!!
+                echo "girt-branch: error: invalid branch name '$input_branch_name'" >/dev/stderr
+			    exit 1
             fi
-        else
-            # !!!!!!! the branch is invalid !!!!!!!!!
-            echo "girt-branch: error: invalid branch name '$input_branch_name'" >/dev/stderr
-			exit 1
         fi
     else
         check_branch_name=$1
