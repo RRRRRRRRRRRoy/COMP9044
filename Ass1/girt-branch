@@ -1,1 +1,30 @@
 #!/bin/dash
+
+# Checking the current directory is exist or not
+if [ -d .girt/ ]
+then
+    # if exist continue
+    :
+else
+    # not exist raising error
+    echo "girt-branch: error: no .girt directory containing girt repository exists"
+    exit 1
+fi
+
+# This part of code is similar to  he girt-status part
+# This is used to check the log file is exist or not
+log_directory=".girt/branch/$current_branch/log"
+if [ -e $log_directory ]
+then
+    :
+else
+    # if there is no commit, the girt-commit will not create log file
+    echo "girt-status: error: your repository does not have any commits yet"
+    exit 1
+fi
+
+# In the girt-branch part
+# there are 3 situations
+# The first one is show all branches
+# The seconde one is delete a branch
+# The third one creating a new branch
