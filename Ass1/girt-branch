@@ -87,7 +87,7 @@ then
 
 				# check the status of input branch which is selected
 				change_counter=0
-				latest_repository=$(ls .girt/branch/$input_branch_name1/repository|sort|tail -n 1)
+				latest_modified_repository=$(ls .girt/branch/$input_branch_name1/repository|sort|tail -n 1)
 
                 # checking the directory in the branch
 				for dir in .girt/branch/*
@@ -101,7 +101,7 @@ then
 						do  
                             # getting the number
 							num_repository=$(echo $repository|cut -d'/' -f5,5)
-							if [ $num_repository -eq $latest_repository ]
+							if [ $num_repository -eq $latest_modified_repository ]
 							then
                                 # if the number is same
                                 # This means the current branch's repository has been modified
@@ -173,8 +173,8 @@ then
 				cp -r $current_branch_repository $branch_with_name_repository
 
 			else
-				usage_match=$(echo $input_branch_name2|egrep '^[-].+*$')
-				if [ "$usage_match" = "" ]
+				option_match=$(echo $input_branch_name2|egrep '^[-].+*$')
+				if [ "$option_match" = "" ]
 				then
 					echo "girt-branch: error: invalid branch name '$input_branch_name2'" >/dev/stderr
 					exit 1
@@ -188,10 +188,11 @@ then
 else
     # print the branch name
 	file_in_branch=".girt/branch/*"
-	for dir in $file_in_branch
+	for directory_in_branch in $file_in_branch
 	do  
         # cutting the branch name
-		branch_name=$(echo $dir|cut -d'/' -f3,3)
+		branch_name=$(echo $directory_in_branch|cut -d'/' -f3,3)
+        # printing the branch name
 		echo $branch_name
 	done
 fi
