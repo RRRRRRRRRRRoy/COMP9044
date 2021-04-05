@@ -1,11 +1,11 @@
 # #!/usr/bin/perl -w
 
 # getting the filename from the input
-$filename=$ARGV[1];
+$filename=$ARGV[0];
 
 # setting filestream to read file from the filename
 # Source: http://perltraining.com.au/tips/2005-11-17.html
-open (my $stdin,'<',"$filename") or die "$!";
+open $stdin,"<","$filename" or die "$!";
 
 # whale_data to store the data of input stream
 @whale_data=();
@@ -16,11 +16,13 @@ while($line = <$stdin>){
 }
 
 # setting the array for name storage
-@whale_name=();
+@name_array=();
 # setting the hash also dictionary to store the data of each name1
 # Tutorial for using dictionary in perl
 # Source: https://www.tutorialspoint.com/perl/perl_hashes.htm
+# counting the number of pods the key is whale name
 %whale_pods=();
+# counting the number of individuals key is whale name
 %whale_individual=();
 
 foreach $line (@whale_data){
@@ -30,21 +32,31 @@ foreach $line (@whale_data){
     $line =~ s/\s+$//;
     # split the line like species_count
     @info = split / +/, $line;
-    @info_len = @info;
-
-    $individual_ob = $info[0];
-    foreach $item(@info){
-        # join the whale elements as string
-        $whale_name = join(" ", $item)
-    }
+    # getting the individual number
+    $individual_oberservation = $info[1];
+    $get_whale_name = @info[2];
     # This is to remove the s and get the type name of whale
-    $whale_name =~ s/s$//;
+    $get_whale_name =~ s/s$//;
     # how to use chomp
     # Source: https://perldoc.perl.org/functions/chomp
-    chomp $whale_name;
+    chomp $get_whale_name;
 
     # exists is for checking the array or hash exists or not
     # Source: https://perldoc.perl.org/functions/exists
-    if(exists
-    
+    if(exists($whale_pods{$get_whale_name})){
+        $whale_pods{$get_whale_name} = $whale_pods{$get_whale_name} + 1;
+        $whale_individual{$get_whale_name} = $whale_individual{$get_whale_name} + $individual_oberservation;
+    }else{ 
+        # new whale
+        # print "Has not been observed before\n";
+        push @name_array, $get_whale_name;
+        $whale_pods{$get_whale_name} = 1;
+        $whale_individual{$get_whale_name} = $individual_oberservation;
+    }
+}
+
+# output the data in alphabetical order
+@name_array = sort(@name_array);
+foreach $get_whale_name(@name_array){
+    print "$get_whale_name observations: $whale_pods{$get_whale_name} pods, $whale_individual{$get_whale_name} individuals\n";
 }
