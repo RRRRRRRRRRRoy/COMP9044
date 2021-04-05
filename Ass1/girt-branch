@@ -125,9 +125,42 @@ then
             fi
         else
             # !!!!!!! the branch is invalid !!!!!!!!!
+            echo "girt-branch: error: invalid branch name '$input_branch_name'" >/dev/stderr
+			exit 1
         fi
     else
-        # in without the -d option check the create a new branch
+        check_branch_name=$1
+        # without the -d option check the existance and create a new branch
+        # check for the valid branch name
+        # the branch name is like b2 which has both characters and numbers
+		branch_match_with_char_num=$(echo $input_branch_name|egrep '^[a-zA-Z0-9][a-zA-Z0-9\.\-\_]+*$')
+		branch_match_without_number=$(echo $input_branch_name|egrep '^[0-9]*$')
+        # check the validation of the branch name
+        if [ "$branch_match_with_char_num" != "" ]
+		then
+            # filtering the full number branch
+			if [ "$branch_match_without_number" = "" ]
+ 			then
+				# check if the branch already exists
+				if [ -d ".girt/branch/$check_branch_name" ]
+				then
+                    # check the existance of the branch
+					echo "girt-branch: error: branch '$check_branch_name' already exists" >/dev/stderr
+					exit 1
+				fi
+
+			else
+				usage_match=$(echo $check_branch_name|egrep '^[-].+*$')
+				if [ "$usage_match" = "" ]
+				then
+					echo "girt-branch: error: invalid branch name '$check_branch_name'" >/dev/stderr
+					exit 1
+				else
+					echo "usage: girt-branch [-d] <branch>" >/dev/stderr
+					exit 1
+				fi
+			fi
+		fi
     fi
 else
     #print the branch name
