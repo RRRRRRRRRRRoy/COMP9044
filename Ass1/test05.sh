@@ -24,3 +24,5 @@ sh ./girt-show 0:a
 sh ./girt-show 0:b
 sh ./girt-show 0:c
 sh ./girt-show 0:d
+sh ./girt-merge branch1 -m 'merging branch 1'
+sh ./girt-log 
