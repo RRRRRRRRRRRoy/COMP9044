@@ -154,8 +154,10 @@ do
 			fi
 		fi
 	fi
-	if [ $change_counter -eq 0 ]
+	if [ $change_counter -ne 0 ]
 	then
+		:
+	else
 		# totally different
 		echo "girt-rm: error: '$file' in index is different to both to the working file and the repository"
 		exit 1
