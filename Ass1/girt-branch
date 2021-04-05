@@ -42,7 +42,7 @@ then
 		input_branch_name1=$2
 		# check for the valid branch name
         # the branch name is like b2 which has both characters and numbers
-		branch_match_with_char_num1=$(echo $input_branch_name1|egrep '^[a-zA-Z0-9][a-zA-Z0-9\.*\-\_]+*$')
+		branch_match_with_char_num1=$(echo $input_branch_name1|egrep '^[a-zA-Z0-9][a-zA-Z0-9\.\-\_]+*$')
 		branch_match_without_number1=$(echo $input_branch_name1|egrep '^[0-9]*$')
 		# this means the the branch_match_with_char_num is not empty
         # branch_match_without_number is empty
