@@ -5,14 +5,18 @@ max_name=""
 
 for file in "$@"
 do
-    current_number_line=$(awk '{print NR}' $file|tail -n1)
-    current_file_name="$file"
-    if [ $max -lt $current_number_line ]
+    number=$(awk '{print NR}' $file|tail -n1)
+    # echo "current_number_line: $number"
+    name="$file"
+    # echo "current_file_name: $name"
+    if [ $max -lt $number ]
     then
-        max=$current_number_line
-        max_name=$curremt_file_name
+        max=$number
+        max_name=$name
     fi
+    # echo "Max: $max"
+    # echo "Max_name: $max_name"
 done
 
-echo "$current_file_name"
+echo "$max_name"
 
