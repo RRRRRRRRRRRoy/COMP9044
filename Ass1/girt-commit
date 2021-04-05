@@ -146,6 +146,8 @@ then
     :
 else
     # Copy filies
+    # using the copy cmd
+    # Source: https://www.rapidtables.com/code/linux/cp.html
     cp $current_branch_source  $repository_destination 
     cp $current_branch_source  $current_branch_destination 
 fi
@@ -174,4 +176,6 @@ else
     # source: https://www.geeksforgeeks.org/touch-command-in-linux-with-examples/
     touch .girt/branch/$current_branch/log
 fi
+# Adding message to log file
+# After the first time commit, createing the log file
 echo "$change_number $message" >> .girt/branch/$current_branch/log

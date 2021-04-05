@@ -161,6 +161,7 @@ then
 		for file in "$@"
 		do
 			current_branch_index=".girt/branch/$current_branch/index/$file"
+			# Source: https://www.geeksforgeeks.org/rm-command-linux-examples/
 			rm "$current_branch_index"
 		done
 	fi
@@ -229,7 +230,9 @@ then
 			fi
 		done
 		for file in "$@"
-		do
+		do	
+			# How to use different type of rm
+			# Source: https://www.geeksforgeeks.org/rm-command-linux-examples/
 			current_branch_index=".girt/branch/$current_branch/index/$file"
 			rm "$current_branch_index"
 			# remove

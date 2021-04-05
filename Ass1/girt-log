@@ -13,7 +13,7 @@ else
 fi
 
 # check .girt/log exists
-current_branch=`cat .girt/current_branch`
+current_branch=$(cat .girt/current_branch)
 
 
 # This is to check the current log file is exist or not
