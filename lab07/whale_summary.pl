@@ -37,8 +37,12 @@ foreach $line (@whale_data){
     # print "@info\n";
     $individual_oberservation = $info[1];
     $whale_name = substr($line,12);
+    # delete the space in the strings
+    # Source: https://www.geeksforgeeks.org/perl-removing-leading-and-trailing-white-spaces-trim/
     $whale_name =~ s/\s+/ /g;
+    # deleting the from sapce
     $whale_name =~ s/^\s+//g;
+    # deleting the back space
     $whale_name =~ s/\s+$//;
     # changing to lower case
     # Source: https://perldoc.perl.org/functions/lc
