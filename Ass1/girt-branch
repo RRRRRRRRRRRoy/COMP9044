@@ -182,4 +182,11 @@ then
     fi
 else
     #print the branch name
+    file_in_branch=".girt/branch/*"
+	for directory in $file_in_branch
+	do  
+        # cutting the branch name
+		branch_name=$(echo $directory|cut -d'/' -f3,3)
+		echo $branch_name
+	done
 fi
