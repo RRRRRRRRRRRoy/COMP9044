@@ -37,6 +37,8 @@ foreach $line (@whale_data){
     # print "@info\n";
     $individual_oberservation = $info[1];
     $whale_name = substr($line,12);
+    $whale_name =~ s/^\s+//;
+    $whale_name =~ s/\s+$//;
     # changing to lower case
     # Source: https://perldoc.perl.org/functions/lc
     $whale_name = lc($whale_name);
