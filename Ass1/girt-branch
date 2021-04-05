@@ -42,14 +42,14 @@ then
 		input_branch_name1=$2
 		# check for the valid branch name
         # the branch name is like b2 which has both characters and numbers
-		branch_match_string1=$(echo $input_branch_name1|egrep '^[a-zA-Z0-9][a-zA-Z0-9\.\-\_]+*$')
-		branch_match_string2=$(echo $input_branch_name1|egrep '^[0-9]*$')
+		branch_match_with_char_num1=$(echo $input_branch_name1|egrep '^[a-zA-Z0-9][a-zA-Z0-9\.\-\_]+*$')
+		branch_match_without_number1=$(echo $input_branch_name1|egrep '^[0-9]*$')
 		# this means the the branch_match_with_char_num is not empty
         # branch_match_without_number is empty
-        if [ "$branch_match_string1" != "" ] 
+        if [ "$branch_match_with_char_num1" != "" ] 
 		then
             # eliminating the pure number of branch name
-			if [ "$branch_match_string2" = "" ]
+			if [ "$branch_match_without_number1" = "" ]
 			then
 				# the branch name is correct
                 # NOTICE DO NOT DELETE MASTER BRANCH!!!
@@ -138,13 +138,13 @@ then
 		# without the -d option check the existance and create a new branch
         # check for the valid branch name
         # the branch name is like b2 which has both characters and numbers
-		branch_match_str1=$(echo $input_branch_name2|egrep '^[a-zA-Z0-9][a-zA-Z0-9\.\-\_]+*$')
-		branch_match_str2=$(echo $input_branch_name2|egrep '^[0-9]*$')
+		branch_match_with_char_num2=$(echo $input_branch_name2|egrep '^[a-zA-Z0-9][a-zA-Z0-9\.\-\_]+*$')
+		branch_match_without_number2=$(echo $input_branch_name2|egrep '^[0-9]*$')
         # check the validation of the branch name
-		if [ "$branch_match_str1" != "" ]
+		if [ "$branch_match_with_char_num2" != "" ]
 		then
             # filtering the full number branch
-			if [ "$branch_match_str2" = "" ]
+			if [ "$branch_match_without_number2" = "" ]
  			then
 				# check if the branch already exists
 				if [ -d ".girt/branch/$input_branch_name2" ]
