@@ -63,12 +63,12 @@ else
     # getting the files in the dir and raising the exception
     files_in_directory=$(ls .girt/branch/$current_branch/index/$printing_filename 2>/dev/null)
     # check file is empty or not
-    if [ "$files_in_directory" != "" ]
+    if [ "$files_in_directory" = "" ]
     then
-        # files_in_directory is not empty
-        cat ".girt/branch/$current_branch/index/$printing_filename"
-    else
         # files_in_directory is empty
         echo "girt-show: error: '$printing_filename' not found in index"
+    else
+        # files_in_directory is not empty
+        cat ".girt/branch/$current_branch/index/$printing_filename"
     fi
 fi
