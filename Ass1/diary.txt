@@ -1,10 +1,10 @@
 
 Date	        Start	    Stop	    Activity	        Comments
-26/03/21	    17:00	    17:00	    Preparing	        Creating Girt-* for assignment1 
-26/03/21	    18:00	    18:30	    Coding	            Starting coding girt-init.sh
-26/03/21	    19:00       19:30	    Debuging            Checking the current directory of .girt is correct or not
-28/03/21	    20:00       20:19	    Debuging            Change the error message in girt-init.sh
-28/03/21	    20:19       20:30       Finish              Coding and Local testing finished
+26/03/21        17:00       17:00       Preparing           Creating Girt-* for assignment1 
+26/03/21        18:00       18:30       Coding              Starting coding girt-init.sh
+26/03/21        19:00       19:30       Debuging            Checking the current directory of .girt is correct or not
+28/03/21        20:00       20:19       Debuging            Change the error message in girt-init.sh
+28/03/21        20:19       20:30       Finish              Coding and Local testing finished
 03/04/21        09:30       11:30       Coding              Coding the girt-add.sh
 03/04/21        11:30       12:00       Coding              Adding the error message in girt-add.sh
 03/04/21        13:30       14:30       Coding              Coding the girt-commit.sh
