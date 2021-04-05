@@ -1,4 +1,44 @@
 
 Date	        Start	    Stop	    Activity	        Comments
-26/03/20	    17:00	    17:00	    Preparing	        Creating Girt-* for assignment1 
-20/06/19	    20:00	    10:30	    debugging	        found bug in command-line arguments
+26/03/21	    17:00	    17:00	    Preparing	        Creating Girt-* for assignment1 
+26/03/21	    18:00	    18:30	    Coding	            Starting coding girt-init.sh
+26/03/21	    19:00       19:30	    Debuging            Checking the current directory of .girt is correct or not
+28/03/21	    20:00       20:19	    Debuging            Change the error message in girt-init.sh
+28/03/21	    20:19       20:30       Finish              Coding and Local testing finished
+03/04/21        09:30       11:30       Coding              Coding the girt-add.sh
+03/04/21        11:30       12:00       Coding              Adding the error message in girt-add.sh
+03/04/21        13:30       14:30       Coding              Coding the girt-commit.sh
+03/04/21        15:30       17:30       Debuging            Redirect the commit message in the girt-commit.sh, adding error message
+03/04/21        17:30       18:00       Testing             Doing the local test of girt-commit.sh
+03/04/21        18:30       19:00       Coding              Coding the girt-log.sh
+03/04/21        19:10       19:20       Debuging            Finding errors in girt-log.sh
+03/04/21        19:20       19:30       Testing             Testing girt-log.sh and adding annotation in girt-log.sh
+03/04/21        19:30       20:40       Coding              Coding the girt-show.sh
+03/04/21        20:50       21:10       Debuging            Checking the output is correct or not
+03/04/21        21:30       22:30       Testing             Doing the local testing based on the assignment1 instruction
+03/04/21        21:30       22:30       Remote Testing      Running the code on vlab testing the subset 0, subset0 past
+03/04/21        22:30       23:00       Coding              Adding annotation and Source link in the girt-show/commit/log/add
+04/04/21        08:00       10:30       Coding              Adding -a option for girt-commit
+04/04/21        11:00       11:20       Debuging            Checking the error in -a option
+04/04/21        11:30       11:40       Remote Testing      Finding output error in testing subset1_13 subset1_14
+04/04/21        11:45       13:30       Debuging            !!!!! Finding the error was due to the variable in girt-add !!!!!
+04/04/21        13:40       14:50       Coding              Redirecting the varibale, change the variable 'Filelist' to "#@" can solve this problem
+04/04/21        15:00       15:20       Testing             Pass the local Testing
+04/04/21        15:20       17:20       Coding              Coding girt-rm.sh
+04/04/21        17:20       19:20       Debuging            Debuging girt-rm.sh and Finding error
+04/04/21        19:20       20:10       Coding              !!!!! Finding error due to the variable redirecting changing error !!!!! 
+04/04/21        20:10       21:10       Testing             Doing the local test in the terminal. Test case is based on the assignment1 instruction
+04/04/21        21:10       21:30       Remote Testing      Passing the test case in vlab subset1_15 subset1_16
+04/04/21        21:10       23:10       Coding              Coding girt-status.sh
+04/04/21        23:10       23:30       Debuging            Debuging girt-status.sh
+04/04/21        23:10       23:30       Testing             Local testing girt-status.sh
+04/04/21        23:30       00:00       Remote Testing      Passing all the test case in vlab subset1
+05/04/21        00:00       00:30       Coding              Adding annotation and Source link in the girt/-commit-a/-rm/-status
+05/04/21        13:10       15:10       Coding              Searching the structure of git brach and coding girt-branch
+05/04/21        15:10       16:15       Debuging            Debuging girt-branch.sh finding error with regrex
+05/04/21        16:25       17:30       Coding              Changing error with regrex and doing the debuging
+05/04/21        17:30       17:40       Debuging            Debuging girt-status.sh
+05/04/21        17:40       18:00       Testing             Local testing based on the assignment1 instruction
+05/04/21        18:00       18:30       Coding              Adding annotation and Source link in the girt-branch
+05/04/21        18:00       18:30       Coding              Adding annotation and Source link in the girt-branch
+05/04/21        18:30       19:30       Writing             Organizing diary.txt
