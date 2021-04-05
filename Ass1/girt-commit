@@ -43,9 +43,9 @@ then
         if [ "$file_in_dir_a"!="" ]
         then
             # current list is not empty
-            cp "$filename_a" "$file_a"
+            cp -r "$filename_a" "$file_a"
         else
-            rm "$file_a"
+            rm -r "$file_a"
         fi
     done
 fi
@@ -148,8 +148,8 @@ else
     # Copy filies
     # using the copy cmd
     # Source: https://www.rapidtables.com/code/linux/cp.html
-    cp $current_branch_source  $repository_destination 
-    cp $current_branch_source  $current_branch_destination 
+    cp -r $current_branch_source  $repository_destination 
+    cp -r $current_branch_source  $current_branch_destination 
 fi
 echo "Committed as commit $change_number"
 
