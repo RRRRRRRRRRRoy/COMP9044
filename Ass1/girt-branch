@@ -160,25 +160,33 @@ then
 				mkdir .girt/branch/$input_branch_name2/repository
 				current_branch_log=".girt/branch/$current_branch/log"
 				branch_with_name=".girt/branch/$input_branch_name2/"
-				cp $current_branch_log $branch_with_name
+                # using the recursively copy
+                # Source: https://www.rapidtables.com/code/linux/cp.html
+				cp -r $current_branch_log $branch_with_name
 
                 # copy file to current branch
 				current_branch_index=".girt/branch/$current_branch/index"
 				branch_with_name_index=".girt/branch/$input_branch_name2/index"
+                # using the recursively copy
+                # Source: https://www.rapidtables.com/code/linux/cp.html
 				cp -r $current_branch_index $branch_with_name_index
 
 				latest_modified_branch=$(ls .girt/branch/$current_branch/repository|sort|tail -n 1)
 				current_branch_repository=".girt/branch/$current_branch/repository/$latest_modified_branch"
 				branch_with_name_repository=".girt/branch/$input_branch_name2/repository/$latest_modified_branch"
+                # using the recursively copy
+                # Source: https://www.rapidtables.com/code/linux/cp.html
 				cp -r $current_branch_repository $branch_with_name_repository
 
 			else
 				option_match=$(echo $input_branch_name2|egrep '^[-].+*$')
 				if [ "$option_match" = "" ]
 				then
+                    # checking the validation of branch name
 					echo "girt-branch: error: invalid branch name '$input_branch_name2'" >/dev/stderr
 					exit 1
-				else
+				else   
+                    # print the usage of girt-branch
 					echo "usage: girt-branch [-d] <branch>" >/dev/stderr
 					exit 1
 				fi
