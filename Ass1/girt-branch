@@ -16,7 +16,9 @@ fi
 # This is used to check the log file is exist or not
 current_branch=$(cat .girt/current_branch)
 
-if [ -e .girt/branch/$current_branch/log ]
+log_directory=".girt/branch/$current_branch/log"
+# checking the log is exist or not
+if [ -e $log_directory ]
 then
 	:
 else
