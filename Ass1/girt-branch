@@ -1,164 +1,121 @@
 #!/bin/dash
 
-# Checking the current directory is exist or not
+#check .girt exists
 if [ -d .girt/ ]
 then
-	# if exist continue
 	:
 else
-	# not exist raising error
     echo "girt-branch: error: no .girt directory containing girt repository exists" >/dev/stderr
     exit 1
 fi
 
-# This part of code is similar to  he girt-status part
-# This is used to check the log file is exist or not
-log_directory=".girt/branch/$current_branch/log"
-if [ -e $log_directory ]
+#check any commit
+current_branch=$(cat .girt/current_branch)
+
+if [ -e .girt/branch/$current_branch/log ]
 then
 	:
 else
-	# if there is no commit, the girt-commit will not create log file
-    # Do not forget to change is to branch
     echo "girt-branch: error: this command can not be run until after the first commit" >/dev/stderr
     exit 1
 fi
 
-current_branch=$(cat .girt/current_branch)
-
-# In the girt-branch part
-# there are 3 situations
-# The first one is show all branches
-# The seconde one is delete a branch
-# The third one creating a new branch
+# girt-branch -d [branch_name]
+#three condition,1 list all branches.2  delete a branch.3 create a new branch
 if [ "$#" -ne 0 ]
 then
-	#check the branch option -d and branch name
 	if [ "$1" = "-d" ]
 	then
 		input_branch_name=$2
-		# check for the valid branch name
-        # the branch name is like b2 which has both characters and numbers
-		branch_match_with_char_num=$(echo $input_branch_name|egrep '^[a-zA-Z0-9][a-zA-Z0-9\.\-\_]+*$')
-		branch_match_without_number=$(echo $input_branch_name|egrep '^[0-9]*$')
-		# this means the the branch_match_with_char_num is not empty
-        # branch_match_without_number is empty
-		if [ "$branch_match_with_char_num" != "" ] 
+		#check for the valid branch name
+		branch_match_string1=$(echo $input_branch_name|egrep '^[a-zA-Z0-9][a-zA-Z0-9\.\-\_]+*$')
+		branch_match_string2=$(echo $input_branch_name|egrep '^[0-9]*$')
+		if [ "$branch_match_string1" != "" ] 
 		then
-			# eliminating the pure number of branch name
-			if [ "$branch_match_without_number" = "" ]
+			if [ "$branch_match_string2" = "" ]
 			then
-				# the branch name is correct
-                # NOTICE DO NOT DELETE MASTER BRANCH!!!
+				#can not delete master
 				if [ "$input_branch_name" != "master" ]
 				then
-					# not master branch
 					:
 				else
-					# if it is master branch, print error!!!
 					echo "girt-branch: error: can not delete branch 'master'" >/dev/stderr
 					exit 1
 				fi
 				#check if it exists
-				input_branch_dir=".girt/branch/$input_branch_name"
-				if [ ! -d "$input_branch_dir" ]
+				if [ ! -d ".girt/branch/$input_branch_name" ]
 				then
-					# not exist print error
 					echo "girt-branch: error: branch '$input_branch_name' doesn't exist" >/dev/stderr
 					exit 1
 				else
-					# exist continue
 					:
 				fi
-				# This is because the current is occupied the branch
-                # Therefore, connot delete the current branch
+
+				#check if it is now branch
 				if [ "$input_branch_name" != "$current_branch" ]
 				then
-					# continue
 					:
 				else
-					# targeting branch is current branch
 					echo "girt-branch: error: internal error error: Cannot delete branch '$input_branch_name' checked out" >/dev/stderr
 					exit 1
 				fi
 
-				# #check the status of input branch which is selected
+				# #check if it is merged
 				change_counter=0
-				latest_modified_repository=$(ls .girt/branch/$input_branch_name/repository|sort|tail -n 1)
-                
-                # checking the directory in the branch
+				latest_repository=$(ls .girt/branch/$input_branch_name/repository|sort|tail -n 1)
+			
 				for dir in .girt/branch/*
 				do
-					# compare with the target branch
 					if [ "$dir" != ".girt/branch/$input_branch_name" ]
 					then
-						# check the branch's repository
 						repository_directory="$dir/repository/*"
 						for repository in $repository_directory
 						do
-							# Getting the number
 							num_repository=$(echo $repository|cut -d'/' -f5,5)
-							if [ $num_repository -eq $latest_modified_repository ]
+							if [ $num_repository -eq $latest_repository ]
 							then
-								# if the number is same
-                                # This means the current branch's repository has been modified
 								change_counter=1
 							fi
 						done
 					fi
 				done
-				# checking the change counter like previous
+				#delete if changable
 				if [ $change_counter -ne 1 ]
 				then
-					# if no changes
 					echo "girt-branch: error: branch '$input_branch_name' has unmerged changes" >/dev/stderr
 					exit 1
 				else
-					# doing the delete opearion
 					input_branch_dir=".girt/branch/$input_branch_name"
-                    # notice rm -rf can delete the hole directory
-                    # Dangerous operation
-                    # Differen kinds of deletion can seek the following link
-                    # Source: https://linuxize.com/post/how-to-remove-files-and-directories-using-linux-command-line/
 					rm -rf $input_branch_dir
 					echo "Deleted branch '$input_branch_name'"
 				fi
 
 			else
-				# !!!!!!! the branch is invalid !!!!!!!!!
 				echo "girt-branch: error: invalid branch name '$input_branch_name'" >/dev/stderr
 				exit 1
 			fi
 		fi
 	else
-		# without the -d option check the existance and create a new branch
-        # check for the valid branch name
-        # the branch name is like b2 which has both characters and numbers
+		#check for the valid branch name
 		branch_match_str1=$(echo $1|egrep '^[a-zA-Z0-9][a-zA-Z0-9\.\-\_]+*$')
 		branch_match_str2=$(echo $1|egrep '^[0-9]*$')
-		# check the validation of the branch name
 		if [ "$branch_match_str1" != "" ]
 		then
-			# filtering the full number branch
 			if [ "$branch_match_str2" = "" ]
  			then
-				# check if the branch already exists
+				#check if the branch already exists
 				if [ -d ".girt/branch/$1" ]
 				then
-					# check the existance of the branch
 					echo "girt-branch: error: branch '$1' already exists" >/dev/stderr
 					exit 1
 				fi
-
-				# create a new branch and reletive folders
-                # The following part of code is similar to the girt-add / girt-init
+				#create a new branch and add its name to branch_names
 				mkdir .girt/branch/$1
 				mkdir .girt/branch/$1/repository
 				current_branch_log=".girt/branch/$current_branch/log"
 				branch_with_name=".girt/branch/$1/"
 				cp $current_branch_log $branch_with_name
 
-				# copy file to current branch
 				current_branch_index=".girt/branch/$current_branch/index"
 				branch_with_name_index=".girt/branch/$1/index"
 				cp -r $current_branch_index $branch_with_name_index
@@ -182,11 +139,9 @@ then
 		fi
 	fi
 else
-	# print the branch name
 	file_in_branch=".girt/branch/*"
 	for dir in $file_in_branch
 	do
-		# cutting the branch name
 		branch_name=$(echo $dir|cut -d'/' -f3,3)
 		echo $branch_name
 	done
