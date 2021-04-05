@@ -58,10 +58,10 @@ do
     then
         # Differen kinds of deletion can seek the following link
         # Source: https://linuxize.com/post/how-to-remove-files-and-directories-using-linux-command-line/
-        rm ".girt/branch/$current_branch/index/$file"
+        rm -r ".girt/branch/$current_branch/index/$file"
     else
         # using the copy
         # Source: https://www.rapidtables.com/code/linux/cp.html
-        cp "$file"  .girt/branch/$current_branch/index/ 
+        cp -r "$file"  .girt/branch/$current_branch/index/ 
     fi
 done
