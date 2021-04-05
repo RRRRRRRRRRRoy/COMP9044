@@ -26,16 +26,16 @@ if [ "$#" -ne 0 ]
 then
 	if [ "$1" = "-d" ]
 	then
-		input_branch_name=$2
+		input_branch_name1=$2
 		#check for the valid branch name
-		branch_match_string1=$(echo $input_branch_name|egrep '^[a-zA-Z0-9][a-zA-Z0-9\.\-\_]+*$')
-		branch_match_string2=$(echo $input_branch_name|egrep '^[0-9]*$')
+		branch_match_string1=$(echo $input_branch_name1|egrep '^[a-zA-Z0-9][a-zA-Z0-9\.\-\_]+*$')
+		branch_match_string2=$(echo $input_branch_name1|egrep '^[0-9]*$')
 		if [ "$branch_match_string1" != "" ] 
 		then
 			if [ "$branch_match_string2" = "" ]
 			then
 				#can not delete master
-				if [ "$input_branch_name" != "master" ]
+				if [ "$input_branch_name1" != "master" ]
 				then
 					:
 				else
@@ -43,30 +43,30 @@ then
 					exit 1
 				fi
 				#check if it exists
-				if [ ! -d ".girt/branch/$input_branch_name" ]
+				if [ ! -d ".girt/branch/$input_branch_name1" ]
 				then
-					echo "girt-branch: error: branch '$input_branch_name' doesn't exist" >/dev/stderr
+					echo "girt-branch: error: branch '$input_branch_name1' doesn't exist" >/dev/stderr
 					exit 1
 				else
 					:
 				fi
 
 				#check if it is now branch
-				if [ "$input_branch_name" != "$current_branch" ]
+				if [ "$input_branch_name1" != "$current_branch" ]
 				then
 					:
 				else
-					echo "girt-branch: error: internal error error: Cannot delete branch '$input_branch_name' checked out" >/dev/stderr
+					echo "girt-branch: error: internal error error: Cannot delete branch '$input_branch_name1' checked out" >/dev/stderr
 					exit 1
 				fi
 
 				# #check if it is merged
 				change_counter=0
-				latest_repository=$(ls .girt/branch/$input_branch_name/repository|sort|tail -n 1)
+				latest_repository=$(ls .girt/branch/$input_branch_name1/repository|sort|tail -n 1)
 			
 				for dir in .girt/branch/*
 				do
-					if [ "$dir" != ".girt/branch/$input_branch_name" ]
+					if [ "$dir" != ".girt/branch/$input_branch_name1" ]
 					then
 						repository_directory="$dir/repository/*"
 						for repository in $repository_directory
@@ -82,54 +82,55 @@ then
 				#delete if changable
 				if [ $change_counter -ne 1 ]
 				then
-					echo "girt-branch: error: branch '$input_branch_name' has unmerged changes" >/dev/stderr
+					echo "girt-branch: error: branch '$input_branch_name1' has unmerged changes" >/dev/stderr
 					exit 1
 				else
-					input_branch_dir=".girt/branch/$input_branch_name"
+					input_branch_dir=".girt/branch/$input_branch_name1"
 					rm -rf $input_branch_dir
-					echo "Deleted branch '$input_branch_name'"
+					echo "Deleted branch '$input_branch_name1'"
 				fi
 
 			else
-				echo "girt-branch: error: invalid branch name '$input_branch_name'" >/dev/stderr
+				echo "girt-branch: error: invalid branch name '$input_branch_name1'" >/dev/stderr
 				exit 1
 			fi
 		fi
 	else
+        input_branch_name2=$1
 		#check for the valid branch name
-		branch_match_str1=$(echo $1|egrep '^[a-zA-Z0-9][a-zA-Z0-9\.\-\_]+*$')
-		branch_match_str2=$(echo $1|egrep '^[0-9]*$')
+		branch_match_str1=$(echo $input_branch_name2|egrep '^[a-zA-Z0-9][a-zA-Z0-9\.\-\_]+*$')
+		branch_match_str2=$(echo $input_branch_name2|egrep '^[0-9]*$')
 		if [ "$branch_match_str1" != "" ]
 		then
 			if [ "$branch_match_str2" = "" ]
  			then
 				#check if the branch already exists
-				if [ -d ".girt/branch/$1" ]
+				if [ -d ".girt/branch/$input_branch_name2" ]
 				then
-					echo "girt-branch: error: branch '$1' already exists" >/dev/stderr
+					echo "girt-branch: error: branch '$input_branch_name2' already exists" >/dev/stderr
 					exit 1
 				fi
 				#create a new branch and add its name to branch_names
-				mkdir .girt/branch/$1
-				mkdir .girt/branch/$1/repository
+				mkdir .girt/branch/$input_branch_name2
+				mkdir .girt/branch/$input_branch_name2/repository
 				current_branch_log=".girt/branch/$current_branch/log"
-				branch_with_name=".girt/branch/$1/"
+				branch_with_name=".girt/branch/$input_branch_name2/"
 				cp $current_branch_log $branch_with_name
 
 				current_branch_index=".girt/branch/$current_branch/index"
-				branch_with_name_index=".girt/branch/$1/index"
+				branch_with_name_index=".girt/branch/$input_branch_name2/index"
 				cp -r $current_branch_index $branch_with_name_index
 
 				latest_modified_branch=$(ls .girt/branch/$current_branch/repository|sort|tail -n 1)
 				current_branch_repository=".girt/branch/$current_branch/repository/$latest_modified_branch"
-				branch_with_name_repository=".girt/branch/$1/repository/$latest_modified_branch"
+				branch_with_name_repository=".girt/branch/$input_branch_name2/repository/$latest_modified_branch"
 				cp -r $current_branch_repository $branch_with_name_repository
 
 			else
-				usage_match=$(echo $1|egrep '^[-].+*$')
+				usage_match=$(echo $input_branch_name2|egrep '^[-].+*$')
 				if [ "$usage_match" = "" ]
 				then
-					echo "girt-branch: error: invalid branch name '$1'" >/dev/stderr
+					echo "girt-branch: error: invalid branch name '$input_branch_name2'" >/dev/stderr
 					exit 1
 				else
 					echo "usage: girt-branch [-d] <branch>" >/dev/stderr
