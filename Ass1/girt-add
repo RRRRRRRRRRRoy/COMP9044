@@ -20,7 +20,7 @@ fi
 # check the validation of the file name
 for file in "$@"
 do
-    match_regex=$(echo "$file" | grep "^[a-zA-Z0-9][a-zA-Z0-9\.\-\_]*$")
+    match_regex=$(echo "$file" | grep "^[a-zA-Z0-9][a-zA-Z0-9\.*\-\_]+*$")
     if [ "$match_regex" != "" ]
     then
         :
