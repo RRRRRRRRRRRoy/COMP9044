@@ -7,10 +7,17 @@
 #         |-- index
 #         |-- repository
 #     |-- new branch
-# |-- head(the location on branch)
+# |-- head(the location on branch) (Not mention in this assignment)
 # |-- commit
-#     |-- msg
+#     
 #
+
+# version control system of Git
+# Source: https://git-scm.com/book/en/v2/Getting-Started-About-Version-Control
+# How to use git
+# Source: https://ourcodingclub.github.io/tutorials/git/
+# How to understand the structure of git
+# Source : https://homes.cs.washington.edu/~mernst/advice/version-control.html
 
 # create the dir call girt
 if [ -d ".girt" ]
