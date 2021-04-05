@@ -86,8 +86,12 @@ then
 		for file in "$@"
 		do
 			# if exist, then remove the file
-			if [ -e  $file ]
+			if [ ! -e  $file ]
 			then 
+				# not exists ---> pass
+				:
+			else
+				# exist ---> remove
 				# remove the file in the filelist
 				rm -r "$file" 
 			fi
@@ -106,8 +110,12 @@ latest_modified_branch=$(ls .girt/branch/$current_branch/repository|sort|tail -n
 for file in "$@"
 do
 	# checking whether the file is exist or not
-	if [ -e $file ]
+	if [ ! -e $file ]
 	then
+		# file not exist
+		:
+	else
+		# exist ----> go through
 		# Using the difference to check the difference
 		# Source: https://www.geeksforgeeks.org/diff-command-linux-examples/
 		current_branch_diff=".girt/branch/$current_branch/index/$file"

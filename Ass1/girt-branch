@@ -93,8 +93,10 @@ then
 				for dir in .girt/branch/*
 				do  
                     # compare with the target branch
-					if [ "$dir" != ".girt/branch/$input_branch_name1" ]
+					if [ "$dir" = ".girt/branch/$input_branch_name1" ]
 					then
+						:
+					else
                         # check the branch's repository
 						repository_directory="$dir/repository/*"
 						for repository in $repository_directory
@@ -147,8 +149,12 @@ then
 			if [ "$branch_match_without_number2" = "" ]
  			then
 				# check if the branch already exists
-				if [ -d ".girt/branch/$input_branch_name2" ]
+				if [ ! -d ".girt/branch/$input_branch_name2" ]
 				then
+					# not exists
+					:
+				else
+					# exist
                     # check the existance of the branch
 					echo "girt-branch: error: branch '$input_branch_name2' already exists" >/dev/stderr
 					exit 1
