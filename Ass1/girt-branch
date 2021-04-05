@@ -19,7 +19,8 @@ then
     :
 else
     # if there is no commit, the girt-commit will not create log file
-    echo "girt-status: error: your repository does not have any commits yet"
+    # Do not forget to change is to branch
+    echo "girt-branch: error: your repository does not have any commits yet"
     exit 1
 fi
 
@@ -29,3 +30,15 @@ current_branch=$(cat .girt/current_branch)
 # The first one is show all branches
 # The seconde one is delete a branch
 # The third one creating a new branch
+if [ "$#" -ne 0 ]
+then
+    #check the branch option -d and branch name
+    if [ "$1" = "-d" ]
+	then
+        # in the -d option need to delete the branch
+    else
+        # in without the -d option check the create a new branch
+    fi
+else
+    #print the branch name
+fi
