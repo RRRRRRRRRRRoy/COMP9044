@@ -42,3 +42,11 @@ Date	        Start	    Stop	    Activity	        Comments
 05/04/21        18:00       18:30       Coding              Adding annotation and Source link in the girt-branch
 05/04/21        18:00       18:30       Coding              Adding annotation and Source link in the girt-branch
 05/04/21        18:30       19:30       Writing             Organizing diary.txt
+05/04/21        19:30       20:30       Writing             Designing the test case and doing the integrity test
+
+
+
+Technical Conclusions
+1.
+2.
+3.
