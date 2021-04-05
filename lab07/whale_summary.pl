@@ -34,7 +34,7 @@ foreach $line (@whale_data){
     # split the line like species_count
     @info = split / +/, $line;
     # getting the individual number
-    print "@info\n";
+    # print "@info\n";
     $individual_oberservation = $info[1];
     $whale_name = substr($line,12);
     # changing to lower case
