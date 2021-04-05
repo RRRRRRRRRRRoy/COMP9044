@@ -11,7 +11,7 @@ else
     exit 1
 fi
 
-#check .girt/log exists
+# Check .girt/log exists
 current_branch=$(cat .girt/current_branch)
 log_directory=".girt/branch/$current_branch/log"
 if [ -e $log_directory ]

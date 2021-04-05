@@ -12,7 +12,7 @@ else
     exit 1
 fi
 
-#test for format num:repository
+# Check the format of repository number
 print_content_slice=$1
 match_string=$(echo $print_content_slice|egrep '^[0-9]*:.*$')
 if [ "$match_string" != "" ]
@@ -31,7 +31,8 @@ fi
 printing_number=$(echo $print_content_slice|sed 's/:[a-zA-Z0-9].*$//g')
 printing_filename=$(echo $print_content_slice|sed 's/^[0-9]*://g')
 
-#test if the required num beyond maximum repository num
+# whether the required number smaller than maximum repository number
+# cutting string
 max_number=$(ls -c .girt/repository|wc -l|sed 's/ //g')
 # notice!! doing the calculation in shell should use double layer $(())
 max_repository_number=$(($max_number - 1))

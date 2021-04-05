@@ -11,7 +11,7 @@ else
     exit 1
 fi
 
-#check any commit
+# check commit
 # This part of code is similar to  he girt-status part
 # This is used to check the log file is exist or not
 current_branch=$(cat .girt/current_branch)
@@ -36,7 +36,7 @@ fi
 # The third one creating a new branch
 if [ "$#" -ne 0 ]
 then
-    #check the branch option -d and branch name
+    # check the branch option -d and branch name
 	if [ "$1" = "-d" ]
 	then
 		input_branch_name1=$2
@@ -62,7 +62,7 @@ then
 					echo "girt-branch: error: can not delete branch 'master'" >/dev/stderr
 					exit 1
 				fi
-				#check if it exists
+				# check exists
 				if [ ! -d ".girt/branch/$input_branch_name1" ]
 				then
                     # not exist print error
@@ -74,7 +74,7 @@ then
 				fi
                 # This is because the current is occupied the branch
                 # Therefore, connot delete the current branch
-				#check if it is current branch
+				# check whether it is located in current branch
 				if [ "$input_branch_name1" != "$current_branch" ]
 				then
                     # continue
