@@ -1,5 +1,5 @@
 
-Date	        Start	    Stop	    Activity	        Comments
+Date            Start       Stop        Activity            Comments
 26/03/21        17:00       17:00       Preparing           Creating Girt-* for assignment1 
 26/03/21        18:00       18:30       Coding              Starting coding girt-init.sh
 26/03/21        19:00       19:30       Debuging            Checking the current directory of .girt is correct or not
