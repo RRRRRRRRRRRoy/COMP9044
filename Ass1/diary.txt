@@ -1,0 +1,4 @@
+
+Date	        Start	    Stop	    Activity	        Comments
+26/03/20	    17:00	    17:00	    Preparing	        Creating Girt-* for assignment1 
+20/06/19	    20:00	    10:30	    debugging	        found bug in command-line arguments
