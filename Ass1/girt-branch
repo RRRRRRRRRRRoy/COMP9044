@@ -149,6 +149,24 @@ then
 					exit 1
 				fi
 
+                # create a new branch and reletive folders
+                # The following part of code is similar to the girt-add / girt-init
+				mkdir .girt/branch/$check_branch_name
+				mkdir .girt/branch/$check_branch_name/repository
+				current_branch_log=".girt/branch/$current_branch/log"
+				branch_with_name=".girt/branch/$check_branch_name/"
+				cp $current_branch_log $branch_with_name
+
+                # copy file to current branch
+				current_branch_index=".girt/branch/$current_branch/index"
+				branch_with_name_index=".girt/branch/$check_branch_name/index"
+				cp -r $current_branch_index $branch_with_name_index
+
+				latest_modified_branch=$(ls .girt/branch/$current_branch/repository|sort|tail -n 1)
+				current_branch_repository=".girt/branch/$current_branch/repository/$latest_modified_branch"
+				branch_with_name_repository=".girt/branch/$check_branch_name/repository/$latest_modified_branch"
+				cp -r $current_branch_repository $branch_with_name_repository
+
 			else
 				usage_match=$(echo $check_branch_name|egrep '^[-].+*$')
 				if [ "$usage_match" = "" ]
