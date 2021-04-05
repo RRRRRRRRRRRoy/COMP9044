@@ -13,7 +13,7 @@ else
 fi
 
 #test for format num:repository
-print_content_slice=$1;
+print_content_slice=$1
 match_string=$(echo $print_content_slice|egrep '^[0-9]*:.*$')
 if [ "$match_string" != "" ]
 then
@@ -34,7 +34,7 @@ printing_filename=$(echo $print_content_slice|sed 's/^[0-9]*://g')
 #test if the required num beyond maximum repository num
 max_number=$(ls -c .girt/repository|wc -l|sed 's/ //g')
 # notice!! doing the calculation in shell should use double layer $(())
-max_repository_number=$(($max_number - 1));
+max_repository_number=$(($max_number - 1))
 current_branch=$(cat .girt/current_branch)
 
 if [ "$printing_number" != "" ]

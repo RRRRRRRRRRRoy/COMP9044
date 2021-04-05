@@ -14,7 +14,7 @@ then
     :
 else
     echo "girt-add: error: girt repository directory .girt not found" >/dev/stderr
-    exit 1;
+    exit 1
 fi
 
 # check the validation of the file name
@@ -26,7 +26,7 @@ do
         :
     else
         echo "girt-add: error: invalid filename '$file'" > /dev/stderr
-        exit 1;
+        exit 1
     fi
 done
 
@@ -43,8 +43,8 @@ do
         then
             :
         else
-            echo "girt-add: error: can not open '$file'" > /dev/stderr;
-            exit 1;
+            echo "girt-add: error: can not open '$file'" > /dev/stderr
+            exit 1
         fi
     fi
 done
@@ -53,7 +53,7 @@ done
 # this is the girt-add operation
 for file in "$@"
 do
-    current_file_index=$(ls $file 2>/dev/null);
+    current_file_index=$(ls $file 2>/dev/null)
     if [ "$current_file_index" = "" ]
     then
         # Differen kinds of deletion can seek the following link

@@ -24,7 +24,7 @@ then
 else
     # not exist ---> untracked
     echo "nothing added to commit but untracked files present"
-    exit 1;
+    exit 1
 fi
 
 # -a could be the second parameter
@@ -89,7 +89,7 @@ then
         for file in $(ls .girt/branch/$current_branch/index/*)
         do
             # cutting the file name
-            filename=$(echo $file|cut -d'/' -f5,5);
+            filename=$(echo $file|cut -d'/' -f5,5)
             # getting the file in the 
             file_in_dir=$(ls .girt/branch/$current_branch/repository/$latest_modified_branch/$filename 2>/dev/null)
             # file is not exists
