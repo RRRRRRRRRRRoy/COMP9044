@@ -125,6 +125,7 @@ do
 					current_branch_diff=".girt/branch/$current_branch/index/$file"
 					latest_modified_diff=".girt/branch/$current_branch/repository/$latest_modified_branch/$file"
 					repository_difference=$(diff $current_branch_diff $latest_modified_diff|wc -w)
+					# checking the difference of repository
 					if [ $repository_difference -le 0 ]
 					then
 						:
@@ -135,6 +136,7 @@ do
 					change_counter=0
 				fi
 			else
+				# checking the difference between file and index file
 				if [ $current_index_difference -le 0 ]
 				then
 					:
