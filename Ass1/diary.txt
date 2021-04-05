@@ -51,5 +51,5 @@ Technical Conclusions
 2. In girt-rm, reducing the time of setting variable can reduce the prossibility of redirecting error.
 3. A good assignment for designing the basement of the system. Nice designing can reduce the future changes of the basement.
 4. Before coding, well prepared the structure of the system.
-5. How to use cp and rm with different parameters(different option) without error is important
+5. How to use cp and rm with different parameters(different option) properly(cause least effect) is important
 6. Using shift can increase the efficiency of getting value.
