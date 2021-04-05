@@ -1,4 +1,4 @@
-# #!/usr/bin/perl -w
+#!/usr/bin/perl -w
 
 # getting the filename from the input
 $filename=$ARGV[1];
