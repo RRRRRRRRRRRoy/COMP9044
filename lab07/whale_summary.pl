@@ -35,7 +35,7 @@ foreach $line (@whale_data){
     @info = split / +/, $line;
     # getting the individual number
     $individual_oberservation = $info[1];
-    $whale_name = @info[2];
+    $whale_name = $info[2];
     # changing to lower case
     # Source: https://perldoc.perl.org/functions/lc
     $whale_name = lc($whale_name);
