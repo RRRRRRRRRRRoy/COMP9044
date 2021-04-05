@@ -23,6 +23,7 @@ else
     exit 1
 fi
 
+current_branch=$(cat .girt/current_branch)
 # In the girt-branch part
 # there are 3 situations
 # The first one is show all branches
