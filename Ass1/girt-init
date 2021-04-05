@@ -24,7 +24,7 @@ fi
 # if the directory is not exists
 # create the dir called .girt
 mkdir ".girt"
-echo "master" > .girt/current_branch;
+# echo "master" > .girt/current_branch;
 
 # create the master branch as git
 # U can find the structure of git from the following website
