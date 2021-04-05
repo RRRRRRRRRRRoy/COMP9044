@@ -75,7 +75,7 @@ then
 	# if flag = 1 remove file in the index dir
 	for file in "$@"
 	do
-		rm ".girt/branch/$current_branch/index/$file"
+		rm -r ".girt/branch/$current_branch/index/$file"
 	done
 	# checking the flag for cached
 	if [ $cached_flag -eq 0 ]
@@ -89,7 +89,7 @@ then
 			if [ -e  $file ]
 			then 
 				# remove the file in the filelist
-				rm "$file" 
+				rm -r "$file" 
 			fi
 		done
 	fi
@@ -164,7 +164,7 @@ then
 		do
 			current_branch_index=".girt/branch/$current_branch/index/$file"
 			# Source: https://www.geeksforgeeks.org/rm-command-linux-examples/
-			rm "$current_branch_index"
+			rm -r "$current_branch_index"
 		done
 	fi
 fi
@@ -236,11 +236,11 @@ then
 			# How to use different type of rm
 			# Source: https://www.geeksforgeeks.org/rm-command-linux-examples/
 			current_branch_index=".girt/branch/$current_branch/index/$file"
-			rm "$current_branch_index"
+			rm -r "$current_branch_index"
 			# remove
 			if [ -e $file ]
 			then
-				rm "$file"
+				rm -r "$file"
 			fi
 		done
 	fi
