@@ -36,6 +36,23 @@ then
     if [ "$1" = "-d" ]
 	then
         # in the -d option need to delete the branch
+        input_branch_name=$2
+		# check for the valid branch name
+        # the branch name is like b2 which has both characters and numbers
+		branch_match_with_char_num=$(echo $input_branch_name|egrep '^[a-zA-Z0-9][a-zA-Z0-9\.\-\_]+*$')
+		branch_match_without_number=$(echo $input_branch_name|egrep '^[0-9]*$')
+        # this means the the branch_match_with_char_num is not empty
+        # branch_match_without_number is empty
+        if [ "$branch_match_string1" != "" ] 
+		then
+            # eliminating the pure number of branch name
+			if [ "$branch_match_string2" = "" ]
+			then
+                # the branch name is correct
+            fi
+        else
+            # the branch is invalid
+        fi
     else
         # in without the -d option check the create a new branch
     fi
