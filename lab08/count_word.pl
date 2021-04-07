@@ -1,31 +1,23 @@
 #!/usr/bin/perl -w
 
-# getting the filename from the input
-$seleted_word=$ARGV[0];
-#$filename = $ARGV[1];
-# # setting counter
-# # setting filestream to read file from the filename
-# # Source: http://perltraining.com.au/tips/2005-11-17.html
-#open (my $stdin,'<',"$filename") or die "$!";
+# This counter is to counting the number of words
+$counter = 0;
+# Getting the input keywords
+$selected_word = $ARGV[0];
 
-%words_dict=();
-# This is similar to Nvdia 2019 interview question counting words
-foreach $line(<STDIN>)
-{
-    # This part of code is from Question1
-    $regrex = '[a-zA-Z]+';
-    @words = $line =~ /$regrex/g;
-    foreach $word (@words)
-    {   
-        # using the dictionary to stroe the number of appearance
-        $key = lc($word);
-        if(! exists $words_dict{$key}){
-            $words_dict{$key}=0;
-        }
-        $words_dict{$key}++;
-    }
+while($line = <STDIN>){
+    $reprex = '[^a-z]+';
+    # based on the regrex cutting the word store in array
+	@words = split /$reprex/i,$line;
+
+	for $word (@words){
+        # checking whether the word is same or not
+        # Do not forget to change all these variables to lower case
+		if (lc($selected_word) eq lc($word)){
+            # Counter adding1
+			$counter ++;
+		}
+	}
 }
 
-print "$seleted_word occurred $words_dict{$seleted_word} times\n";
-# Do not forget to close the file stream
-# close $stdin;
+print "$selected_word occurred $counter times\n";
