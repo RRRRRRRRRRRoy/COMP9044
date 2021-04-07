@@ -37,10 +37,10 @@ for $file (@filelist){
 		for $word (@words){
         # checking whether the word is same or not
         # Do not forget to change all these variables to lower case
-		if (lc($selected_word) eq lc($word)){
-            # Counter adding1
-			$counter ++;
-		}
+		    if (lc($keyword) eq lc($word)){
+                # Counter adding1
+			    $counter ++;
+		    }
 	}
 	}
     # format printing
