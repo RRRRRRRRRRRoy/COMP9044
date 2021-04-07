@@ -12,7 +12,7 @@ $sum=0;
 open (my $stdin,'<',"$filename") or die "$!";
 
 foreach $line(<$stdin>){
-    $regrex = '\w+';
+    $regrex = '[a-zA-Z]+';
     @words = $line =~ /$regrex/g;
     # Store the data in to a list using scalar counting the list
     # Source: https://www.tutorialspoint.com/perl/perl_scalar.htm
