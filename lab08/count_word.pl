@@ -1,7 +1,7 @@
 #!/usr/bin/perl -w
 
 # getting the filename from the input
-my $seleted_word=$ARGV[0];
+$seleted_word=$ARGV[0];
 #$filename = $ARGV[1];
 # # setting counter
 # # setting filestream to read file from the filename
@@ -9,22 +9,20 @@ my $seleted_word=$ARGV[0];
 #open (my $stdin,'<',"$filename") or die "$!";
 
 %words_dict=();
-$sum = 0;
-
 # This is similar to Nvdia 2019 interview question counting words
 foreach $line(<STDIN>)
 {
-    $regrex='[^a-z]+';
-    @words = split /$regrex/i,$line;
+    # This part of code is from Question1
+    $regrex = '[a-zA-Z]+';
+    @words = $line =~ /$regrex/g;
     foreach $word (@words)
     {   
         # using the dictionary to stroe the number of appearance
-        if($word =~ m/^$seleted_word$/i){
-            $sum ++;
-        }
+        $key = lc($word);
+        $words_dict{$key}++;
     }
 }
 
-print "$seleted_word occurred $sum times";
+print "$seleted_word occurred $words_dict{$seleted_word} times";
 # Do not forget to close the file stream
-close $stdin;
+# close $stdin;
