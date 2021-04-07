@@ -1,16 +1,21 @@
 #!/usr/bin/perl -w
 
-$counter = 0;
 
 # getting the filename from the input
-$filename=$ARGV[1];
+$filename=$ARGV[0];
 
-# setting filestream to read file from the filename
-# Source: http://perltraining.com.au/tips/2005-11-17.html
+# # setting counter
+# $sum=0;
+
+# # setting filestream to read file from the filename
+# # Source: http://perltraining.com.au/tips/2005-11-17.html
 open (my $stdin,'<',"$filename") or die "$!";
 
 foreach $line(<$stdin>){
-    $counter += $line =~ /[a-zA-Z]/g;
+    @words = length($line);
+	$sum += scalar @words;
+    # print "$sum";
 }
 
-print "$total\n"
+print "$sum\n"
+
