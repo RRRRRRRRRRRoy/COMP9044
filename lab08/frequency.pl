@@ -34,10 +34,14 @@ for $file (@filelist){
         # Source: https://www.tutorialspoint.com/perl/perl_scalar.htm
         $sum += scalar @words;
         # This part of code is from question 2
-		if (lc($keyword) eq lc($word)){
+		for $word (@words){
+        # checking whether the word is same or not
+        # Do not forget to change all these variables to lower case
+		if (lc($selected_word) eq lc($word)){
             # Counter adding1
 			$counter ++;
 		}
+	}
 	}
     # format printing
     # Source: https://perldoc.perl.org/functions/printf
