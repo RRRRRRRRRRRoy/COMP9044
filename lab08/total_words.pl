@@ -12,7 +12,9 @@ $filename=$ARGV[0];
 open (my $stdin,'<',"$filename") or die "$!";
 
 foreach $line(<$stdin>){
-    @words = length($line);
+    @words = $line =~ /\w+/g;
+    # Store the data in to a list using scalar counting the list
+    # Source: https://www.tutorialspoint.com/perl/perl_scalar.htm
 	$sum += scalar @words;
     # print "$sum";
 }
