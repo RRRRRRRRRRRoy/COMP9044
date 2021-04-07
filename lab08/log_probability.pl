@@ -8,23 +8,21 @@ $keyword = $ARGV[0];
 @filelist = glob "lyrics/*.txt";
 
 
-
+# These Code are copied from Question2
 for $file (@filelist){
 	open (my $stdin,'<',"$file") or die "$!";
-
     # String matching is from the following link
     # Source: https://www.tutorialspoint.com/perl/perl_regular_expressions.htm
     # Cutting the string
-    # Ig using
     # Source: http://web.eecs.utk.edu/~bvanderz/cs460/notes/perl/perl2.html
     # print $file;
-    # delete lyrics/
-	$file =~ s/lyrics\///g;
-    # Delete the .txt
-	$file =~ s/\.txt//g;
-    # replace the _ by space
-	$file =~ s/_/ /g;
 	$artist = $file;
+    # delete lyrics/
+	$artist =~ s/lyrics\///g;
+    # Delete the .txt
+	$artist =~ s/\.txt//g;
+    # replace the _ by space
+	$artist =~ s/_/ /g;
     # counting the number of each word in the file
     %words_dict=();
     # Counting the number of each word in the lyrics
@@ -57,4 +55,6 @@ for $file (@filelist){
 	# printf "log((%d+1)/%6d) = %8.4f %s", $words_dict{$keyword}, $sum, log(($words_dict{$keyword}+1)/$sum),$artist;
     $log_result = log(($counter+1)/$sum);
     printf "log((%d+1)/%6d) = %8.4f %s\n", $counter, $sum, $log_result,$artist;
+    # Do not forget to close the file stream
+    close $stdin;
 }

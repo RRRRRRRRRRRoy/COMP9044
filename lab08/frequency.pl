@@ -15,13 +15,13 @@ for $file (@filelist){
     # Ig using
     # Source: http://web.eecs.utk.edu/~bvanderz/cs460/notes/perl/perl2.html
     # print $file;
+    $artist = $file;
     # delete lyrics/
-	$file =~ s/lyrics\///g;
+	$artist =~ s/lyrics\///g;
     # Delete the .txt
-	$file =~ s/\.txt//g;
+	$artist =~ s/\.txt//g;
     # replace the _ by space
-	$file =~ s/_/ /g;
-	$artist = $file;
+	$artist =~ s/_/ /g;
 	$sum = 0;
     # Counting the number of each word in the lyrics
     %words_dict=();
@@ -43,4 +43,6 @@ for $file (@filelist){
     # format printing
     # Source: https://perldoc.perl.org/functions/printf
 	printf "%4d/%6d = %.9f %s\n", $words_dict{$keyword}, $sum, $words_dict{$keyword}/$sum,$artist;
+    # Do not forget to close the file stream
+    close $stdin;
 }

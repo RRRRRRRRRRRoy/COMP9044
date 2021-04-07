@@ -22,3 +22,5 @@ foreach $line(<$stdin>)
 }
 
 print "$seleted_word occurred $words_dict{$seleted_word} times"
+# Do not forget to close the file stream
+close $stdin;
