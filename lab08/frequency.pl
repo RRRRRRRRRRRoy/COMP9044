@@ -2,7 +2,7 @@
 
 
 $keyword = $ARGV[0];
-
+$counter = 0;
 # filelist
 @filelist = glob "lyrics/*.txt";
 
