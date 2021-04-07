@@ -19,10 +19,13 @@ foreach $line(<STDIN>)
     {   
         # using the dictionary to stroe the number of appearance
         $key = lc($word);
+        if(! exists $words_dict{$key}){
+            $words_dict{$key}=0;
+        }
         $words_dict{$key}++;
     }
 }
 
-print "$seleted_word occurred $words_dict{$seleted_word} times";
+print "$seleted_word occurred $words_dict{$seleted_word} times\n";
 # Do not forget to close the file stream
 # close $stdin;
