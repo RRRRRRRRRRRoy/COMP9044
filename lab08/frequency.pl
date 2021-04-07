@@ -23,7 +23,7 @@ for $file (@filelist){
     # replace the _ by space
 	$file =~ s/_/ /g;
 	$artist = $file;
-	$totalwords = 0;
+	$sum = 0;
     # Counting the number of each word in the lyrics
     %words_dict=();
 	while($line = <$stdin>){
@@ -32,7 +32,7 @@ for $file (@filelist){
         @words = $line =~ /$regrex/g;
         # Store the data in to a list using scalar counting the list
         # Source: https://www.tutorialspoint.com/perl/perl_scalar.htm
-        $totalwords += scalar @words;
+        $sum += scalar @words;
         # This part of code is from question 2
 		for $word (@words){
             # to lower cases
@@ -42,5 +42,5 @@ for $file (@filelist){
 	}
     # format printing
     # Source: https://perldoc.perl.org/functions/printf
-	printf "%4d/%6d = %.9f %s\n", $words_dict{$keyword}, $totalwords, $words_dict{$keyword}/$totalwords,$artist;
+	printf "%4d/%6d = %.9f %s\n", $words_dict{$keyword}, $sum, $words_dict{$keyword}/$sum,$artist;
 }
