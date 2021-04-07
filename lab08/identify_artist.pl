@@ -11,9 +11,12 @@ foreach $file (@filelist)
     # Source: http://web.eecs.utk.edu/~bvanderz/cs460/notes/perl/perl2.html
     # These part of code is copied from Q3 log_probability
     $artist = $file;
-    $artist =~ s/lyrics\///;
-    $artist =~ s/\.txt//;
-    $artist =~ tr/_/ /;
+    # delete lyrics/
+	$artist =~ s/lyrics\///g;
+    # Delete the .txt
+	$artist =~ s/\.txt//g;
+    # replace the _ by space
+	$artist =~ s/_/ /g;
 
     # read lyrics from every artist
     open (my $stdin, '<', "$file") or die "$!";
@@ -28,10 +31,28 @@ foreach $file (@filelist)
         foreach $word (@words)
         {
             # The idea of this part of code is copied from Question2
-            $key =~ lc($word);
+            $key = lc($word);
             # doing the statistics for each artist
             $artist_hash{"$artist"}{"$key"} = $artist_hash{"$artist"}{"$key"} + 1;
         }
     }
     close $stdin;
+}
+
+foreach $file(@ARGV){
+    # reset hash artist_counter
+    %artist_counter = ();
+
+    # read lyrics from every artist
+    open (my $stdin, '<', "$file") or die "$!";
+
+    foreach $line (<$stdin>){
+        # This part of code is copied from Question1
+        $regrex = '[a-zA-Z]+';
+        @words = $line =~ /$regrex/g;
+        foreach $word (@words)
+        {
+            $key = lc($word);
+        }
+    }
 }
