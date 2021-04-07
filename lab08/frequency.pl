@@ -2,7 +2,7 @@
 
 
 $keyword = $ARGV[0];
-$counter = 0;
+
 # filelist
 @filelist = glob "lyrics/*.txt";
 
@@ -23,6 +23,7 @@ for $file (@filelist){
     # replace the _ by space
 	$artist =~ s/_/ /g;
 	$sum = 0;
+    $counter = 0;
     # Counting the number of each word in the lyrics
     # %words_dict=();
     # Setting the counter for checking the number of keyword
@@ -37,7 +38,7 @@ for $file (@filelist){
         $reprex = '[^a-z]+';
         # based on the regrex cutting the word store in array
 	    @words_counter = split /$reprex/i,$line;
-		for $word (@words_counter){
+		foreach $word (@words_counter){
         # checking whether the word is same or not
         # Do not forget to change all these variables to lower case
 		    if (lc($keyword) eq lc($word)){
