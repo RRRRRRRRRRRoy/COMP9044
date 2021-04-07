@@ -9,17 +9,21 @@ my $seleted_word=$ARGV[0];
 #open (my $stdin,'<',"$filename") or die "$!";
 
 %words_dict=();
+$sum = 0;
 
 # This is similar to Nvdia 2019 interview question counting words
 foreach $line(<STDIN>)
 {
     $regrex='[^a-z]+';
     @words = split /$regrex/i,$line;
-    foreach $word (words)
+    foreach $word (@words)
     {   
         # using the dictionary to stroe the number of appearance
         $key = lc($word);
         $words_dict{$key}++;
+        if($word =~ m/^$seleted_word$/i){
+            $sum ++;
+        }
     }
 }
 
