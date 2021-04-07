@@ -1,10 +1,13 @@
 #!/usr/bin/perl -w
 
+# These part of code is copied from Q3
 
 $keyword = $ARGV[0];
 
 # filelist
 @filelist = glob "lyrics/*.txt";
+
+
 
 for $file (@filelist){
 	open (my $stdin,'<',"$file") or die "$!";
@@ -22,10 +25,12 @@ for $file (@filelist){
     # replace the _ by space
 	$file =~ s/_/ /g;
 	$artist = $file;
-	$sum = 0;
-    # Counting the number of each word in the lyrics
+    # counting the number of each word in the file
     %words_dict=();
-    # Setting the counter for checking the number of keyword
+    # Counting the number of each word in the lyrics
+    $counter = 0;
+    # counting the total number of words
+    $sum = 0;
 	while($line = <$stdin>){
         # THis part of code is from Question1
         $regrex = '[a-zA-Z]+';
@@ -36,11 +41,20 @@ for $file (@filelist){
         # This part of code is from question 2
 		for $word (@words){
             # to lower cases
-			$key = lc($word);
+            $key = lc($word);
+            if( ! exists($words_dict{$key})){
+                $words_dict{$key}=0;
+            }
             $words_dict{$key}++;
+            
+			if ($word =~ m/^$keyword$/i){
+                $counter = $counter + 1;
+            }
 		}
 	}
     # format printing
     # Source: https://perldoc.perl.org/functions/printf
-	printf "%4d/%6d = %.9f %s\n", $words_dict{$keyword}, $sum, $words_dict{$keyword}/$sum,$artist;
+	# printf "log((%d+1)/%6d) = %8.4f %s", $words_dict{$keyword}, $sum, log(($words_dict{$keyword}+1)/$sum),$artist;
+    $log_result = log(($counter+1)/$sum);
+    printf "log((%d+1)/%6d) = %8.4f %s\n", $counter, $sum, $log_result,$artist;
 }
