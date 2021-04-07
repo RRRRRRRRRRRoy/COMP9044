@@ -1,7 +1,7 @@
 #!/usr/bin/perl -w
 
 # getting the filename from the input
-#$seleted_word=$ARGV[0];
+$seleted_word=$ARGV[0];
 #$filename = $ARGV[1];
 # # setting counter
 # # setting filestream to read file from the filename
