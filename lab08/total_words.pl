@@ -12,16 +12,13 @@ $sum=0;
 open (my $stdin,'<',"$filename") or die "$!";
 
 foreach $line(<$stdin>){
-    @words = $line =~ /\w+/g;
-    @number = $line =~ /[0-9]+/g;
-    #@down_line = $line =~ /[_]+/g;
+    $regrex = '\w+';
+    @words = $line =~ /$regrex/g;
     # Store the data in to a list using scalar counting the list
     # Source: https://www.tutorialspoint.com/perl/perl_scalar.htm
-	$sum += scalar @words;
-    #$sum -= scalar @down_line;
-    $sum -= scalar @number;
-    # print "$sum";
+    $sum += scalar @words;
 }
 
-print "$sum\n"
+
+print "$sum\n";
 
