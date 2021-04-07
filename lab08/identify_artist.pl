@@ -33,7 +33,9 @@ foreach $file (@filelist)
             # The idea of this part of code is copied from Question2
             $key = lc($word);
             # doing the statistics for each artist
-            $artist_hash{"$artist"}{"$key"} = $artist_hash{"$artist"}{"$key"} + 1;
+            # Store the data in a (2-dimensional) hash.
+            # Source: https://cgi.cse.unsw.edu.au/~cs2041/21T1/lab/08/questions
+            $artist_hash{"$artist"}{"$key"} += 1;
         }
     }
     close $stdin;
@@ -52,7 +54,36 @@ foreach $file(@ARGV){
         @words = $line =~ /$regrex/g;
         foreach $word (@words)
         {
+            # This part of code is copied from Question2
             $key = lc($word);
+            foreach $artist (sort keys %artist_hash)
+            {
+                # calculating the total number
+                $sum = 0;
+                # Searching the word in the second dimension
+                foreach $word (keys %{$artist_hash{$artist}})
+                {   
+                    # Counting the words in artist hash
+                    $sum += $artist_hash{$artist}{$word};
+                }
+                # checking whether the word is exists
+                if ( ! exists $artist_hash{$artist}{$key})
+                {
+                    # if not exist using the 1 to calculate the log
+                    $frequency = 1 / $sum;
+                    $log_prob = log($frequency);
+                    $artist_counter{$artist} += $log_prob;
+                }
+                else
+                {
+                    # Claculating the frequency as Question 3
+                    $frequency = ($artist_hash{$artist}{$key} + 1) / $sum;
+                    $log_prob = log($sequence);
+                    $artist_counter{$artist} += $log_prob;
+                }
+            }
         }
     }
+
+    close $stdin;
 }
