@@ -12,6 +12,9 @@ $sum=0;
 open (my $stdin,'<',"$filename") or die "$!";
 
 foreach $line(<$stdin>){
+    # Using [a-zA-Z] only
+    # \w including char number also _
+    # Source: https://www.w3schools.com/jsref/jsref_regexp_wordchar.asp
     $regrex = '[a-zA-Z]+';
     @words = $line =~ /$regrex/g;
     # Store the data in to a list using scalar counting the list
