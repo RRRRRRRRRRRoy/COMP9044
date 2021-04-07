@@ -11,6 +11,8 @@ $sum=0;
 # # Source: http://perltraining.com.au/tips/2005-11-17.html
 #open $stdin,'<',$filename or die "$!";
 
+# Using STDIN Here to do the vlab test
+# Source: https://perlmaven.com/read-from-stdin
 foreach $line(<STDIN>){
     # Using [a-zA-Z] only
     # \w including char number also _
