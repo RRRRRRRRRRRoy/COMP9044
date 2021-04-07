@@ -2,7 +2,7 @@
 
 
 # getting the filename from the input
-$filename=$ARGV[0];
+$filename=$ARGV[1];
 
 # # setting counter
 $sum=0;
