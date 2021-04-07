@@ -13,7 +13,9 @@ my $seleted_word=$ARGV[0];
 # This is similar to Nvdia 2019 interview question counting words
 foreach $line(<STDIN>)
 {
-    foreach $word ($line =~ /[a-zA-Z]+/g)
+    $regrex='[^a-z]+'
+    @words = split /$regrex/i,$line;
+    foreach $word (words)
     {   
         # using the dictionary to stroe the number of appearance
         $key = lc($word);
