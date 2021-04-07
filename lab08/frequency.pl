@@ -34,15 +34,14 @@ for $file (@filelist){
         # Source: https://www.tutorialspoint.com/perl/perl_scalar.htm
         $sum += scalar @words;
         # This part of code is from question 2
-		for $word (@words){
-            # to lower cases
-			$key = lc($word);
-            $words_dict{$key}++;
+		if (lc($keyword) eq lc($word)){
+            # Counter adding1
+			$counter ++;
 		}
 	}
     # format printing
     # Source: https://perldoc.perl.org/functions/printf
-	printf "%4d/%6d = %.9f %s\n", $words_dict{$keyword}, $sum, $words_dict{$keyword}/$sum,$artist;
+	printf "%4d/%6d = %.9f %s\n", $counter, $sum, $counter/$sum,$artist;
     # Do not forget to close the file stream
     close $stdin;
 }
