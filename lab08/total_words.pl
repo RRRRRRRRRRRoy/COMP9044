@@ -26,5 +26,5 @@ foreach $line(<STDIN>){
 print "$sum words\n";
 
 # Do not forget to close the file stream
-close $stdin;
+#close $stdin;
 
