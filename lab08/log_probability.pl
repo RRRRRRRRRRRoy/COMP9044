@@ -42,21 +42,21 @@ foreach $file (@filelist){
         #     $words_dict{$word}=0
         # }
         # This part of code is from question 2
-		for $word (@words){
-            # to lower cases
-            $key = lc($word);
-            $words_dict{$key}++;
-            
-			if ($word =~ m/^$keyword$/i){
-                $counter = $counter + 1;
-            }
-		}
+        $reprex = '[^a-z]+';
+        # based on the regrex cutting the word store in array
+	    @words_counter = split /$reprex/i,$line;
+		foreach $word (@words_counter){
+        # checking whether the word is same or not
+        # Do not forget to change all these variables to lower case
+		    if (lc($keyword) eq lc($word)){
+                # Counter adding1
+			    $counter ++;
+		    }
+	    }
 	}
     # format printing
     # Source: https://perldoc.perl.org/functions/printf
-	#printf "log((%d+1)/%6d) = %8.4f %s", $words_dict{$keyword}, $sum, log(($words_dict{$keyword}+1)/$sum),$artist;
-    # printf "log((%d+1)/%6d) = %8.4f %s\n", $words_dict{$keyword}, $sum, log(($words_dict{$keyword}+1)/$sum),$artist;
-    $log_result = log(($counter+1)/$sum);
+	$log_result = log(($counter+1)/$sum);
     printf "log((%d+1)/%6d) = %8.4f %s\n", $counter, $sum, $log_result,$artist;
     # Do not forget to close the file stream
     close $stdin;
