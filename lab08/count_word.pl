@@ -13,7 +13,7 @@ my $seleted_word=$ARGV[0];
 # This is similar to Nvdia 2019 interview question counting words
 foreach $line(<STDIN>)
 {
-    $regrex='[^a-z]+'
+    $regrex='[^a-z]+';
     @words = split /$regrex/i,$line;
     foreach $word (words)
     {   
