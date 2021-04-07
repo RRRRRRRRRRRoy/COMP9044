@@ -2,14 +2,14 @@
 
 
 # getting the filename from the input
-$filename=$ARGV[1];
+#$filename=$ARGV[1];
 
 # # setting counter
 $sum=0;
 
 # # setting filestream to read file from the filename
 # # Source: http://perltraining.com.au/tips/2005-11-17.html
-open $stdin,'<',$filename or die "$!";
+#open $stdin,'<',$filename or die "$!";
 
 foreach $line(<STDIN>){
     # Using [a-zA-Z] only
