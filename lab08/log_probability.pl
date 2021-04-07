@@ -9,7 +9,7 @@ $keyword = $ARGV[0];
 
 
 # These Code are copied from Question2
-for $file (@filelist){
+foreach $file (@filelist){
 	open (my $stdin,'<',"$file") or die "$!";
     # String matching is from the following link
     # Source: https://www.tutorialspoint.com/perl/perl_regular_expressions.htm

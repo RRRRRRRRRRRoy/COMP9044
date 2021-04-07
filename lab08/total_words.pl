@@ -9,7 +9,7 @@ $sum=0;
 
 # # setting filestream to read file from the filename
 # # Source: http://perltraining.com.au/tips/2005-11-17.html
-open (my $stdin,'<',"$filename") or die "$!";
+open (my $stdin,'<',$filename) or die "$!";
 
 foreach $line(<$stdin>){
     # Using [a-zA-Z] only
