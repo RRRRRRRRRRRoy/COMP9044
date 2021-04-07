@@ -24,7 +24,7 @@ for $file (@filelist){
 	$artist =~ s/_/ /g;
 	$sum = 0;
     # Counting the number of each word in the lyrics
-    %words_dict=();
+    # %words_dict=();
     # Setting the counter for checking the number of keyword
 	while($line = <$stdin>){
         # THis part of code is from Question1
