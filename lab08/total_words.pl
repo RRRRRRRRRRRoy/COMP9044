@@ -5,7 +5,7 @@
 $filename=$ARGV[0];
 
 # # setting counter
-# $sum=0;
+$sum=0;
 
 # # setting filestream to read file from the filename
 # # Source: http://perltraining.com.au/tips/2005-11-17.html
@@ -13,9 +13,13 @@ open (my $stdin,'<',"$filename") or die "$!";
 
 foreach $line(<$stdin>){
     @words = $line =~ /\w+/g;
+    @number = $line =~ /[0-9]+/g;
+    #@down_line = $line =~ /[_]+/g;
     # Store the data in to a list using scalar counting the list
     # Source: https://www.tutorialspoint.com/perl/perl_scalar.htm
 	$sum += scalar @words;
+    #$sum -= scalar @down_line;
+    $sum -= scalar @number;
     # print "$sum";
 }
 
