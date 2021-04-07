@@ -32,7 +32,7 @@ for $file (@filelist){
         @words = $line =~ /$regrex/g;
         # Store the data in to a list using scalar counting the list
         # Source: https://www.tutorialspoint.com/perl/perl_scalar.htm
-        $sum += scalar @words;
+        $sum += @words;
         # This part of code is from question 2
         $reprex = '[^a-z]+';
         # based on the regrex cutting the word store in array
