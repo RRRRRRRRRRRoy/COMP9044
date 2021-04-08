@@ -21,4 +21,4 @@ foreach $word(@input_value){
     }
 }
 
-print "@words_counter";
+print "@words_counter\n";
