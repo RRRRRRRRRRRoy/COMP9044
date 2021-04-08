@@ -15,12 +15,12 @@ foreach $string(<STDIN>){
     if($input_string eq $strings{$string}){
         # current appearance is 1
         if($counter == 0){
-		    $output = $string;
+		    $result = $string;
             $counter = 1;
         }
     }
 }
 
-if($output){
-	print "Snap: $output";
+if($result){
+	print "Snap: $result";
 }
