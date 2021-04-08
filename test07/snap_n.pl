@@ -16,7 +16,7 @@ foreach $string(<STDIN>){
     if($input_string eq $current_string){
         # current appearance is 1
         if($counter != 0){
-		    next;
+		    continue;
         }else{
             $output = $string;
             $counter = 1;
