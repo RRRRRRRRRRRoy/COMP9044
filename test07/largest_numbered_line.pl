@@ -8,9 +8,10 @@ foreach $line (@lines)
 {
     #checking digital in the line
     # Source: https://perldoc.perl.org/functions/chomp
-    chomp $line;
+    # chomp $line;
     # checking the integer and float
-    while ($line =~ /(-?(\d)+(\.(\d)+)?)/g)
+    #$line =~ /[--]/g;
+    while ($line =~ /(-?\d+(\.\d+)?)/g)
     {
         # getting the previous mathcing line
         # SOurce: https://stackoverflow.com/questions/1036285/what-does-1-mean-in-perl
