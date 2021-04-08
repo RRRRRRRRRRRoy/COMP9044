@@ -12,7 +12,7 @@ $counter=0;
 
 foreach $string(<STDIN>){
     $strings{$string} ++;
-    if($strings[$string] eq $input_string){
+    if($input_string eq $strings{$string}){
         # current appearance is 1
         if($counter == 0){
 		    $output = $string;
