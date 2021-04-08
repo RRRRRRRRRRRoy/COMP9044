@@ -1,18 +1,26 @@
 #!/usr/bin/perl -w
 
-%word_list=();
 
+# in his question cannot use hash!!!!!
+# This is due to the order of the hash keys
+# Therefore the sequence is in the wrong order.
+# change is to array!!!
+
+@words_list=();
 # getting the input
 @input_value = @ARGV;
-foreach$word(@input_value){
-    if(! exists $word_list{$word}){
-        $word_list{$word} = 1;
-    }
-    else{
-        $word_list{$word}++;
+foreach $word(@input_value){
+    # creating a current to store the number of the words
+    if(exists $words_in_sentence{$word}){
+		next;
+	}else{
+        $words_in_sentence{$word} = 1;
+        # Toturial of using push
+        # Source: https://www.learn-perl.org/en/Arrays
+		push @words_list,$word;
     }
 }
 
-foreach $key(keys %word_list){
-    print "$key "
+foreach $value(values @words_list){
+    print "$value "
 }
