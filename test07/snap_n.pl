@@ -5,6 +5,7 @@ $input_string=$ARGV[0];
 
 # Setting the counter to counter the appearance
 $counter=0;
+$result="";
 
 # setting filestream to read file from the filename
 # Source: http://perltraining.com.au/tips/2005-11-17.html
