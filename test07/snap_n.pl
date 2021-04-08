@@ -10,20 +10,22 @@ $counter=0;
 # Source: http://perltraining.com.au/tips/2005-11-17.html
 # open (my $stdin,'<',"@ARGV") or die "$!";
 
-foreach $string(<STDIN>){
-    $strings{$string} ++;
+@strings = <STDIN>;
+foreach $string(@strings){
+    $strings{$string}++;
     $current_string = $strings{$string};
-    if($input_string eq $current_string){
+    if($input_string eq $strings{$string}){
         # current appearance is 1
-        if($counter != 0){
-		    continue;
-        }else{
-            $output = $string;
+        if($counter == 0){
+		    $result = $string;
             $counter = 1;
+        }
+        if ($counter != 0){
+            next;
         }
     }
 }
 
-if($output){
-    print "Snap: $output";
+if($result != ''){
+	print "Snap: $result";
 }
