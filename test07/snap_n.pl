@@ -14,7 +14,7 @@ $counter=0;
 foreach $string(@strings){
     $strings{$string}++;
     $current_string = $strings{$string};
-    if($input_string eq $strings{$string}){
+    if($input_string eq $current_string){
         # current appearance is 1
         if($counter == 0){
 		    $result = $string;
