@@ -14,19 +14,22 @@ $result="";
 @strings = <STDIN>;
 foreach $string(@strings){
     $strings{$string}++;
+    # Getting the current string compare with the input string
     $current_string = $strings{$string};
     if($input_string eq $current_string){
-        # current appearance is 1
+        # current appearance is 1 move to 2
         if($counter == 0){
 		    $result = $string;
             $counter = 1;
         }
+        # current appearance is not 1
         if ($counter != 0){
             next;
         }
     }
 }
 
+# check the result is not null
 if($result ne ''){
 	print "Snap: $result";
 }
