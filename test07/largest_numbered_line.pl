@@ -11,7 +11,7 @@ foreach $line (@lines)
     # chomp $line;
     # checking the integer and float
     #$line =~ /[--]/g;
-    while ($line =~ /(-?\d+(\.\d+)?)/g)
+    while ($line =~ /([-]?[(\d)]+(\.([\d]+))?)/g)
     {
         # getting the previous mathcing line
         # SOurce: https://stackoverflow.com/questions/1036285/what-does-1-mean-in-perl
