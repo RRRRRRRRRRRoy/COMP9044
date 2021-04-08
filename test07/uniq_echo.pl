@@ -24,4 +24,4 @@ foreach $word(@input_value){
 foreach $value(values @words_list){
     $result = join(" ",$value);  
 }
-print "@words_list\n";
+print "@words_list";
