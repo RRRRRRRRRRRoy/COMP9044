@@ -26,6 +26,6 @@ foreach $string(@strings){
     }
 }
 
-if($result != ''){
+if($result ne ''){
 	print "Snap: $result";
 }
