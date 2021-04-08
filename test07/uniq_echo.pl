@@ -6,7 +6,7 @@
 # Therefore the sequence is in the wrong order.
 # change is to array!!!
 
-@words_list=();
+@words_counter=();
 # getting the input
 @input_value = @ARGV;
 foreach $word(@input_value){
@@ -17,11 +17,8 @@ foreach $word(@input_value){
         $words_in_sentence{$word} = 1;
         # Toturial of using push
         # Source: https://www.learn-perl.org/en/Arrays
-		push @words_list,$word;
+		push @words_counter,$word;
     }
 }
 
-foreach $value(values @words_list){
-    $result = join(" ",$value);  
-}
-print "@words_list";
+print "@words_counter";
