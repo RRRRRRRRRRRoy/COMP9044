@@ -22,5 +22,5 @@ foreach $word(@input_value){
 }
 
 foreach $value(values @words_list){
-    print "$value "
+    print "$value"
 }
