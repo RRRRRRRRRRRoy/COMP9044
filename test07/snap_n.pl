@@ -22,5 +22,5 @@ foreach $string(<STDIN>){
 }
 
 if($output){
-	print "Snap: $output\n";
+	print "Snap: $output";
 }
