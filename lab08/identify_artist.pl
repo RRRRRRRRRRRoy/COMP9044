@@ -1,5 +1,7 @@
 #!/usr/bin/perl -w
 
+# Getting file recursively
+# Source: https://perldoc.perl.org/functions/glob
 @filelist = glob "lyrics/*.txt";
 @input_list =@ARGV;
 # build my artist hash
