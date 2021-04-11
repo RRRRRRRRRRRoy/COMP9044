@@ -10,7 +10,7 @@ while($line = <STDIN>){
     # based on the regrex cutting the word store in array
 	@words = split /$reprex/i,$line;
 
-	for $word (@words){
+	foreach $word (@words){
         # checking whether the word is same or not
         # Do not forget to change all these variables to lower case
 		if (lc($selected_word) eq lc($word)){
