@@ -113,6 +113,8 @@ foreach $file(@input_list){
             # format printing
             # Source: https://perldoc.perl.org/functions/prin
             printf "%s most resembles the work of %s (log-probability=%.1f)\n", $file, $key, $maximum;
+        }else{
+            next;
         }
     }
     close $stdin;

@@ -1,7 +1,6 @@
 #!/usr/bin/perl -w
 
 # These part of code is copied from Q3
-
 $keyword = $ARGV[0];
 
 # filelist
