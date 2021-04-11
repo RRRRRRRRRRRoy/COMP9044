@@ -11,6 +11,7 @@ open ($fileinputstream,'<',$input_file) or die $!;
 
 foreach $line($fileinputstream){
     # chomp is to delete the empty line
+    # Source: https://perldoc.perl.org/functions/chomp
     chomp $line;
     push @lines_list,$line;
 }
@@ -19,7 +20,7 @@ foreach $line($fileinputstream){
 $length_of_file=@lines_list;
 $number_of_lines=$length_of_file;
  
-# checking odd
+# checking odd ----> checking the remainder
 $checking_odd=$number_of_lines % 2;
 # if the file is not empty
 if($number_of_lines > 0){
