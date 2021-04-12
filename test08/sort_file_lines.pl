@@ -14,18 +14,21 @@ foreach $line(<$fileinputstream>){
     # chomp is to delete the empty line
     # Source: https://perldoc.perl.org/functions/chomp
     chomp $line;
-    $words_dict{$line} = length($line);
+    # Using the length function can get the length of the strings
+    # Source: https://www.geeksforgeeks.org/perl-length-function/
+    $line_len = length($line);
+    $words_dict{$line} = $line_len;
 }
 
 # Getting the key
 # Source: https://perldoc.perl.org/functions/keys
 @words_dict_key = keys %words_dict;
 
-# How to use <=> 
+# How to use <=> checking the differnece of number
 # Source: https://stackoverflow.com/questions/7855815/meaning-of-less-than-equal-greater-than-in-perl
-# How to use cmp
+# How to use cmp to checking the difference of string
 # Source: https://www.geeksforgeeks.org/perl-cmp-operator/
-@sorted_words_key = sort {$words_dict{$a} <=> $words_dict{$b} or $a cmp $b} @words_dict_key;
+@sorted_words_key = sort {$words_dict{$a} <=> $words_dict{$b} or lc($a) cmp lc($b)} @words_dict_key;
 
 foreach $line (@sorted_words_key){
 	print "$line\n";
