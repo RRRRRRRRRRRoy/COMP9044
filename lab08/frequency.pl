@@ -35,13 +35,13 @@ for $file (@filelist){
         # Source: https://www.tutorialspoint.com/perl/perl_scalar.htm
         $sum += @words;
         # This part of code is from question 2
-        $reprex = '[^a-z]+';
+        $regrex_word = '[^a-z]+';
         # based on the regrex cutting the word store in array
-	    @words_counter = split /$reprex/i,$line;
+	    @words_counter = split(/$regrex_word/i,$line);
 		foreach $word (@words_counter){
         # checking whether the word is same or not
         # Do not forget to change all these variables to lower case
-		    if (lc($keyword) eq lc($word)){
+		    if (lc($keyword) eq lc($word) and uc($keyword) eq uc($word)){
                 # Counter adding1
 			    $counter ++;
 		    }

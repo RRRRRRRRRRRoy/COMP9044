@@ -65,7 +65,8 @@ foreach $file(@input_list){
             # Source: https://www.perltutorial.org/perl-hash/
             # How to use sort keyword to sort the value list
             # Source: https://perldoc.perl.org/functions/sort
-            @artist_keys=sort keys %artist_hash;
+            @artist_keys = keys %artist_hash;
+            @artist_keys = sort @artist_keys;
             foreach $artist (@artist_keys)
             {
                 # calculating the total number
@@ -77,7 +78,8 @@ foreach $file(@input_list){
                 foreach $word (@artist_words_number)
                 {   
                     # Counting the words in artist hash
-                    $sum += $artist_hash{$artist}{$word};
+                    $current_artist_word = $artist_hash{$artist}{$word}
+                    $sum += $current_artist_word;
                 }
                 # checking whether the word is exists
                 if ( ! exists $artist_hash{$artist}{$key})
@@ -90,7 +92,8 @@ foreach $file(@input_list){
                 else
                 {
                     # Claculating the frequency as Question 3
-                    $log_probability = log(($artist_hash{$artist}{$key} + 1) / $sum);
+                    $artist_hash_cla = $artist_hash{$artist}{$key} + 1
+                    $log_probability = log($artist_hash_cla / $sum);
                     $artist_counter{$artist} += $log_probability;
                 }
             }
