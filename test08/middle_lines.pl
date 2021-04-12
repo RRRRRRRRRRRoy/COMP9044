@@ -26,7 +26,7 @@ $checking_odd=$number_of_lines % 2;
 if($number_of_lines > 0){
     # The current line number is odd number
     if($checking_odd == 1){
-        $middle_index = $number_of_lines/2
+        $middle_index = $number_of_lines/2;
         print "$lines_list[$middle_index]\n";
     }
     # The current line number is even number
