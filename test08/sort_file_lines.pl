@@ -25,7 +25,7 @@ foreach $line(<$fileinputstream>){
 # Source: https://stackoverflow.com/questions/7855815/meaning-of-less-than-equal-greater-than-in-perl
 # How to use cmp
 # Source: https://www.geeksforgeeks.org/perl-cmp-operator/
-@sorted_words_key = sort {$words_dict{$a} <=> $words_dict{$b} or $a cmp $b} @words_dict_key;
+@sorted_words_key = sort {$a cmp $b or $words_dict{$a} <=> $words_dict{$b}} @words_dict_key;
 
 foreach $line (@sorted_words_key){
 	print "$line\n";
