@@ -28,8 +28,15 @@ foreach $line(<$fileinputstream>){
 # Source: https://stackoverflow.com/questions/7855815/meaning-of-less-than-equal-greater-than-in-perl
 # How to use cmp to checking the difference of string
 # Source: https://www.geeksforgeeks.org/perl-cmp-operator/
+# all to lower-case and doing the comparison
 @sorted_words_key = sort {$words_dict{$a} <=> $words_dict{$b} or lc($a) cmp lc($b)} @words_dict_key;
 
-foreach $line (@sorted_words_key){
-	print "$line\n";
+
+foreach $line_content (@sorted_words_key){
+    # checking the content of each line is not null
+    if($line_content ne ""){
+        	print "$line_content\n";
+    }
 }
+
+
