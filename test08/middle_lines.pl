@@ -32,7 +32,7 @@ if($number_of_lines > 0){
     # The current line number is even number
     if($checking_odd == 0){
         # middle - 1 content ----> previous content
-        $middle_index = $number_of_lines/2
+        $middle_index = $number_of_lines/2;
         $previous_content = $lines_list[$middle_index-1];
         # middle content ----> later content
         $later_content = $lines_list[$middle_index];
