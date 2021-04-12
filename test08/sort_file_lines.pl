@@ -29,6 +29,7 @@ foreach $line(<$fileinputstream>){
 # How to use cmp to checking the difference of string
 # Source: https://www.geeksforgeeks.org/perl-cmp-operator/
 # all to lower-case and doing the comparison
+# checking uppercases lowercases and the normal case
 @sorted_words_key = sort {$words_dict{$a} <=> $words_dict{$b} or $a cmp $b or lc($a) cmp lc($b) or uc($a) cmp uc($b) } @words_dict_key;
 
 
