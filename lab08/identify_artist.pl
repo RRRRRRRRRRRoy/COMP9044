@@ -78,7 +78,7 @@ foreach $file(@input_list){
                 foreach $word (@artist_words_number)
                 {   
                     # Counting the words in artist hash
-                    $current_artist_word = $artist_hash{$artist}{$word}
+                    $current_artist_word = $artist_hash{$artist}{$word};
                     $sum += $current_artist_word;
                 }
                 # checking whether the word is exists
@@ -92,7 +92,7 @@ foreach $file(@input_list){
                 else
                 {
                     # Claculating the frequency as Question 3
-                    $artist_hash_cla = $artist_hash{$artist}{$key} + 1
+                    $artist_hash_cla = $artist_hash{$artist}{$key} + 1;
                     $log_probability = log($artist_hash_cla / $sum);
                     $artist_counter{$artist} += $log_probability;
                 }
