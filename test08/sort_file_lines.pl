@@ -10,7 +10,7 @@ $input_file=$ARGV[0];
 # Source: https://perldoc.perl.org/functions/open
 open ($fileinputstream,'<',$input_file) or die $!;
 
-foreach $line($fileinputstream){
+foreach $line(<$fileinputstream>){
     # chomp is to delete the empty line
     # Source: https://perldoc.perl.org/functions/chomp
     chomp $line;
