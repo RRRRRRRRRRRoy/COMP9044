@@ -30,7 +30,7 @@ foreach $line(<$fileinputstream>){
 
 foreach $key1 (@sorted_words_key){
     foreach $key2 (@sorted_words_key){
-        if($words_dict{$key1} <=> $words_dict{$key2} or $key1 cmp $key2){
+        if($words_dict{$key1} < $words_dict{$key2} or $words_dict{$key1} = $words_dict{$key2} or $words_dict{$key1} > $words_dict{$key2} or $key1 cmp $key2){
             @sorted_words_key = sort @words_dict_key;
         }
     }
