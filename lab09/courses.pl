@@ -23,7 +23,7 @@ $web_source = get($UNSW_COURSETABLE) or die "Unable to get $UNSW_COURSETABLE";
 @lines_in_web = split /\n/, $web_source;
 # print "$lines_in_web[1]";
 
-foreach $line (@lines_in_web){
+for $line (@lines_in_web){
     # testing the current data reading is successful
     # print "$line";
     # print $line;
@@ -32,4 +32,23 @@ foreach $line (@lines_in_web){
 			#print "$line";
 			next;
 		}
+		$line =~ /^.*($major[0-9][0-9][0-9][0-9])\.html.*">(..*)<\/a>/;
+		# $1 is the first matching string
+		# $2 is the second matching string
+		$course_info = "$1 $2";
+		push @match_result,$course_info;
+	}
+}
+
+# Doing the unique operation ----> cleaning the extra data
+@match_result = uniq @match_result;
+# Sorting the result array
+@match_result = sort @match_result;
+
+$index = 0;
+while($index < @match_result){
+	print "$match_result[$index]\n";
+	$index = $index + 1;
+}
+
 
