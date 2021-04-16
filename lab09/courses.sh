@@ -23,7 +23,7 @@ do
         :
     else
         # finding matches cutting the data
-        course_info=$(echo $match_string|sed "s/.*\($1[0-9]*\)\.html[^>]*> *\([^<]*\).*/\1 \2/")
+        course_info=$(echo $match_string|sed -e "s/^ *<td class=\"data\">.*\"\($1[0-9]*\)\.html.*\">\(.*\)<\/a><\/td>/\1 \2/g");
 		echo $course_info
     fi
 done
