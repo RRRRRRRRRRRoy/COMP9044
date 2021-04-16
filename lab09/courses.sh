@@ -13,6 +13,7 @@ UNSW_COURSETABLE="http://timetable.unsw.edu.au/current/"$major"KENS.html"
 # Source: https://unix.stackexchange.com/questions/196549/hide-curl-output
 curl --location --silent $UNSW_COURSETABLE | sort | uniq | while read line
 do
+    # The briefly structure is similar to the HTML structure
     match_string=$(echo $line|egrep "^.*<.*>.*($major[0-9][0-9][0-9][0-9]).*>.*<.*>"|egrep -v ".*($major[0-9][0-9][0-9][0-9]).*($major[0-9][0-9][0-9][0-9])")
 
     # egrep -v
