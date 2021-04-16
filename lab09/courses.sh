@@ -23,7 +23,7 @@ do
     # The course number is COMP9044 which has 4 numbers
     match_string=$(echo $line|egrep "^.*<.*>.*($major[0-9][0-9][0-9][0-9]).*>.*<.*>"|egrep -v ".*($major[0-9][0-9][0-9][0-9]).*($major[0-9][0-9][0-9][0-9])")
     # checking the brief structure of the online data
-    echo $match_string
+    # echo $match_string
     if [ "$match_string" == "" ]
     then
         :
