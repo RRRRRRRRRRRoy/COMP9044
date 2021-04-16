@@ -4,9 +4,7 @@ $major=$ARGV[0];
 
 my @match_result;
 
-# How to get the value in the array with uniq
-# Source: https://perlmaven.com/unique-values-in-an-array-in-perl
-use List::MoreUtils qw(uniq);
+
 # Testing this function
 # These part of code is from the website of COMP9044
 # Source: https://cgi.cse.unsw.edu.au/~cs2041/21T1/lab/09/questions
@@ -40,6 +38,9 @@ for $line (@lines_in_web){
 	}
 }
 
+# How to get the value in the array with uniq
+# Source: https://perlmaven.com/unique-values-in-an-array-in-perl
+use List::MoreUtils qw(uniq);
 # Doing the unique operation ----> cleaning the extra data
 @match_result = uniq @match_result;
 # Sorting the result array
