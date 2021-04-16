@@ -15,7 +15,7 @@ UNSW_COURSETABLE="http://timetable.unsw.edu.au/current/"$major"KENS.html"
 # Source: https://www.unix.com/unix-for-dummies-questions-and-answers/115385-grep-v-option.html
 curl --location --silent $UNSW_COURSETABLE | sort | uniq | while read line
 do
-    match_string=$(echo $line|egrep "^.*<td class=\"data\">.*\"$major[0-9][0-9][0-9][0-9].*\">.*</a>"|egrep -v ".*$major[0-9][0-9][0-9][0-9].*$major[0-9][0-9][0-9][0-9]*")
+    match_string=$(echo $line|egrep "^.*<.*>.*\"$major[0-9][0-9][0-9][0-9].*\">.*<.*>"|egrep -v ".*$major[0-9][0-9][0-9][0-9].*$major[0-9][0-9][0-9][0-9]*")
     # checking the brief structure of the online data
     # echo $match_string
     if [ "$match_string" == "" ]
