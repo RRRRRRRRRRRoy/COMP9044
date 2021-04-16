@@ -1,11 +1,5 @@
 #!/usr/bin/perl -w
 
-$major=$ARGV[0];
-
-my @match_result;
-
-
-# Testing this function
 # These part of code is from the website of COMP9044
 # Source: https://cgi.cse.unsw.edu.au/~cs2041/21T1/lab/09/questions
 # Documents for LWP 
@@ -13,13 +7,15 @@ my @match_result;
 use LWP::Simple;
 $UNSW_COURSETABLE = "http://www.timetable.unsw.edu.au/current/$ARGV[0]KENS.html";
 $web_source = get($UNSW_COURSETABLE) or die "Unable to get $UNSW_COURSETABLE";
-
-# Testing whether getting the web source successfully
-# print "$web_source";
-
-# cutting each line of the websource and testing
+# clean up the empty lines and spaces
+chomp $web_source;
+# split the source data into different lines
 @lines_in_web = split /\n/, $web_source;
 # print "$lines_in_web[1]";
+
+$major=$ARGV[0];
+
+my @match_result;
 
 for $line (@lines_in_web){
     # testing the current data reading is successful
