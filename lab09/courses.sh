@@ -4,6 +4,10 @@ major=$1
 # Source: https://cgi.cse.unsw.edu.au/~cs2041/21T1/lab/09/questions
 UNSW_COURSETABLE="http://timetable.unsw.edu.au/current/"$major"KENS.html"
 
+# <td class="data"><a href="VISN1101.html">Seeing the World: Perspectives from Vision Science</a></td>
+# <td class="data"><a href="VISN1111.html">Geometrical and Physical Optics</a></td>
+# <td class="data"><a href="VISN1221.html">Visual Optics</a></td>
+# <td class="data"><a href="VISN2111.html">Ocular Anatomy and Physiology</a></td>
 
 # This part of code is modified from the the following links
 # SOurce: https://cgi.cse.unsw.edu.au/~cs2041/21T1/lab/09/questions
@@ -19,7 +23,7 @@ do
     # The course number is COMP9044 which has 4 numbers
     match_string=$(echo $line|egrep "^.*<.*>.*($major[0-9][0-9][0-9][0-9]).*>.*<.*>"|egrep -v ".*($major[0-9][0-9][0-9][0-9]).*($major[0-9][0-9][0-9][0-9])")
     # checking the brief structure of the online data
-    # echo $match_string
+    echo $match_string
     if [ "$match_string" == "" ]
     then
         :
