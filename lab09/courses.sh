@@ -15,7 +15,7 @@ curl --location --silent $UNSW_COURSETABLE | sort | uniq | while read line
 do
     # Inverse matching Selected lines are those not matching any of the specified patterns.
     # Source: https://www.unix.com/unix-for-dummies-questions-and-answers/115385-grep-v-option.html
-    match_string=$(echo $line|egrep "^ *<td class=\"data\">.*\"$major[\d+]*.*\">.*</a></td>"|egrep -v ".*$major[\d+]*.*$major[\d+]*")
+    match_string=$(echo $line|egrep "^ *<td class=\"data\">.*\"$major[[0-9]+]*.*\">.*</a></td>"|egrep -v ".*$major[[0-9]+]*.*$major[[0-9]+]*")
     # checking the brief structure of the online data
     # echo $match_string
     if [ "$match_string" == "" ]
