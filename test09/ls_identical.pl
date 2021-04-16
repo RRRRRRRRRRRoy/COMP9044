@@ -7,10 +7,12 @@ $comparison_directory = $ARGV[1];
 # filelist
 @file_list = glob "$file_directory/*";
 # Using the file comparison to check whether 2 files are equal
+# The following link has the sample of compare
 use File::Compare;
 for $item (@file_list){
 	$file=$item=~s/.*\///gr;
-    # if compare return is not 0 files are not same
+    # if compare return is not 0 files are not same ---> sample of using compare
+    # Source: https://docstore.mik.ua/orelly/perl2/prog/ch32_19.htm
 	if(compare($item,"$comparison_directory/$file")!=0){    #equal file
 		next;
 	}else{
