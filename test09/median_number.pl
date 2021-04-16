@@ -8,5 +8,6 @@
 # Source: https://www.tutorialspoint.com/perl/perl_scalar.htm
 $numbers = scalar @sorted_array;
 # median number
-$median_number = $sorted_array[$numbers/2];
+$middle_index = $numbers/2;
+$median_number = $sorted_array[$middle_index];
 print "$median_number\n";
