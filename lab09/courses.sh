@@ -16,13 +16,13 @@ UNSW_COURSETABLE="http://timetable.unsw.edu.au/current/"$major"KENS.html"
 # How to hide curl output
 # Source: https://unix.stackexchange.com/questions/196549/hide-curl-output
 curl_result=$(curl --location --silent $UNSW_COURSETABLE)
-echo "$curl_result" | sort -r | uniq | sort| while read line
+curl --location --silent $UNSW_COURSETABLE | sort -r | uniq | sort| while read line
 do
     # The briefly structure is similar to the HTML structure
     # egrep -v
     # Source: https://www.unix.com/unix-for-dummies-questions-and-answers/115385-grep-v-option.html
     # The course number is COMP9044 which has 4 numbers
-    match_string=$(echo $line|egrep "^.*<.*>.*($major[\d+]).*>.*<.*>"|egrep -v ".*($major[\d+]).*($major[\d+])")
+    match_string=$(echo $line|egrep "^.*<.*>.*\"($major[0-9][0-9][0-9][0-9]).*\">.*</a>"|egrep -v ".*($major[0-9][0-9][0-9][0-9]).*($major[0-9][0-9][0-9][0-9])")
     # checking the brief structure of the online data
     # echo $match_string
     if [ "$match_string" == "" ]
@@ -30,7 +30,7 @@ do
         :
     else
         # finding matches cutting the data
-        course_info=$(echo $match_string|sed "s/.*\($major[\d+]\)\.html[^>]*> *\([^<]*\).*/\1 \2/")
+        course_info=$(echo $match_string|sed -e "s/^.*<.*>.*\"\($major[0-9][0-9][0-9][0-9]\)\.html.*\">\(.*\)<\/a><\/td>/\1 \2/g")
 		echo $course_info
     fi
 done
