@@ -8,6 +8,7 @@ $input_value = $ARGV[0];
 # checking whether the word is distinct
 my %words_dict;
 
+# This part of code is similar to the previous lab
 # Read from the terminal
 foreach $line(<STDIN>){
 	$counter++;

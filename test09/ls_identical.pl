@@ -15,7 +15,8 @@ for $item (@file_list){
 	$file=$item=~s/.*\///gr;
     # if compare return is not 0 files are not same ---> sample of using compare
     # Source: https://docstore.mik.ua/orelly/perl2/prog/ch32_19.htm
-	if(compare($item,"$comparison_directory/$file")!=0){    #equal file
+    # Checking 2 file are equal
+	if(compare($item,"$comparison_directory/$file")!=0){
 		next;
 	}else{
     # if compare return is 0 files are same
