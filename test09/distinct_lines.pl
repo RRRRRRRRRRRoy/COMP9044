@@ -17,7 +17,7 @@ foreach $line(<STDIN>){
 	$line = uc($line);
 	chomp $line;
     # delete the extra space
-	$line =~ s/ *//g ;
+	$line =~ s/ *//g;
 	$words_dict{$line} += 1;
 	# Using scalar to checking the keys
 	# Source: https://www.tutorialspoint.com/perl/perl_scalar.htm
