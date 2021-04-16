@@ -5,7 +5,7 @@ $file_directory = $ARGV[0];
 # the comparison directory --> target directory
 $comparison_directory = $ARGV[1];
 # filelist
-@file_list = glob "$file_directory/*"
+@file_list = glob "$file_directory/*";
 # Using the file comparison to check whether 2 files are equal
 use File::Compare;
 for $item (@file_list){
