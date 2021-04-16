@@ -25,7 +25,7 @@ do
         :
     else
         # finding matches cutting the data
-        course_info=$(echo $match_string|sed "s/.*\($major[0-9][0-9][0-9][0-9]\)(\.html[^>])*> *\([^<]*\).*/\1 \2/")
+        course_info=$(echo $match_string|sed "s/.*\($major[0-9][0-9][0-9][0-9]\)\.html[^>]*> *\([^<]*\).*/\1 \2/")
 		echo $course_info
     fi
 done
