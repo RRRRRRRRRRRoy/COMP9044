@@ -15,7 +15,8 @@ UNSW_COURSETABLE="http://timetable.unsw.edu.au/current/"$major"KENS.html"
 # adding the sort and uniq to clean the online data
 # How to hide curl output
 # Source: https://unix.stackexchange.com/questions/196549/hide-curl-output
-curl --location --silent $UNSW_COURSETABLE | sort -r | uniq | sort| while read line
+curl_result=$(curl --location --silent $UNSW_COURSETABLE)
+echo "$curl_result" | sort -r | uniq | sort| while read line
 do
     # The briefly structure is similar to the HTML structure
     # egrep -v
