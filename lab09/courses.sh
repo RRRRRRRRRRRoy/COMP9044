@@ -14,11 +14,10 @@ UNSW_COURSETABLE="http://timetable.unsw.edu.au/current/"$major"KENS.html"
 curl --location --silent $UNSW_COURSETABLE | sort | uniq | while read line
 do
     # The briefly structure is similar to the HTML structure
-    match_string=$(echo $line|egrep "^.*<.*>.*($major[0-9][0-9][0-9][0-9]).*>.*<.*>"|egrep -v ".*($major[0-9][0-9][0-9][0-9]).*($major[0-9][0-9][0-9][0-9])")
-
     # egrep -v
     # Source: https://www.unix.com/unix-for-dummies-questions-and-answers/115385-grep-v-option.html
-
+    # The course number is COMP9044 which has 4 numbers
+    match_string=$(echo $line|egrep "^.*<.*>.*($major[0-9][0-9][0-9][0-9]).*>.*<.*>"|egrep -v ".*($major[0-9][0-9][0-9][0-9]).*($major[0-9][0-9][0-9][0-9])")
     # checking the brief structure of the online data
     # echo $match_string
     if [ "$match_string" == "" ]
