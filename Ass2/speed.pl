@@ -10,4 +10,5 @@ sub usage_speed {
     exit 0;
 }
 
+# Testing the usage_speed function
 usage_speed();
