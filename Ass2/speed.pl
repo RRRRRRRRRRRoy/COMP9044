@@ -32,14 +32,14 @@ sub parse_arguments {
     ) or usage_speed();
 }
 
-parse_args();
+parse_arguments();
 if($no_default_setting){
     print "test nd : $no_default_setting\n"; 
 }
 if($string_cmd){
     print "test str_cmd: $string_cmd";
 }
-if(!$string_cmd){
+if(!$string_cmd or !$no_default_setting){
     if( @ARGV ne "") {
         my $command_line = shift @ARGV;
         print "$command_line";
