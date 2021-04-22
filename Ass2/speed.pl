@@ -12,3 +12,7 @@ sub usage_speed {
 
 # Testing the usage_speed function
 usage_speed();
+
+# Reading the string by using GETOPT::LONG
+# This can read several types of string
+# Source: https://www.perl.com/article/195/2015/10/21/Professional-scripts-are-a-snap-with-Getopt-Long/
