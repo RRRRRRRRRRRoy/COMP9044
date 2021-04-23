@@ -45,3 +45,24 @@ if(!$string_cmd or !$no_default_setting){
         print "$command_line";
     }
 }
+
+# This function is to check the input command line's format
+# subset 0 has
+# subset 1 has
+sub parse_command{
+    # the shift without parameters
+    # Source: https://perlmaven.com/shift
+    my $command_string = shift;
+    my $input_string = shift;
+    # The default option in parse_arguments
+    my $default_format = ($command_string =~ /-nd/ );
+    $command_string =~ s/-nd//g;
+    # Using the !~ to check the opposite of =~
+    # Source: https://stackoverflow.com/questions/57007847/what-does-mean-in-perl\
+    # This is to check the subset0 p q s d 4 options
+    if ($command_string !~ /p|q|s|d/){
+        # If the type is wrong check the usage of speed
+        print "The current command got errors \n";
+        usage_speed();
+    }
+}
