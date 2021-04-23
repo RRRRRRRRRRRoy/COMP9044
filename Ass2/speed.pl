@@ -47,6 +47,8 @@ if(!$string_cmd or !$no_default_setting){
 }
 
 # This function is to check the input command line's format
+# Notice: using my in the function to differenciate with the global value
+# 
 # subset 0 has
 # subset 1 has
 sub parse_command{
@@ -64,5 +66,19 @@ sub parse_command{
         # If the type is wrong check the usage of speed
         print "The current command got errors \n";
         usage_speed();
+    }
+    # using the ; to split the command lines
+    my @command_list = split /;/ , $command_string;
+    # setting the initial line number as 1 avoiding bring the trouble by 0
+    my $init_line_number = 1;
+    # start pointer
+    my $start = 0;
+    # end pointer
+    my $end = 0;
+    # Store the printing information
+    my $print_lint_string = "";
+    # Writing the subset 0 subset 1 situation in this whilez 
+    while(<>){
+
     }
 }
