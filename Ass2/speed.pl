@@ -72,13 +72,36 @@ sub parse_command{
     # setting the initial line number as 1 avoiding bring the trouble by 0
     my $init_line_number = 1;
     # start pointer
-    my $start = 0;
+    my $start_pointer = 0;
     # end pointer
-    my $end = 0;
+    my $end_pointer = 0;
     # Store the printing information
-    my $print_lint_string = "";
+    my $print_line_string = "";
     # Writing the subset 0 subset 1 situation in this whilez 
     while(<>){
+        if($init_line_number != 1){
+            if(exists $print_line_string){
+                # print the string in the line
+                print $print_line_string;
+            }
+            # If end pointer(flag) is 1 end the opearion and reset the pointer
+            if($end_pointer == 1){
+                # reset the end and start pointer
+                $end_pointer = 0;
+                $start_pointer = 0;
+            }
+            # After reset the point reset the print line
+            $print_line_string = "";
+            # Getting the current line from the while loop
+            my $current_line = $_;
+            # printing flag
+            my $string_needs_print = 1;
+            # printing another time flag
+            my $string_needs_print_again = 0;
+            # looping the command in the list
+            foreach $current_list_command(@command_list){
 
+            }
+        }
     }
 }
