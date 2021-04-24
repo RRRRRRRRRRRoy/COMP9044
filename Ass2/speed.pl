@@ -358,10 +358,13 @@ sub parse_command_line {
             }
             # This part of code is for -s option which are both in subset0 and subset1
             # Here is the format sample sXbbXbbX
+            # This is similar to sed s///g
+            # more info plz check: https://www.digitalocean.com/community/tutorials/the-basics-of-using-the-sed-stream-editor-to-manipulate-text-in-linux
             if ($command_in_list =~ /([0-9]+)s(.)(.*)\2(.*)\2(g?)/){ 
                 # Based on the if structure, cutting the following parts
                 (my $number, my $item, my $string_in_replace, my $g_symbol) = ($1,$3,$4,$5);
-                    # checking the line number with the cutting number
+                # checking the line number with the cutting number
+                # Checking the number is same or not
                 if ($line_number_counter != $number){
                         # not same
                     next;
@@ -369,7 +372,7 @@ sub parse_command_line {
                     # same
                     # notice checking whether there are g at the end
                     if (not $g_symbol){
-                         # no g symbol at the end
+                        # no g symbol at the end
                         $current_line =~ s#$item#$string_in_replace#;
                     }else{
                         # has g symbol at the end
@@ -377,8 +380,44 @@ sub parse_command_line {
                     }
                 }
             }
-            
-
+            # This situation option is similar to the previous one
+            # THe previous match the digital numebr. This one match all characters
+            elsif ($command_in_list =~ /\/(.*?)\/s(.)(.*)\2(.*)\2(g?)/){ #sXaaXaaX
+                (my $number, my $item, my $string_in_replace, my $g_symbol) = ($1,$3,$4,$5);
+                $match_pattern = qr/$number/;
+                # Checking whether the string are matching
+                if ( $current_line !~ /$match_pattern/){
+                    next;
+                }else{
+                    if (not $g_symbol){
+                        # no g symbol at the end
+                        $current_line =~ s#$item#$string_in_replace#;
+                    } else{
+                        # has g symbol at the end
+                        $current_line =~ s#$item#$string_in_replace#g;
+                    }
+                }
+            }
+            # This part is similar to the previous part
+            # Difference no need doing comparison
+            elsif ($command_in_list =~ /s(.)(.*)\1(.*)\1(g?)/){
+                (my $item, my $string_in_replace, my $g_symbol) = ($2,$3,$4);
+                
+                if (not $g_symbol){
+                    $current_line =~ s#$item#$string_in_replace#;
+                } else{
+                    $current_line =~ s#$item#$string_in_replace#g;
+                }
+            }
+            # This part is to checking s///g in the test case
+            elsif ( $command_in_list =~ /s\/((.*)?)\/((.*)?)\/(g?)/){
+                (my $item, my $string_in_replace, my $g_symbol) = ($1,$2,$3);
+                #print " *** $line $command_in_list ***\n";
+                if (not $g_symbol){
+                    $current_line =~ s/$item/$string_in_replace/;
+                } else{ 
+                    $current_line =~ s#$item#$string_in_replace#g;
+                }
+            }
         }
-    }
-}
+        
