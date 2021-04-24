@@ -110,7 +110,38 @@ sub parse_command_line {
         my $string_needs_print_again = 0;
         # looping the command in the list
         foreach my $command_in_list (@command_line_list){
-                
+            # Cutting the space in the command line
+            chomp $command_in_list;
+            # Check empty
+            if(!$command_in_list){
+                next;
+            }
+            # Checking p option in subset0
+            if ( $command_in_list =~ /([0-9]+)p$/ || $command_in_list =~ /\/((.+)*)\/p$/){
+                my $matches = $1;
+                my $number_matches_pointer = 1;
+                if ($command_in_list !~ /\//){
+                    ;
+                }else{
+                    $number_matches_pointer = 0;
+                }
+                # qr in perl regrex
+                # Source: https://stackoverflow.com/questions/30093272/what-is-the-meaning-of-qr-in-perl/30093915
+                $match_pattern = qr/$matches/;
+                # 2 situation needs to print again
+                # 1. line counter is equal and matches pointer is no empty
+                # 2. pattern is matches and the number pointer is empty
+                if ( ($number_matches_pointer and $line_number_counter == $1) || ($current_line =~ /$match_pattern/ and !$number_matches_pointer)){
+                    $string_needs_print_again = 1;
+                }
+            }
+            # This is to check there is only p without numbers 
+            elsif ( $command_in_list eq 'p'){ 
+                # Setting the flag to print again
+                $string_needs_print_again = 1;
+            }
+            
+
         }
     }
 }
