@@ -311,6 +311,50 @@ sub parse_command_line {
                     }
                 }
             }
+            # This part of code is the -d option in the subset 0
+            # Writing the address in the previous is due to some of 2 part are overlap
+            # The addresses is widely used to avoid the error Writing first
+            # The first part is to match the digital eg seq 1 5 | 2041 speed '4d'
+            # The second part is match // eg seq 11 20 | 2041 speed '/[2468]/d'
+            elsif ( $command_in_list =~ /([0-9]+)d$/  || $command_in_list =~ /\/((.+)*)\/d$/){
+                my $matches = $1;
+                $match_pattern = qr/$matches/;
+                # Checking the matches result is number or not, defualt is number
+                my $match_number = 1;
+                # if the matches are not number
+                if ($matches  =~ /[^0-9]/){
+                    # flag changes to 0
+                    $match_number = 0;
+                }
+                # if the matches are numbers
+                if ($match_number){
+                    #  checking the line counter with the matches
+                    if($line_number_counter != $matches){
+                        # printing
+                        next;
+                    }else{
+                        # not printing
+                        $string_needs_print = 0;
+                    }
+                }
+                
+                if($current_line !~ /$match_pattern/){
+                    # format is not same
+                    next;
+                }else{
+                    # format is same
+                    $string_needs_print = 0;
+                }
+                
+            } 
+            # checking 1 situation only d option in the command line
+            if ( $command_in_list eq 'd'){ 
+                # only d -> no printing
+                $string_needs_print = 0;
+            }elsif( $command_in_list ne 'd'){
+                # has other sting in the command line
+                ;
+            }
 
 
         }

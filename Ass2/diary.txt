@@ -2,17 +2,17 @@
 Date            Start       Stop        Activity            Comments
 22/04/21        19:00       19:10       Preparing           Creating speed.pl and starting
 22/04/21        21:00       21:16       Coding              Writing the Usage of the speed
-22/04/21        21:16       21:20       testing             Checking the printing of the usage of speed
+22/04/21        21:16       21:20       Testing             Checking the printing of the usage of speed
 22/04/21        21:20       22:00       Searching           Searching the material GRTOPT::LONG reading parameters
 22/04/21        22:00       23:00       Coding              Writing the function of reading parameters from terminal
-22/04/21        23:05       23:20       testing             Testing the parse_arguments function to getting parameters
-23/04/21        19:00       19:45       coding              checking the default value in parse_arguments, also the format of subset0 pqsd 4 options
-23/04/21        20:00       21:45       coding              Getting the data from the input / setting the flags and pointer for the following p q s d
-24/04/21        19:00       20:00       coding              Renaming the variable in speed avoiding conflict, aslo using my to avoid conflict
-24/04/21        20:00       21:00       coding              Finishing the option p in Subset 0
-24/04/21        21:00       21:45       coding              Finishing the option q in Subset 0
+22/04/21        23:05       23:20       Testing             Testing the parse_arguments function to getting parameters
+23/04/21        19:00       19:45       Coding              Checking the default value in parse_arguments, also the format of subset0 pqsd 4 options
+23/04/21        20:00       21:45       Coding              Getting the data from the input / setting the flags and pointer for the following p q s d
+24/04/21        19:00       20:00       Coding              Renaming the variable in speed avoiding conflict, aslo using my to avoid conflict
+24/04/21        20:00       21:00       Coding              Finishing the option p in Subset 0
+24/04/21        21:00       21:45       Coding              Finishing the option q in Subset 0
 24/04/21        21:45       22:00       Testing             Thinking about the structure of the subset 0 d option and addresses
 24/04/21        22:00       22:45       Debuging            The previous version using == to check same. But test case using string, therefore, changing and adding the string operation.
 24/04/21        22:45       23:00       Testing             The option q has passed
-25/04/21        23:00       01:11       coding              coding the addresses option in subset1. Notice the using of head and tail pointer.
+25/04/21        23:00       01:11       Coding              Coding the addresses option in subset1. Notice the using of head and tail pointer.
 
