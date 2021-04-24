@@ -22,9 +22,9 @@ sub parse_arguments {
     # Source: https://perldoc.perl.org/Getopt::Long
     # Automatically provide support for the --version option if the application did not specify a handler for this option itself.
     # With pass_through anything that is unknown, ambiguous or supplied with an invalid option will not be flagged as an error.
-    GetOptions('n'=>\$checking_default,
-               'f=s'=>\$script_string_command,
-               'help|usage'=>\&usage_speed,
+    GetOptions( 'help|usage'=>\&usage_speed,
+                'f=s'=>\$script_string_command,
+                'n'=>\$checking_default,  
     );
 }
 
@@ -70,15 +70,15 @@ sub parse_command_line {
         print "Error command found in speed \n"; 
         usage_speed();
     }
-    # using symbol to connect
-    # This is tricky, ,.=-+ etc are used, therefore, using ; is better
-    my @command_line_list = split /;/,$command_line_t;
-    # THis counter is used to counting the number of lines
-    my $line_number_counter = 1;
     # start pointer
     my $start_pointer = 0;
     # end pointer
     my $finish_pointer = 0;
+    # THis counter is used to counting the number of lines
+    my $line_number_counter = 1;
+    # using symbol ; to connect
+    # This is tricky, ,.=-+ etc are used, therefore, using ; is better
+    my @command_line_list = split /;/,$command_line_t;
     # Used to store the string which needed to print
     my $print_line_string = '';
     while(my $line_has_command = <>){
@@ -171,19 +171,42 @@ sub parse_command_line {
                     if($line_number_counter != $matches){
                         ;
                     }else{
+                        # Do not forget to add exit to quit at the location
                         print $current_line;
                         exit 1;
                     }
                 }
                 elsif($current_line =~ /$match_pattern/){
                     if($number_matches_pointer){
+                        # exists and not equal to 0 or "" continue else quit
                         ;
                     }else{
+                        # Do not forget to add exit to quit at the location
                         print $current_line;
                         exit 1;
                     }
                 }
             }
+            # The following part is for d and addresses in subset 1
+            if ($command_in_list =~ /,/){
+                if($command_in_list =~ /(.*?),(.*?)d/){
+                    #print "At here\n";
+                    (my $addresses_1,my $addresses_2) = ($1,$2);
+                    #my $addresses_2 = $2;
+                    (my $addresses1_pointer,my $addresses2_pointer) = (0,0);
+                    if ($addresses_1 =~ /[0-9]+$/){
+                        $addresses1_pointer = 1;
+                    }
+                    if ($addresses_2 =~ /[0-9]+$/){
+                        $addresses2_pointer = 1;
+                    }
+                
+                    if ($addresses1_pointer){
+                        ;
+                    }else{
+                        $addresses_1 = substr($addresses_1,1,-1);
+                        $addresses_1 = qr/$addresses_1/;
+                    }
 
         }
     }
