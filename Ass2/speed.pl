@@ -356,7 +356,28 @@ sub parse_command_line {
                 # has other sting in the command line
                 ;
             }
-
+            # This part of code is for -s option which are both in subset0 and subset1
+            # Here is the format sample sXbbXbbX
+            if ($command_in_list =~ /([0-9]+)s(.)(.*)\2(.*)\2(g?)/){ 
+                # Based on the if structure, cutting the following parts
+                (my $number, my $item, my $string_in_replace, my $g_symbol) = ($1,$3,$4,$5);
+                    # checking the line number with the cutting number
+                if ($line_number_counter != $number){
+                        # not same
+                    next;
+                }else{
+                    # same
+                    # notice checking whether there are g at the end
+                    if (not $g_symbol){
+                         # no g symbol at the end
+                        $current_line =~ s#$item#$string_in_replace#;
+                    }else{
+                        # has g symbol at the end
+                        $current_line =~ s#$item#$string_in_replace#g;
+                    }
+                }
+            }
+            
 
         }
     }

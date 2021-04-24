@@ -14,5 +14,8 @@ Date            Start       Stop        Activity            Comments
 24/04/21        21:45       22:00       Testing             Thinking about the structure of the subset 0 d option and addresses
 24/04/21        22:00       22:45       Debuging            The previous version using == to check same. But test case using string, therefore, changing and adding the string operation.
 24/04/21        22:45       23:00       Testing             The option q has passed
-25/04/21        23:00       01:11       Coding              Coding the addresses option in subset1. Notice the using of head and tail pointer.
+24/04/21        23:00       01:11       Coding              Coding the addresses option in subset1. Notice the using of head and tail pointer.
+25/04/21        01:15       01:50       Coding              Coding the -d option in subset0. This part is similar to address.
+25/04/21        01:50       02:50       Coding              Coding the -d option in subset0. This part is similar to address.
+
 
