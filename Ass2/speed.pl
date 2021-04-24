@@ -135,12 +135,13 @@ sub parse_command_line {
                     $string_needs_print_again = 1;
                 }
             }
-            # This is to check there is only p without numbers 
+            # This is to check there is only p without numbers
+            # THis is for some test case in subset0 which only has p
+            # THis will lead the error between == and eq, Therefore, need another to check
             elsif ( $command_in_list eq 'p'){ 
                 # Setting the flag to print again
                 $string_needs_print_again = 1;
             }
-            
 
         }
     }

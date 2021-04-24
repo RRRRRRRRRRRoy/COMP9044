@@ -8,3 +8,5 @@ Date            Start       Stop        Activity            Comments
 22/04/21        23:05       23:20       testing             Testing the parse_arguments function to getting parameters
 23/04/21        19:00       19:45       coding              checking the default value in parse_arguments, also the format of subset0 pqsd 4 options
 23/04/21        20:00       21:45       coding              Getting the data from the input / setting the flags and pointer for the following p q s d
+24/04/21        19:00       20:00       coding              Renaming the variable in speed avoiding conflict, aslo using my to avoid conflict
+24/04/21        20:00       21:00       coding              Finishing the option p in Subset 0
