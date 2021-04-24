@@ -22,6 +22,7 @@ sub parse_arguments {
     # Source: https://perldoc.perl.org/Getopt::Long
     # Automatically provide support for the --version option if the application did not specify a handler for this option itself.
     # With pass_through anything that is unknown, ambiguous or supplied with an invalid option will not be flagged as an error.
+    # This can help to bring the -f option and usage in speed
     GetOptions( 'help|usage'=>\&usage_speed,
                 'f=s'=>\$script_string_command,
                 'n'=>\$checking_default,  
