@@ -18,5 +18,5 @@ Date            Start       Stop        Activity            Comments
 25/04/21        01:15       01:50       Coding              Coding the -d option in subset0. This part is similar to address.
 25/04/21        01:50       02:00       Thinking            -s Option has 4 situations which all contain g or not containing g at the end.
 25/04/21        02:00       03:00       Coding              Based on the previous coding the basic function of -s option in subset0 and subset11
-
+25/04/21        09:00       10:30       Coding              Finishing the start and finish pointer comparison and Adding the entrency of the function 
 

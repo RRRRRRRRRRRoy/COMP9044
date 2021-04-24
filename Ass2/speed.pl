@@ -11,6 +11,7 @@ sub usage_speed {
     exit 0;
 }
 
+
 # Reading the string by using GETOPT::LONG
 # This can read several types of string
 # Source: https://www.perl.com/article/195/2015/10/21/Professional-scripts-are-a-snap-with-Getopt-Long/
@@ -23,23 +24,23 @@ sub parse_arguments {
     # Automatically provide support for the --version option if the application did not specify a handler for this option itself.
     # With pass_through anything that is unknown, ambiguous or supplied with an invalid option will not be flagged as an error.
     # This can help to bring the -f option and usage in speed
-    GetOptions( 'help|usage'=>\&usage_speed,
-                'f=s'=>\$script_string_command,
-                'n'=>\$checking_default,  
+    GetOptions('f=s'=>\$script_string_command,
+                'n'=>\$checking_default,
+               'help|usage'=>\&usage_speed,
     );
 }
 
 
 
-# This part of code is for local test
+# # This part of code is testing the getting arguments
 # parse_arguments();
-# if($checking_default){
-#     print "test nd : $checking_default\n"; 
+# if($no_default_setting){
+#     print "test nd : $no_default_setting\n"; 
 # }
-# if($script_string_command){
-#     print "test str_cmd: $script_string_command";
+# if($string_cmd){
+#     print "test str_cmd: $string_cmd";
 # }
-# if(!$script_string_command or !$checking_default){
+# if(!$string_cmd or !$no_default_setting){
 #     if( @ARGV ne "") {
 #         my $command_line = shift @ARGV;
 #         print "$command_line";
@@ -60,7 +61,7 @@ sub parse_command_line {
     $command_line_t =~ s/-n//g;
     # Checking 4 options provided by subset 0
     # p q s d
-    my $regrex_subset0 = "p|q|s|d"
+    my $regrex_subset0 = 'p|q|s|d';
     if ( $command_line_t =~ /$regrex_subset0/){
         # The current line is in correct format
         # This means it contains p q s d
@@ -83,7 +84,7 @@ sub parse_command_line {
     # Used to store the string which needed to print
     my $print_line_string = '';
     while(my $line_has_command = <>){
-        if( $line_number_counter == 1){
+        if($line_number_counter == 1){
             # checking the current flag
             # if flag is 1 continue
             ;
@@ -134,7 +135,7 @@ sub parse_command_line {
                 # qr in perl regrex
                 # Source: https://stackoverflow.com/questions/30093272/what-is-the-meaning-of-qr-in-perl/30093915
                 $match_pattern = qr/$matches/;
-                # 2 situation needs to print again
+                # 2 situations needs to print again
                 # 1. line counter is equal and matches pointer is no empty
                 # 2. pattern is matches and the number pointer is empty
                 if ($number_matches_pointer){
@@ -150,7 +151,7 @@ sub parse_command_line {
             }
             # This is to check there is only p without numbers
             # THis is for some test case in subset0 which only has p
-            # THis will lead the error between == and eq, Therefore, need another to check
+            # THis will lead the error between == and eq, Therefore, need another to check 
             elsif ( $command_in_list eq 'p'){ 
                 # Setting the flag to print again
                 $string_needs_print_again = 1;
@@ -172,24 +173,24 @@ sub parse_command_line {
                     if($line_number_counter != $matches){
                         ;
                     }else{
-                        # Do not forget to add exit to quit at the location
+                    	# Do not forget to add exit to quit at the location
                         print $current_line;
                         exit 1;
                     }
                 }
                 elsif($current_line =~ /$match_pattern/){
                     if($number_matches_pointer){
-                        # exists and not equal to 0 or "" continue else quit
+                    	# exists and not equal to 0 or "" continue else quit
                         ;
                     }else{
-                        # Do not forget to add exit to quit at the location
+                    	# Do not forget to add exit to quit at the location
                         print $current_line;
                         exit 1;
                     }
                 }
             }
             # The following part is for d and addresses in subset 1
-            # Combining d with address is due to these 2 part are similar
+            # Combining d with address is due to these 2 part are similar  
             if ($command_in_list =~ /,/){
                 if($command_in_list =~ /(.*?),(.*?)d/){
                     # Setting the address value 
@@ -208,12 +209,12 @@ sub parse_command_line {
                         $addresses2_pointer = 1;
                     }
 
-                    # Checking the address is string or not
+                	# Checking the address is string or not
                     if ($addresses1_pointer){
-                        # pointer is 1 which is digital number
+                    	# pointer is 1 which is digital number
                         ;
                     }else{
-                        # If the addresses1_pointer is string cutting the string
+                    	# If the addresses1_pointer is string cutting the string
                         $addresses_1 = substr($addresses_1,1,-1);
                         # The usage of qr can seek the previous link
                         # Source: https://stackoverflow.com/questions/30093272/what-is-the-meaning-of-qr-in-perl/30093915
@@ -230,15 +231,15 @@ sub parse_command_line {
 
                     # Checking the line number with the addresses number which are cutting from the input
                     if ($line_number_counter == $addresses_1){
-                        # Checking the pointer
+                    	# Checking the pointer
                         if($addresses1_pointer){
                             if($start_pointer){
                                 next;
                             }else{
-                                # Start pointer = 0 
+                            	# Start pointer = 0 
                                 # finish pointer != 0
                                 if(!$finish_pointer){
-                                    # reset the pointer and no needs for printing
+                                	# reset the pointer and no needs for printing
                                     $start_pointer = 1;  
                                     $string_needs_print = 0;
                                 }else{
@@ -257,24 +258,24 @@ sub parse_command_line {
                             #print "At here $addresses_1\n";
                         }
                     }
-                    
+
                     # THis part of code is similar to addresses1_pointer
                     elsif ($line_number_counter == $addresses_2){
                         if ($addresses2_pointer){
                             if($finish_pointer){
                                 next;
                             }else{
-                                # Start pointer is 0
+                            	# Start pointer is 0
                                 if(!$start_pointer){
                                     next;
                                 }else{
-                                    # Notice addresses1 determines the start pointer
+                                	# Notice addresses1 determines the start pointer
                                     # addresses2 determines the end pointer
                                     $string_needs_print = 0;
                                     $finish_pointer = 1; 
                                 }
                             }
-                        }   # This part of code is similar to the addresses1 part
+                        }	# This part of code is similar to the addresses1 part
                     } elsif (!$addresses2_pointer && ($current_line =~ /$addresses_2/) && !$finish_pointer && $start_pointer){
                         if(!$finish_pointer){
                             if($start_pointer){
@@ -291,20 +292,20 @@ sub parse_command_line {
                         if($finish_pointer){ 
                             next;
                         }else{
-                            # start and finish_pointer all 0 no needs for printing
+                        	# start and finish_pointer all 0 no needs for printing
                             $string_needs_print = 0;
                         }
                     }
                     else { 
-                        # start pointer is 0 -> next
+                    	# start pointer is 0 -> next
                         if(!$start_pointer){
                             next;
                         }else{
-                            # finish pointer is 0 -> next
+                        	# finish pointer is 0 -> next
                             if(!$finish_pointer){
                                 next;
                             }else{
-                                # all pointers are not 0 printing
+                            	# all pointers are not 0 printing
                                 # Set the printing flag to 1
                                 $string_needs_print = 1;
                             }
@@ -324,14 +325,14 @@ sub parse_command_line {
                 my $match_number = 1;
                 # if the matches are not number
                 if ($matches  =~ /[^0-9]/){
-                    # flag changes to 0
+                	# flag changes to 0
                     $match_number = 0;
                 }
                 # if the matches are numbers
                 if ($match_number){
-                    #  checking the line counter with the matches
+                	#  checking the line counter with the matches
                     if($line_number_counter != $matches){
-                        # printing
+                    	# printing
                         next;
                     }else{
                         # not printing
@@ -340,36 +341,36 @@ sub parse_command_line {
                 }
                 
                 if($current_line !~ /$match_pattern/){
-                    # format is not same
+                	# format is not same
                     next;
                 }else{
-                    # format is same
+                	# format is same
                     $string_needs_print = 0;
                 }
                 
-            } 
+            }
             # checking 1 situation only d option in the command line
             if ( $command_in_list eq 'd'){ 
-                # only d -> no printing
+            	# only d -> no printing
                 $string_needs_print = 0;
             }elsif( $command_in_list ne 'd'){
-                # has other sting in the command line
+            	# has other sting in the command line
                 ;
             }
             # This part of code is for -s option which are both in subset0 and subset1
             # Here is the format sample sXbbXbbX
             # This is similar to sed s///g
             # more info plz check: https://www.digitalocean.com/community/tutorials/the-basics-of-using-the-sed-stream-editor-to-manipulate-text-in-linux
-            if ($command_in_list =~ /([0-9]+)s(.)(.*)\2(.*)\2(g?)/){ 
+           	if ($command_in_list =~ /([0-9]+)s(.)(.*)\2(.*)\2(g?)/){
                 # Based on the if structure, cutting the following parts
                 (my $number, my $item, my $string_in_replace, my $g_symbol) = ($1,$3,$4,$5);
                 # checking the line number with the cutting number
                 # Checking the number is same or not
                 if ($line_number_counter != $number){
-                        # not same
+                    # not same
                     next;
                 }else{
-                    # same
+                   	# same
                     # notice checking whether there are g at the end
                     if (not $g_symbol){
                         # no g symbol at the end
@@ -382,7 +383,7 @@ sub parse_command_line {
             }
             # This situation option is similar to the previous one
             # THe previous match the digital numebr. This one match all characters
-            elsif ($command_in_list =~ /\/(.*?)\/s(.)(.*)\2(.*)\2(g?)/){ #sXaaXaaX
+            elsif ($command_in_list =~ /\/(.*?)\/s(.)(.*)\2(.*)\2(g?)/){
                 (my $number, my $item, my $string_in_replace, my $g_symbol) = ($1,$3,$4,$5);
                 $match_pattern = qr/$number/;
                 # Checking whether the string are matching
@@ -403,21 +404,72 @@ sub parse_command_line {
             elsif ($command_in_list =~ /s(.)(.*)\1(.*)\1(g?)/){
                 (my $item, my $string_in_replace, my $g_symbol) = ($2,$3,$4);
                 
-                if (not $g_symbol){
-                    $current_line =~ s#$item#$string_in_replace#;
-                } else{
-                    $current_line =~ s#$item#$string_in_replace#g;
-                }
+                    if (not $g_symbol){
+                        $current_line =~ s#$item#$string_in_replace#;
+                    } else{
+                        $current_line =~ s#$item#$string_in_replace#g;
+                    }
             }
             # This part is to checking s///g in the test case
             elsif ( $command_in_list =~ /s\/((.*)?)\/((.*)?)\/(g?)/){
                 (my $item, my $string_in_replace, my $g_symbol) = ($1,$2,$3);
-                #print " *** $line $command_in_list ***\n";
+                # print " *** $line $command_in_list ***\n";
                 if (not $g_symbol){
                     $current_line =~ s/$item/$string_in_replace/;
-                } else{ 
+                } else{
                     $current_line =~ s#$item#$string_in_replace#g;
                 }
             }
         }
+        if ($string_needs_print){
+            if(!$checking_default){
+                $print_line_string= $current_line;
+            }else{
+                ;
+            }
+        }
+
         
+        if ($string_needs_print_again){
+            if($string_needs_print){
+                print $current_line;
+            }else{
+                ;
+            }
+        }else{
+            ;
+        }
+        
+        $line_number_counter ++;
+    }
+    if( $command_line_t =~ /\$d/){
+        ;
+    }
+    else{
+        print $print_line_string ;
+    }
+}
+
+parse_arguments();
+my $command;
+
+if ($script_string_command){
+    
+    my @command_line_list=();
+    open(my $stdin, '<', "$script_string_command") or die $!;
+    foreach my $command_input (<$stdin>){
+        push @command_line_list,$command_input;
+    }
+    $command = join(";",@command_line_list);
+
+} else {
+    # at here, we thought the command will be passed on command
+    $command =shift @ARGV;
+}
+my @command_files = @ARGV;
+#print "cmd $cmd\n";
+$command =~ s/\s//g;
+#print "lines @all_lines\n";
+#exit 1;
+#print "no default $checking_default\n";
+parse_command_line($command, @command_files);    
