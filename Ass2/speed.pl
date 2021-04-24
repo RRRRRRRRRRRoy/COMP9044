@@ -1,5 +1,6 @@
 #!/usr/bin/perl -w
 
+
 # function name
 $speed_perl = $0;
 # Create the usage function for speed
@@ -100,7 +101,7 @@ sub parse_command{
             my $string_needs_print_again = 0;
             # looping the command in the list
             foreach $current_list_command(@command_list){
-
+                
             }
         }
     }
