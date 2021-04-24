@@ -188,25 +188,130 @@ sub parse_command_line {
                 }
             }
             # The following part is for d and addresses in subset 1
+            # Combining d with address is due to these 2 part are similar
             if ($command_in_list =~ /,/){
                 if($command_in_list =~ /(.*?),(.*?)d/){
-                    #print "At here\n";
+                    # Setting the address value 
+                    # $1 is in the first position in the previous regrex
+                    # $2 is in the second position in the previous regrex
                     (my $addresses_1,my $addresses_2) = ($1,$2);
-                    #my $addresses_2 = $2;
+                    # Setting the address pointer also the flag
+                    # Which are the head pointer and the tail pointer
                     (my $addresses1_pointer,my $addresses2_pointer) = (0,0);
+                    # Checking the addresses1 is digital here can also use \d
                     if ($addresses_1 =~ /[0-9]+$/){
                         $addresses1_pointer = 1;
                     }
+                    # Checking the addresses1 is digital here can also use \d
                     if ($addresses_2 =~ /[0-9]+$/){
                         $addresses2_pointer = 1;
                     }
-                
+
+                    # Checking the address is string or not
                     if ($addresses1_pointer){
+                        # pointer is 1 which is digital number
                         ;
                     }else{
+                        # If the addresses1_pointer is string cutting the string
                         $addresses_1 = substr($addresses_1,1,-1);
+                        # The usage of qr can seek the previous link
+                        # Source: https://stackoverflow.com/questions/30093272/what-is-the-meaning-of-qr-in-perl/30093915
                         $addresses_1 = qr/$addresses_1/;
                     }
+
+                    # This part of code is similar to addresses_1
+                    if ($addresses2_pointer){
+                        ;
+                    }else{               
+                        $addresses_2 = substr($addresses_2,1,-1);
+                        $addresses_2 = qr/$addresses_2/;
+                    }
+
+                    # Checking the line number with the addresses number which are cutting from the input
+                    if ($line_number_counter == $addresses_1){
+                        # Checking the pointer
+                        if($addresses1_pointer){
+                            if($start_pointer){
+                                next;
+                            }else{
+                                # Start pointer = 0 
+                                # finish pointer != 0
+                                if(!$finish_pointer){
+                                    # reset the pointer and no needs for printing
+                                    $start_pointer = 1;  
+                                    $string_needs_print = 0;
+                                }else{
+                                    next;
+                                }
+                            }
+                        }else{
+                            next;
+                        } # Pointer all 0
+                    }elsif (!$addresses1_pointer && !$start_pointer && !$finish_pointer){
+                        # current line Doing the comparison with the addresses_1
+                        if(($current_line =~ /$addresses_1/)){
+                            $start_pointer = 1; 
+                            $string_needs_print = 0;
+                            # Can also using the following code doing the testing
+                            #print "At here $addresses_1\n";
+                        }
+                    }
+                    
+                    # THis part of code is similar to addresses1_pointer
+                    elsif ($line_number_counter == $addresses_2){
+                        if ($addresses2_pointer){
+                            if($finish_pointer){
+                                next;
+                            }else{
+                                # Start pointer is 0
+                                if(!$start_pointer){
+                                    next;
+                                }else{
+                                    # Notice addresses1 determines the start pointer
+                                    # addresses2 determines the end pointer
+                                    $string_needs_print = 0;
+                                    $finish_pointer = 1; 
+                                }
+                            }
+                        }   # This part of code is similar to the addresses1 part
+                    } elsif (!$addresses2_pointer && ($current_line =~ /$addresses_2/) && !$finish_pointer && $start_pointer){
+                        if(!$finish_pointer){
+                            if($start_pointer){
+                                $string_needs_print = 0;
+                                $finish_pointer = 1; 
+                            }else{
+                                next;
+                            }
+                        }else{
+                            next;
+                        }
+                    # start and finish_pointer all 1 need printing
+                    } elsif( $start_pointer){
+                        if($finish_pointer){ 
+                            next;
+                        }else{
+                            # start and finish_pointer all 0 no needs for printing
+                            $string_needs_print = 0;
+                        }
+                    }
+                    else { 
+                        # start pointer is 0 -> next
+                        if(!$start_pointer){
+                            next;
+                        }else{
+                            # finish pointer is 0 -> next
+                            if(!$finish_pointer){
+                                next;
+                            }else{
+                                # all pointers are not 0 printing
+                                # Set the printing flag to 1
+                                $string_needs_print = 1;
+                            }
+                        }
+                    }
+                }
+            }
+
 
         }
     }

@@ -11,4 +11,8 @@ Date            Start       Stop        Activity            Comments
 24/04/21        19:00       20:00       coding              Renaming the variable in speed avoiding conflict, aslo using my to avoid conflict
 24/04/21        20:00       21:00       coding              Finishing the option p in Subset 0
 24/04/21        21:00       21:45       coding              Finishing the option q in Subset 0
-24/04/21        21:45       22:00       Thinking            Thinking about the structure of the subset 0 d option and addresses
+24/04/21        21:45       22:00       Testing             Thinking about the structure of the subset 0 d option and addresses
+24/04/21        22:00       22:45       Debuging            The previous version using == to check same. But test case using string, therefore, changing and adding the string operation.
+24/04/21        22:45       23:00       Testing             The option q has passed
+25/04/21        23:00       01:11       coding              coding the addresses option in subset1. Notice the using of head and tail pointer.
+
