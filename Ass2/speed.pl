@@ -3,44 +3,43 @@
 
 # function name
 $speed_perl = $0;
-# Create the usage function for speed
-sub usage_speed {
-    # This format is the nomal format for a function
-    # notice here is speed-command not sed-command
-    print "usage: $speed_perl [-f <script-file] [speed-command] <files> \n";
-    exit 0;
-}
 
-# Testing the usage_speed function
-# usage_speed();
 
 # Reading the string by using GETOPT::LONG
 # This can read several types of string
 # Source: https://www.perl.com/article/195/2015/10/21/Professional-scripts-are-a-snap-with-Getopt-Long/
 use Getopt::Long;
-my $no_default_setting="No default";
-# checking whether there is other situation of -
-my $string_cmd;
+my $checking_default;
+my $script_string_command;
 sub parse_arguments {
     # The parameter of LONG::Configure
     # Source: https://perldoc.perl.org/Getopt::Long
     # Automatically provide support for the --version option if the application did not specify a handler for this option itself.
     # With pass_through anything that is unknown, ambiguous or supplied with an invalid option will not be flagged as an error.
-    Getopt::Long::Configure( 'auto_version', 'pass_through', 'permute', 'no_ignore_case' );
-    GetOptions('nd|no-default'=>\$no_default_setting,
-               'c|command=s'=>\$string_cmd,
-               'help|usage' => \&usage_speed,
+    #Getopt::Long::Configure( 'auto_version', 'pass_through', 'permute', 'no_ignore_case' );
+    GetOptions('n'=>\$checking_default,
+               'f=s'=>\$script_string_command,
+               'help|usage'=>\&usage_speed,
     ) or usage_speed();
 }
 
+# Create the usage function for speed
+sub usage_speed {
+    # This format is the nomal format for a function
+    # notice here is speed-command not sed-command
+    print "usage: $speed_perl [-i] [-n] [-f <script-file] [speed-command] <files> \n";
+    exit 0;
+}
+
+# This part of code is for local test
 parse_arguments();
-if($no_default_setting){
-    print "test nd : $no_default_setting\n"; 
+if($checking_default){
+    print "test nd : $checking_default\n"; 
 }
-if($string_cmd){
-    print "test str_cmd: $string_cmd";
+if($script_string_command){
+    print "test str_cmd: $script_string_command";
 }
-if(!$string_cmd or !$no_default_setting){
+if(!$script_string_command or !$checking_default){
     if( @ARGV ne "") {
         my $command_line = shift @ARGV;
         print "$command_line";
@@ -52,57 +51,66 @@ if(!$string_cmd or !$no_default_setting){
 # 
 # subset 0 has
 # subset 1 has
-sub parse_command{
+sub parse_command_line {
     # the shift without parameters
-    # Source: https://perlmaven.com/shift
-    my $command_string = shift;
-    my $input_string = shift;
-    # The default option in parse_arguments
-    my $default_format = ($command_string =~ /-nd/ );
-    $command_string =~ s/-nd//g;
-    # Using the !~ to check the opposite of =~
-    # Source: https://stackoverflow.com/questions/57007847/what-does-mean-in-perl\
-    # This is to check the subset0 p q s d 4 options
-    if ($command_string !~ /p|q|s|d/){
-        # If the type is wrong check the usage of speed
-        print "The current command got errors \n";
+    # Source: https://perlmaven.com/shift 
+    my $command_line_t = shift;
+    # This is to check the default option
+    # This is the -n in the code
+    $command_line_t =~ s/-n//g;
+    # Checking 4 options provided by subset 0
+    # p q s d
+    my $regrex_subset0 = "p|q|s|d"
+    if ( $command_line_t =~ /$regrex_subset0/){
+        # The current line is in correct format
+        # This means it contains p q s d
+    }else{
+        # If the current line doesnot contian show the error
+        # Then printing the usage
+        print "Error command found in speed \n"; 
         usage_speed();
     }
-    # using the ; to split the command lines
-    my @command_list = split /;/ , $command_string;
-    # setting the initial line number as 1 avoiding bring the trouble by 0
-    my $init_line_number = 1;
+    # using symbol to connect
+    # This is tricky, ,.=-+ etc are used, therefore, using ; is better
+    my @command_line_list = split /;/,$command_line_t;
+    # THis counter is used to counting the number of lines
+    my $line_number_counter = 1;
     # start pointer
     my $start_pointer = 0;
     # end pointer
-    my $end_pointer = 0;
-    # Store the printing information
-    my $print_line_string = "";
-    # Writing the subset 0 subset 1 situation in this whilez 
-    while(<>){
-        if($init_line_number != 1){
-            if(exists $print_line_string){
-                # print the string in the line
+    my $finish_pointer = 0;
+    # Used to store the string which needed to print
+    my $print_line_string = '';
+    while(my $line_has_command = <>){
+        if( $line_number_counter == 1){
+            # checking the current flag
+            # if flag is 1 continue
+        }else{
+            # Checking the printing string is empty or not
+            if(!$print_line_string){
+                # current line is empty
+                # Doing noting
+            }else{
+                # if the string is not empty and the line number is not 1
+                # printing the result
                 print $print_line_string;
             }
-            # If end pointer(flag) is 1 end the opearion and reset the pointer
-            if($end_pointer == 1){
-                # reset the end and start pointer
-                $end_pointer = 0;
-                $start_pointer = 0;
-            }
-            # After reset the point reset the print line
-            $print_line_string = "";
-            # Getting the current line from the while loop
-            my $current_line = $_;
-            # printing flag
-            my $string_needs_print = 1;
-            # printing another time flag
-            my $string_needs_print_again = 0;
-            # looping the command in the list
-            foreach $current_list_command(@command_list){
+        }
+        # If the finish flag is 1 reset the pointer
+        if($finish_pointer == 1){ 
+            $finish_pointer = 0;
+            $start_pointer=0;
+        }
+        # reset the print string
+        $print_line_string = "";
+        my $current_line = $line_has_command;
+        # Checking the string needs print or not, default is 1
+        my $string_needs_print = 1;
+        # Checking the string needs print for another time, defualt is 0
+        my $string_needs_print_again = 0;
+        # looping the command in the list
+        foreach my $command_in_list (@command_line_list){
                 
-            }
         }
     }
 }
