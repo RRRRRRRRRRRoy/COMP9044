@@ -7,7 +7,7 @@ $speed_perl = $0;
 sub usage_speed {
     # This format is the nomal format for a function
     # notice here is speed-command not sed-command
-    print "usage: $speed_perl [-i] [-n] [-f <script-file] [speed-command] <files> \n";
+    print "usage: $speed_perl [-i] [-n] [-f <script-file> [speed-command] <files> \n";
     exit 0;
 }
 
@@ -57,7 +57,7 @@ sub parse_command_line {
     # Source: https://perlmaven.com/shift 
     my $command_line_t = shift;
     # This is to check the default option
-    # This is the -n in the code
+    # This is the -n option in the instruction
     $command_line_t =~ s/-n//g;
     # Checking 4 options provided by subset 0
     # p q s d
@@ -80,6 +80,7 @@ sub parse_command_line {
     my $line_number_counter = 1;
     # using symbol ; to connect
     # This is tricky, ,.=-+ etc are used, therefore, using ; is better
+    # Split tutorial: https://www.geeksforgeeks.org/perl-split-function/
     my @command_line_list = split /;/,$command_line_t;
     # Used to store the string which needed to print
     my $print_line_string = '';
@@ -350,6 +351,7 @@ sub parse_command_line {
                 
             }
             # checking 1 situation only d option in the command line
+            # seq 1 5 | 2041 speed 'd'
             if ( $command_in_list eq 'd'){ 
             	# only d -> no printing
                 $string_needs_print = 0;
@@ -361,7 +363,8 @@ sub parse_command_line {
             # Here is the format sample sXbbXbbX
             # This is similar to sed s///g
             # more info plz check: https://www.digitalocean.com/community/tutorials/the-basics-of-using-the-sed-stream-editor-to-manipulate-text-in-linux
-           	if ($command_in_list =~ /([0-9]+)s(.)(.*)\2(.*)\2(g?)/){
+           	# Example: seq 51 60 | 2041 speed '5s/5/9/g'
+            if ($command_in_list =~ /([0-9]+)s(.)(.*)(.)(.*)(.)(g?)/){
                 # Based on the if structure, cutting the following parts
                 my $number = $1;
                 my $item = $3;
@@ -386,6 +389,7 @@ sub parse_command_line {
             }
             # This situation option is similar to the previous one
             # THe previous match the digital numebr. This one match all characters
+            # Example: seq 100 111 | 2041 speed '/1.1/s/1/-/g'
             elsif ($command_in_list =~ /\/(.*?)\/s(.)(.*)\2(.*)\2(g?)/){
                 my $number = $1;
                 my $item = $3;
@@ -409,6 +413,7 @@ sub parse_command_line {
             # Difference no need doing comparison
             # Here is the difference between /1 and $1
             # Source: https://stackoverflow.com/questions/1068840/what-is-the-difference-between-1-and-1-in-a-perl-regex
+            # Example echo Hello Andrew | 2041 speed 's/e//g'
             elsif ($command_in_list =~ /s(.)(.*)\1(.*)\1(g?)/){
                 my $item = $2;
                 my $string_in_replace = $3;
@@ -422,6 +427,7 @@ sub parse_command_line {
                 }
             }
             # This part is to checking s///g in the test case
+            # This is the normal case of sed s///g
             elsif ( $command_in_list =~ /s\/(((.+)*)?)\/(((.+)*)?)\/(g?)/){
                 my $item = $1;
                 my $string_in_replace = $2;
