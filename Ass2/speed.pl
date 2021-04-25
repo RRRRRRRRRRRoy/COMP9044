@@ -323,7 +323,7 @@ sub parse_command_line {
             # The first part is to match the digital eg seq 1 5 | 2041 speed '4d'
             # The second part is match // eg seq 11 20 | 2041 speed '/[2468]/d'
             # This regrex is similar to the previous -p
-            elsif ( $command_in_list =~ /([0-9]+)d$/  || $command_in_list =~ /\/((.+)*)\/d$/){
+            elsif ( $command_in_list =~ /([0-9]+)d$/  || $command_in_list =~ /\/((..+)*)\/d$/){
                 my $matches = $1;
                 $match_pattern = qr/$matches/;
                 # Checking the matches result is number or not, defualt is number
