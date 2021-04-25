@@ -368,7 +368,7 @@ sub parse_command_line {
             if ($command_in_list =~ /([0-9]+)s(.)(.*)\2(.*)\2(g?)/){
                 # Based on the if structure, cutting the following parts
                 my $number = $1;
-                my $pattern = $2;
+                my $d = $2;
                 my $item = $3;
                 my $string_in_replace = $4;
                 my $g_symbol = $5;
@@ -394,7 +394,7 @@ sub parse_command_line {
             # Example: seq 100 111 | 2041 speed '/1.1/s/1/-/g'
             elsif ($command_in_list =~ /\/(.*?)\/s(.)(.*)\2(.*)\2(g?)/){
                 my $number = $1;
-                my $pattern = $2;
+                my $d = $2;
                 my $item = $3;
                 my $string_in_replace = $4;
                 my $g_symbol = $5;
@@ -418,7 +418,7 @@ sub parse_command_line {
             # Source: https://stackoverflow.com/questions/1068840/what-is-the-difference-between-1-and-1-in-a-perl-regex
             # Example echo Hello Andrew | 2041 speed 's/e//g'
             elsif ($command_in_list =~ /s(.)(.*)\1(.*)\1(g?)/){
-                my $pattern = $1;
+                my $d = $1;
                 my $item = $2;
                 my $string_in_replace = $3;
                 my $g_symbol = $4;
@@ -472,7 +472,7 @@ sub parse_command_line {
         # Counter adding 1
         $line_number_counter ++;
     }
-    if( $command_line_t =~ /\$pattern/){
+    if( $command_line_t =~ /\$d/){
         # no need for printing -> pass
         ;
     }
