@@ -19,4 +19,10 @@ Date            Start       Stop        Activity            Comments
 25/04/21        01:50       02:00       Thinking            -s Option has 4 situations which all contain g or not containing g at the end.
 25/04/21        02:00       03:00       Coding              Based on the previous coding the basic function of -s option in subset0 and subset11
 25/04/21        09:00       10:30       Coding              Finishing the start and finish pointer comparison and Adding the entrency of the function 
+25/04/21        10:30       11:00       Testing             Doing the local test On the Macos getting the several problems with address -f in subset1
+25/04/21        11:00       11:30       Testing             Doing the vlab testing the result is not good
+25/04/21        11:30       12:00       Debuging            The error of -d option has the same problem with == and eq
+25/04/21        12:00       12:30       Coding              Correcting the error in the -d option part
+25/04/21        12:30       13:30       Lunch time          
+25/04/21        13:30       15:30       Coding              Coding the test case for ass2        
 

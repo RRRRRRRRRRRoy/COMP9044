@@ -341,7 +341,7 @@ sub parse_command_line {
                         $string_needs_print = 0;
                     }
                 }
-                
+                # This is to check the not match !~
                 if($current_line !~ /$match_pattern/){
                 	# format is not same
                     next;
