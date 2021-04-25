@@ -69,7 +69,7 @@ sub parse_command_line {
     }else{
         # If the current line doesnot contian show the error
         # Then printing the usage
-        print "Error command found in speed \n"; 
+        print "Error command was found in speed \n"; 
         usage_speed();
     }
     # start pointer
@@ -119,6 +119,7 @@ sub parse_command_line {
         # looping the command in the list
         foreach my $command_in_list (@command_line_list){
             # Cutting the space in the command line
+            # Source: https://www.geeksforgeeks.org/perl-chomp-function/
             chomp $command_in_list;
             # Check empty
             if(!$command_in_list){
@@ -225,7 +226,9 @@ sub parse_command_line {
                     # This part of code is similar to addresses_1
                     if ($addresses2_pointer){
                         ;
-                    }else{               
+                    }else{              
+                        # substr
+                        # SOurce: https://www.geeksforgeeks.org/perl-substr-function/ 
                         $addresses_2 = substr($addresses_2,1,-1);
                         $addresses_2 = qr/$addresses_2/;
                     }
@@ -475,6 +478,7 @@ sub parse_command_line {
         # Counter adding 1
         $line_number_counter ++;
     }
+    # Comparing with the previous pattern
     if( $command_line_t =~ /(\$d)/){
         # no need for printing -> pass
         ;
