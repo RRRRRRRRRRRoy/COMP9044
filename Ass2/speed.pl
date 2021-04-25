@@ -203,11 +203,11 @@ sub parse_command_line {
                     # Which are the head pointer and the tail pointer
                     (my $addresses1_pointer,my $addresses2_pointer) = (0,0);
                     # Checking the addresses1 is digital here can also use \d
-                    if ($addresses_1 =~ /([0-9])*$/){
+                    if ($addresses_1 =~ /([0-9]+)$/){
                         $addresses1_pointer = 1;
                     }
                     # Checking the addresses1 is digital here can also use \d
-                    if ($addresses_2 =~ /([0-9])*$/){
+                    if ($addresses_2 =~ /([0-9]+)$/){
                         $addresses2_pointer = 1;
                     }
 
