@@ -126,7 +126,7 @@ sub parse_command_line {
                 next;
             }
             # Checking p option in subset0
-            if ( $command_in_list =~ /([0-9]+)p$/ || $command_in_list =~ /\/((.+)*)\/p$/){
+            if ( $command_in_list =~ /([0-9]+)p$/ || $command_in_list =~ /\/((..+)*)\/p$/){
                 my $matches = $1;
                 my $number_matches_pointer = 1;
                 if ($command_in_list !~ /\//){
@@ -160,7 +160,7 @@ sub parse_command_line {
             }
             # This is for the q option in subset 0
             # Some of these codes are similar to p option in the previous part
-            if ( $command_in_list =~ /([0-9]+)q$/ || $command_in_list =~ /\/((.+)*)\/q$/){ #quit
+            if ( $command_in_list =~ /([0-9]+)q$/ || $command_in_list =~ /\/((..+)*)\/q$/){ #quit
                 my $matches = $1;
                 my $number_matches_pointer = 1;
                 if ($command_in_list !~ /\//){
@@ -203,11 +203,11 @@ sub parse_command_line {
                     # Which are the head pointer and the tail pointer
                     (my $addresses1_pointer,my $addresses2_pointer) = (0,0);
                     # Checking the addresses1 is digital here can also use \d
-                    if ($addresses_1 =~ /[0-9]+$/){
+                    if ($addresses_1 =~ /([0-9]+)*$/){
                         $addresses1_pointer = 1;
                     }
                     # Checking the addresses1 is digital here can also use \d
-                    if ($addresses_2 =~ /[0-9]+$/){
+                    if ($addresses_2 =~ /([0-9]+)*$/){
                         $addresses2_pointer = 1;
                     }
 
@@ -323,7 +323,7 @@ sub parse_command_line {
             # The first part is to match the digital eg seq 1 5 | 2041 speed '4d'
             # The second part is match // eg seq 11 20 | 2041 speed '/[2468]/d'
             # This regrex is similar to the previous -p
-            elsif ( $command_in_list =~ /([0-9]+)d$/  || $command_in_list =~ /\/((.+)*)\/d$/){
+            elsif ( $command_in_list =~ /([0-9]+)d$/  || $command_in_list =~ /\/((..+)*)\/d$/){
                 my $matches = $1;
                 $match_pattern = qr/$matches/;
                 # Checking the matches result is number or not, defualt is number
