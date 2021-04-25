@@ -368,7 +368,7 @@ sub parse_command_line {
             # This is similar to sed s///g
             # more info plz check: https://www.digitalocean.com/community/tutorials/the-basics-of-using-the-sed-stream-editor-to-manipulate-text-in-linux
            	# Example: seq 51 60 | 2041 speed '5s/5/9/g'
-            if ($command_in_list =~ /([0-9]+)s(.)(.*)\2(.*)\2(g?)/){
+            if ($command_in_list =~ /([0-9]+)s(.)(..*)\2(..*)\2(g?)/){
                 # Based on the if structure, cutting the following parts
                 my $number = $1;
                 # This is to check with command_line_t and doing the printing
@@ -422,7 +422,7 @@ sub parse_command_line {
             # Here is the difference between /1 and $1
             # Source: https://stackoverflow.com/questions/1068840/what-is-the-difference-between-1-and-1-in-a-perl-regex
             # Example echo Hello Andrew | 2041 speed 's/e//g'
-            elsif ($command_in_list =~ /s(.)(.*)\1(.*)\1(g?)/){
+            elsif ($command_in_list =~ /s(.)(..*)\1(..*)\1(g?)/){
                 # This is to check with command_line_t and doing the printing
                 my $d = $1;
                 my $item = $2;
