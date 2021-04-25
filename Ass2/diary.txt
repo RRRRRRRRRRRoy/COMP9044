@@ -24,5 +24,24 @@ Date            Start       Stop        Activity            Comments
 25/04/21        11:30       12:00       Debuging            The error of -d option has the same problem with == and eq
 25/04/21        12:00       12:30       Coding              Correcting the error in the -d option part
 25/04/21        12:30       13:30       Lunch time          
-25/04/21        13:30       15:30       Coding              Coding the test case for ass2        
+25/04/21        13:30       14:30       Coding              Adding annotation for this speed.pl, to help code reader. 
+25/04/21        13:30       14:30       Coding              Writing the shell scripts to doing the test. All these test scripts are similar to each other. This is due to the structure are same.     
+25/04/21        15:30       16:30       Writing             Draw a conclusion for diary.txt        
 
+
+
+
+Conclusion:
+1. When creating the variables, using my to set the scope is a good choice.
+2. The problem which was found at q and d, notice using the if() check directory can ommit the type of varibles(string or number).
+3. Current speed.pl performs good in subset0 and some parts of subset1. However, the white spaces and comments performs poor.
+4. The Best thing I did in this assignment, is to use GETOPT to read data, this can help to set -f -n options. THis can do help to the following programming.
+5. Some test case for address performs worse, This is due to the some function and details were ommit.
+6. In the test scripts, using the perl speed.pl command. This is due to the current system is macOS. If you want to check plz reset these command. 
+7. When designing as system, notice the name of the variables. This is to avoide the conflict.
+8. Before starting programming, it is very important to have an overall understanding of the project. This can avoid project rework which was happed on Saturday.
+
+Error points:
+1. Addresses option is not finished properly, needs to optimize.
+2. The comment and white spaces functions performs poor, need to optimize.
+3. There are still some small error is d option, but the basic function works properly.
