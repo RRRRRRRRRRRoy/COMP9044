@@ -78,7 +78,7 @@ sub parse_command_line {
     my $finish_pointer = 0;
     # THis counter is used to counting the number of lines
     my $line_number_counter = 1;
-    # using symbol ; to connect
+    # using symbol ; to connect the commands
     # This is tricky, ,.=-+ etc are used, therefore, using ; is better
     # Split tutorial: https://www.geeksforgeeks.org/perl-split-function/
     my @command_line_list = split /;/,$command_line_t;
@@ -509,7 +509,7 @@ if ($script_string_command){
     $command = join(";",@command_line_list);
 
 } else {
-    # at here, we thought the command will be passed on command
+    # we thought the command will be passed on command, using ; to connect the command
     # Flatten the data
     # Source: https://perlmaven.com/shift
     $command =shift @ARGV;
