@@ -386,7 +386,7 @@ sub parse_command_line {
             }
             # This situation option is similar to the previous one
             # THe previous match the digital numebr. This one match all characters
-            elsif ($command_in_list =~ /\/((.*)?)\/s(.)(.*)\2(.*)\2(g?)/){
+            elsif ($command_in_list =~ /\/((.)*?)\/s(.)(.*)\2(.*)\2(g?)/){
                 my $number = $1;
                 my $item = $3;
                 my $string_in_replace = $4;
