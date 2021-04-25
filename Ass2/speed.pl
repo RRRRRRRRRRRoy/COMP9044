@@ -194,7 +194,7 @@ sub parse_command_line {
             # The following part is for d and addresses in subset 1
             # Combining d with address is due to these 2 part are similar  
             if ($command_in_list =~ /,/){
-                if($command_in_list =~ /(.*?),(.*?)d/){
+                if($command_in_list =~ /(((.+)*)?),(((.+)*)?)d/){
                     # Setting the address value 
                     # $1 is in the first position in the previous regrex
                     # $2 is in the second position in the previous regrex
