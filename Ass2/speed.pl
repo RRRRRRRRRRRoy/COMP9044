@@ -319,6 +319,7 @@ sub parse_command_line {
             # The addresses is widely used to avoid the error Writing first
             # The first part is to match the digital eg seq 1 5 | 2041 speed '4d'
             # The second part is match // eg seq 11 20 | 2041 speed '/[2468]/d'
+            # This regrex is similar to the previous -p -q
             elsif ( $command_in_list =~ /([0-9]+)d$/  || $command_in_list =~ /\/((.+)*)\/d$/){
                 my $matches = $1;
                 $match_pattern = qr/$matches/;
@@ -364,12 +365,13 @@ sub parse_command_line {
             # This is similar to sed s///g
             # more info plz check: https://www.digitalocean.com/community/tutorials/the-basics-of-using-the-sed-stream-editor-to-manipulate-text-in-linux
            	# Example: seq 51 60 | 2041 speed '5s/5/9/g'
-            if ($command_in_list =~ /([0-9]+)s(.)(.*)(.)(.*)(.)(g?)/){
+            if ($command_in_list =~ /([0-9]+)s(.)(.*)\2(.*)\2(g?)/){
                 # Based on the if structure, cutting the following parts
                 my $number = $1;
                 my $item = $3;
                 my $string_in_replace = $4;
                 my $g_symbol = $5;
+                my $checking_pattern = $2;
                 # checking the line number with the cutting number
                 # Checking the number is same or not
                 if ($line_number_counter != $number){
@@ -395,6 +397,7 @@ sub parse_command_line {
                 my $item = $3;
                 my $string_in_replace = $4;
                 my $g_symbol = $5;
+                my $checking_pattern = $2;
                 $match_pattern = qr/$number/;
                 # Checking whether the string are matching
                 if ( $current_line !~ /$match_pattern/){
@@ -415,6 +418,7 @@ sub parse_command_line {
             # Source: https://stackoverflow.com/questions/1068840/what-is-the-difference-between-1-and-1-in-a-perl-regex
             # Example echo Hello Andrew | 2041 speed 's/e//g'
             elsif ($command_in_list =~ /s(.)(.*)\1(.*)\1(g?)/){
+                my $checking_pattern = $1;
                 my $item = $2;
                 my $string_in_replace = $3;
                 my $g_symbol = $4;
@@ -468,7 +472,7 @@ sub parse_command_line {
         # Counter adding 1
         $line_number_counter ++;
     }
-    if( $command_line_t =~ /\$d/){
+    if( $command_line_t =~ /\$checking_pattern/){
         # no need for printing -> pass
         ;
     }
@@ -483,9 +487,12 @@ my $command;
 
 # getopt::long is exists
 if ($script_string_command){
-    
+    # This part of code is similar to the previous lab07 whale
     my @command_line_list=();
+    # setting filestream to read file from the script_string_command
+    # Source: http://perltraining.com.au/tips/2005-11-17.html
     open(my $stdin, '<', "$script_string_command") or die $!;
+    # Pushing the data in the the list
     foreach my $command_input (<$stdin>){
         push @command_line_list,$command_input;
     }
@@ -496,6 +503,8 @@ if ($script_string_command){
 
 } else {
     # at here, we thought the command will be passed on command
+    # Flatten the data
+    # Source: https://perlmaven.com/shift
     $command =shift @ARGV;
 }
 my @command_files = @ARGV;
@@ -503,4 +512,5 @@ my @command_files = @ARGV;
 # Here is similar to use \s in stead of the [\f\n\r\t\v]
 $command =~ s/\s//g;
 
+# Pushing the data into the checking method
 parse_command_line($command, @command_files);    
