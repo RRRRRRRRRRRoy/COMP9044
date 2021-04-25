@@ -422,7 +422,7 @@ sub parse_command_line {
             # Here is the difference between /1 and $1
             # Source: https://stackoverflow.com/questions/1068840/what-is-the-difference-between-1-and-1-in-a-perl-regex
             # Example echo Hello Andrew | 2041 speed 's/e//g'
-            elsif ($command_in_list =~ /s(.)(..*)\1(..*)\1(g?)/){
+            elsif ($command_in_list =~ /s(.)(.*)\1(.*)\1(g?)/){
                 # This is to check with command_line_t and doing the printing
                 my $d = $1;
                 my $item = $2;
