@@ -319,7 +319,7 @@ sub parse_command_line {
             # The addresses is widely used to avoid the error Writing first
             # The first part is to match the digital eg seq 1 5 | 2041 speed '4d'
             # The second part is match // eg seq 11 20 | 2041 speed '/[2468]/d'
-            # This regrex is similar to the previous -p -q
+            # This regrex is similar to the previous -p
             elsif ( $command_in_list =~ /([0-9]+)d$/  || $command_in_list =~ /\/((.+)*)\/d$/){
                 my $matches = $1;
                 $match_pattern = qr/$matches/;
@@ -368,7 +368,6 @@ sub parse_command_line {
             if ($command_in_list =~ /([0-9]+)s(.)(.*)\2(.*)\2(g?)/){
                 # Based on the if structure, cutting the following parts
                 my $number = $1;
-                my $checking_pattern = $2;
                 my $item = $3;
                 my $string_in_replace = $4;
                 my $g_symbol = $5;
@@ -394,7 +393,6 @@ sub parse_command_line {
             # Example: seq 100 111 | 2041 speed '/1.1/s/1/-/g'
             elsif ($command_in_list =~ /\/(.*?)\/s(.)(.*)\2(.*)\2(g?)/){
                 my $number = $1;
-                my $checking_pattern = $2;
                 my $item = $3;
                 my $string_in_replace = $4;
                 my $g_symbol = $5;
@@ -418,7 +416,6 @@ sub parse_command_line {
             # Source: https://stackoverflow.com/questions/1068840/what-is-the-difference-between-1-and-1-in-a-perl-regex
             # Example echo Hello Andrew | 2041 speed 's/e//g'
             elsif ($command_in_list =~ /s(.)(.*)\1(.*)\1(g?)/){
-                my $checking_pattern = $1;
                 my $item = $2;
                 my $string_in_replace = $3;
                 my $g_symbol = $4;
@@ -472,14 +469,14 @@ sub parse_command_line {
         # Counter adding 1
         $line_number_counter ++;
     }
-    # if( $command_line_t =~ /\$checking_pattern/){
-    #     # no need for printing -> pass
-    #     ;
-    # }
-    # else{
-    #     # printing the result
-    #     print $print_line_string ;
-    # }
+    if( $command_line_t =~ /\$d/){
+        # no need for printing -> pass
+        ;
+    }
+    else{
+        # printing the result
+        print $print_line_string ;
+    }
 }
 
 parse_arguments();
