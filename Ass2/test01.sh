@@ -5,6 +5,7 @@
 # If one case is fail exit 1 printing fail
 # If all cases pass printing pass exit 0
 
+# The code structure of test script are similar!
 # Test 4p
 launch_1=$(seq 5 15|perl speed.pl '4p');
 correct_answer_1='5 6 7 8 8 9 10 11 12 13 14 15';
@@ -13,9 +14,10 @@ checking_answer_1=$(echo $launch_1);
 echo "TEST_p_1: seq 5 15|perl speed.pl '4p' "
 if [ "$correct_answer_1" == "$checking_answer_1" ]; 
 then
-  echo "TEST_p_1: PASS"
-else
-  echo "TEST_p_1: FAIL"
+  echo "TEST_p_1: PASS the test case ^_^!"
+elif [ "$correct_answer_1" != "$checking_answer_1" ];
+then
+  echo "TEST_p_1: FAIL the test case T_T!"
   exit 1;
 fi
 
@@ -29,9 +31,10 @@ checking_answer_2=$(echo $launch_2);
 echo "TEST_p_2: seq 50 66|perl speed.pl '/3$/p "
 if [ "$correct_answer_2" == "$checking_answer_2" ]; 
 then
-  echo "TEST_p_2: PASS"
-else
-  echo "TEST_p_2: FAIL"
+  echo "TEST_p_2: PASS the test case ^_^!"
+elif [ "$correct_answer_2" != "$checking_answer_2" ];
+then
+  echo "TEST_p_2: FAIL the test case T_T!"
   exit 1;
 fi
 
@@ -45,9 +48,10 @@ checking_answer_3=$(echo $launch_3);
 echo "TEST_p_3: seq 15 20|perl speed.pl 'p' "
 if [ "$correct_answer_3" == "$checking_answer_3" ]; 
 then
-  echo "TEST_p_3: PASS"
+  echo "TEST_p_3: PASS the test case ^_^!"
   exit 0;
-else
-  echo "TEST_p_3: FAIL"
+elif [ "$correct_answer_3" != "$checking_answer_3" ]
+then
+  echo "TEST_p_3: FAIL the test case T_T!"
   exit 1;
 fi
