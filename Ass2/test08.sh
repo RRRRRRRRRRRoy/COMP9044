@@ -19,6 +19,7 @@ echo "TEST_input_files_1: perl speed.pl '20q;8p;/2/d' ten.txt eighty.txt "
 if [ "$correct_answer_1" == "$checking_answer_1" ]; 
 then
   echo "TEST_input_files_1: PASS the test case ^_^!";
+  exit 0;
 elif [ "$correct_answer_1" != "$checking_answer_1" ];
 then
   echo "TEST_input_files_1: FAIL the test case T_T!";

@@ -1,5 +1,6 @@
 
 Date            Start       Stop        Activity            Comments
+21/04/21        18:00       20:00       Thinking            Using which way to reading data and the basic structure of the system
 22/04/21        19:00       19:10       Preparing           Creating speed.pl and starting
 22/04/21        21:00       21:16       Coding              Writing the Usage of the speed
 22/04/21        21:16       21:20       Testing             Checking the printing of the usage of speed
@@ -9,12 +10,18 @@ Date            Start       Stop        Activity            Comments
 23/04/21        19:00       19:45       Coding              Checking the default value in parse_arguments, also the format of subset0 pqsd 4 options
 23/04/21        20:00       21:45       Coding              Getting the data from the input / setting the flags and pointer for the following p q s d
 24/04/21        19:00       20:00       Coding              Renaming the variable in speed avoiding conflict, aslo using my to avoid conflict
-24/04/21        20:00       21:00       Coding              Finishing the option p in Subset 0
-24/04/21        21:00       21:45       Coding              Finishing the option q in Subset 0
-24/04/21        21:45       22:00       Testing             Thinking about the structure of the subset 0 d option and addresses
-24/04/21        22:00       22:45       Debuging            The previous version using == to check same. But test case using string, therefore, changing and adding the string operation.
-24/04/21        22:45       23:00       Testing             The option q has passed
-24/04/21        23:00       01:11       Coding              Coding the addresses option in subset1. Notice the using of head and tail pointer.
+24/04/21        20:00       21:00       Coding              Finishing the option p coding in Subset 0
+24/04/21        21:00       21:15       Testing             Finding the error with no number in the command of p option
+24/04/21        21:15       21:30       Debuging            Adding the print again pointer and doing the check for printing again.
+24/04/21        21:30       21:45       Testing             The printing error with option p has been solved
+24/04/21        21:45       22:00       Coding              Finishing the option q coding in Subset 0
+24/04/21        22:15       22:30       Testing             Option q getting the error with == and eq. This may cause by the comparison between string and number.
+24/04/21        22:30       22:45       Debuging            The previous version using == to check same. But test case using string, therefore, changing and adding the string operation.
+24/04/21        22:45       23:00       Coding              Changing the comparison part in to if($a). Avoiding the accurate eq and == avoiding the error of comparison.
+24/04/21        23:00       23:15       Testing             The test of option q has passed
+24/04/21        23:15       23:45       Thinking            Thinking about the structure of the subset 0 d option and addresses, finding the difference and similarities
+24/04/21        23:45       00:30       Designing           Due to address is similar to option d, avoiding the conflict between these 2 options. using 2 pointers to implement address. Then focus on d option.
+25/04/21        00:30       01:11       Coding              Coding the addresses option in subset1. Notice the using of head and tail pointer.
 25/04/21        01:15       01:50       Coding              Coding the -d option in subset0. This part is similar to address.
 25/04/21        01:50       02:00       Thinking            -s Option has 4 situations which all contain g or not containing g at the end.
 25/04/21        02:00       03:00       Coding              Based on the previous coding the basic function of -s option in subset0 and subset11
@@ -23,16 +30,15 @@ Date            Start       Stop        Activity            Comments
 25/04/21        11:00       11:30       Testing             Doing the vlab testing the result is not good
 25/04/21        11:30       12:00       Debuging            The error of -d option has the same problem with == and eq
 25/04/21        12:00       12:30       Coding              Correcting the error in the -d option part
-25/04/21        12:30       13:30       Lunch time          
+25/04/21        12:30       12:45       Testing             Testing the error in -d option          
 25/04/21        13:30       14:30       Coding              Adding annotation for this speed.pl, to help code reader. 
-25/04/21        13:30       14:30       Coding              Writing the shell scripts to doing the test. All these test scripts are similar to each other. This is due to the structure are same.     
+25/04/21        14:30       15:30       Coding              Writing the shell scripts to doing the test. All these test scripts are similar to each other. This is due to the structure are same.     
 25/04/21        15:30       16:30       Writing             Draw a conclusion for diary.txt        
-
-
+25/04/21        16:30       17:30       Writing             Adding annotation for speed.pl make it more easier to read.
 
 
 Conclusion:
-1. When creating the variables, using my to set the scope is a good choice.
+1. When creating the variables, using keywords my to set the scope is a good choice.
 2. The problem which was found at q and d, notice using the if() check directory can ommit the type of varibles(string or number).
 3. Current speed.pl performs good in subset0 and some parts of subset1. However, the white spaces and comments performs poor.
 4. The Best thing I did in this assignment, is to use GETOPT to read data, this can help to set -f -n options. THis can do help to the following programming.

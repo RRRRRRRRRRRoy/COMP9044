@@ -16,6 +16,7 @@ echo "TEST_commentandspace_1: seq 1 20 | perl speed.pl ' 3, 15  d  # delete; 3 q
 if [ "$correct_answer_1" == "$checking_answer_1" ]; 
 then
   echo "TEST_commentandspace_files_1: PASS the test case ^_^!";
+  exit 0;
 elif [ "$correct_answer_1" != "$checking_answer_1" ];
 then
   echo "TEST_commentandspace_files_1: FAIL the test case T_T!";
