@@ -363,10 +363,10 @@ sub parse_command_line {
             # more info plz check: https://www.digitalocean.com/community/tutorials/the-basics-of-using-the-sed-stream-editor-to-manipulate-text-in-linux
            	if ($command_in_list =~ /([0-9]+)s(.)(.*)\2(.*)\2(g?)/){
                 # Based on the if structure, cutting the following parts
-                (my $number = $1;
+                my $number = $1;
                 my $item = $3;
                 my $string_in_replace = $4;
-                my $g_symbol) = $5;
+                my $g_symbol = $5;
                 # checking the line number with the cutting number
                 # Checking the number is same or not
                 if ($line_number_counter != $number){
