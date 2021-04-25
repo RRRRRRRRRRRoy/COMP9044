@@ -486,6 +486,6 @@ if ($script_string_command){
 my @command_files = @ARGV;
 
 # Here is similar to use \s in stead of the [\f\n\r\t\v]
-$command =~ s/[\f\n\r\t\v]//g;
+$command =~ s/\s//g;
 
 parse_command_line($command, @command_files);    
