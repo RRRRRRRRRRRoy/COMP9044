@@ -369,7 +369,7 @@ sub parse_command_line {
                 # Based on the if structure, cutting the following parts
                 my $number = $1;
                 # This is to check with command_line_t and doing the printing
-                my $flag = $2;
+                my $d = $2;
                 my $item = $3;
                 my $string_in_replace = $4;
                 my $g_symbol = $5;
@@ -396,7 +396,7 @@ sub parse_command_line {
             elsif ($command_in_list =~ /\/(.*?)\/s(.)(.*)\2(.*)\2(g?)/){
                 my $number = $1;
                 # This is to check with command_line_t and doing the printing
-                my $flag = $2;
+                my $d = $2;
                 my $item = $3;
                 my $string_in_replace = $4;
                 my $g_symbol = $5;
@@ -421,7 +421,7 @@ sub parse_command_line {
             # Example echo Hello Andrew | 2041 speed 's/e//g'
             elsif ($command_in_list =~ /s(.)(.*)\1(.*)\1(g?)/){
                 # This is to check with command_line_t and doing the printing
-                my $flag = $1;
+                my $d = $1;
                 my $item = $2;
                 my $string_in_replace = $3;
                 my $g_symbol = $4;
@@ -475,7 +475,7 @@ sub parse_command_line {
         # Counter adding 1
         $line_number_counter ++;
     }
-    if( $command_line_t =~ /\(\$flag\)/){
+    if( $command_line_t =~ /\(\$d\)/){
         # no need for printing -> pass
         ;
     }
