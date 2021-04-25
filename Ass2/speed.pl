@@ -472,14 +472,14 @@ sub parse_command_line {
         # Counter adding 1
         $line_number_counter ++;
     }
-    if( $command_line_t =~ /\$checking_pattern/){
-        # no need for printing -> pass
-        ;
-    }
-    else{
-        # printing the result
-        print $print_line_string ;
-    }
+    # if( $command_line_t =~ /\$checking_pattern/){
+    #     # no need for printing -> pass
+    #     ;
+    # }
+    # else{
+    #     # printing the result
+    #     print $print_line_string ;
+    # }
 }
 
 parse_arguments();
