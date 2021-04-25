@@ -422,7 +422,7 @@ sub parse_command_line {
                 }
             }
             # This part is to checking s///g in the test case
-            elsif ( $command_in_list =~ /s\/((.*)?)\/((.*)?)\/(g?)/){
+            elsif ( $command_in_list =~ /s\/(((.+)*)?)\/(((.+)*)?)\/(g?)/){
                 my $item = $1;
                 my $string_in_replace = $2;
                 my $g_symbol = $3;
