@@ -46,6 +46,7 @@ echo "TEST_p_3: seq 15 20|perl speed.pl 'p' "
 if [ "$correct_answer_3" == "$checking_answer_3" ]; 
 then
   echo "TEST_p_3: PASS"
+  exit 0;
 else
   echo "TEST_p_3: FAIL"
   exit 1;
