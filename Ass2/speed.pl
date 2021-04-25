@@ -409,7 +409,7 @@ sub parse_command_line {
             # Difference no need doing comparison
             # Here is the difference between /1 and $1
             # Source: https://stackoverflow.com/questions/1068840/what-is-the-difference-between-1-and-1-in-a-perl-regex
-            elsif ($command_in_list =~ /s(.)(.*)\1(.*)\1(g?)/){
+            elsif ($command_in_list =~ /s(.)((.+)*)\1((.+)*)\1(g?)/){
                 my $item = $2;
                 my $string_in_replace = $3;
                 my $g_symbol = $4;
