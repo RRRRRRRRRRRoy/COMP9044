@@ -276,16 +276,18 @@ sub parse_command_line {
                                 }
                             }
                         }	# This part of code is similar to the addresses1 part
-                    } elsif (!$addresses2_pointer && ($current_line =~ /$addresses_2/)){
-                        if(!$finish_pointer){
-                            if($start_pointer){
-                                $string_needs_print = 0;
-                                $finish_pointer = 1; 
+                    } elsif (!$addresses2_pointer){
+                        if(($current_line =~ /$addresses_2/)){
+                            if(!$finish_pointer){
+                                if($start_pointer){
+                                    $string_needs_print = 0;
+                                    $finish_pointer = 1; 
+                                }else{
+                                    next;
+                                }
                             }else{
                                 next;
                             }
-                        }else{
-                            next;
                         }
                     # start and finish_pointer all 1 need printing
                     } elsif( $start_pointer){
@@ -378,7 +380,7 @@ sub parse_command_line {
                     if (not $g_symbol){
                         # no g symbol at the end
                         $current_line =~ s#$item#$string_in_replace#;
-                    }else{
+                    }elsif($g_symbol){
                         # has g symbol at the end
                         $current_line =~ s#$item#$string_in_replace#g;
                     }
@@ -399,7 +401,7 @@ sub parse_command_line {
                     if (not $g_symbol){
                         # no g symbol at the end
                         $current_line =~ s#$item#$string_in_replace#;
-                    } else{
+                    } elsif($g_symbol){
                         # has g symbol at the end
                         $current_line =~ s#$item#$string_in_replace#g;
                     }
@@ -416,7 +418,7 @@ sub parse_command_line {
                 if (not $g_symbol){
                     # no g symbol at the end
                     $current_line =~ s#$item#$string_in_replace#;
-                } else{
+                } else($g_symbol){
                     # has g symbol at the end
                     $current_line =~ s#$item#$string_in_replace#g;
                 }
@@ -430,7 +432,7 @@ sub parse_command_line {
                 if (not $g_symbol){
                     # no g symbol at the end
                     $current_line =~ s/$item/$string_in_replace/;
-                } else{
+                } else($g_symbol){
                     # has g symbol at the end
                     $current_line =~ s#$item#$string_in_replace#g;
                 }
