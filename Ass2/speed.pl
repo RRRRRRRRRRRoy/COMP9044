@@ -401,12 +401,16 @@ sub parse_command_line {
             }
             # This part is similar to the previous part
             # Difference no need doing comparison
+            # Here is the difference between /1 and $1
+            # Source: https://stackoverflow.com/questions/1068840/what-is-the-difference-between-1-and-1-in-a-perl-regex
             elsif ($command_in_list =~ /s(.)(.*)\1(.*)\1(g?)/){
                 (my $item, my $string_in_replace, my $g_symbol) = ($2,$3,$4);
                 
                     if (not $g_symbol){
+                        # no g symbol at the end
                         $current_line =~ s#$item#$string_in_replace#;
                     } else{
+                        # has g symbol at the end
                         $current_line =~ s#$item#$string_in_replace#g;
                     }
             }
@@ -415,37 +419,46 @@ sub parse_command_line {
                 (my $item, my $string_in_replace, my $g_symbol) = ($1,$2,$3);
                 # print " *** $line $command_in_list ***\n";
                 if (not $g_symbol){
+                    # no g symbol at the end
                     $current_line =~ s/$item/$string_in_replace/;
                 } else{
+                    # has g symbol at the end
                     $current_line =~ s#$item#$string_in_replace#g;
                 }
             }
         }
         if ($string_needs_print){
             if(!$checking_default){
+                # Setting the printing line as the current line
                 $print_line_string= $current_line;
             }else{
+                # no need for printing -> pass
                 ;
             }
         }
 
-        
+        # If the string need to print also needs to print again
         if ($string_needs_print_again){
             if($string_needs_print){
+                # This is to print the result for another time
                 print $current_line;
             }else{
+                # no need for printing -> pass
                 ;
             }
         }else{
+            # no need for printing -> pass
             ;
         }
-        
+        # Counter adding 1
         $line_number_counter ++;
     }
     if( $command_line_t =~ /\$d/){
+        # no need for printing -> pass
         ;
     }
     else{
+        # printing the result
         print $print_line_string ;
     }
 }
@@ -453,6 +466,7 @@ sub parse_command_line {
 parse_arguments();
 my $command;
 
+# getopt::long is exists
 if ($script_string_command){
     
     my @command_line_list=();
@@ -460,6 +474,9 @@ if ($script_string_command){
     foreach my $command_input (<$stdin>){
         push @command_line_list,$command_input;
     }
+    # Using the ; to connect the string in the command list
+    # Similar to python join
+    # Source: https://www.geeksforgeeks.org/perl-join-function/
     $command = join(";",@command_line_list);
 
 } else {
@@ -467,9 +484,8 @@ if ($script_string_command){
     $command =shift @ARGV;
 }
 my @command_files = @ARGV;
-#print "cmd $cmd\n";
-$command =~ s/\s//g;
-#print "lines @all_lines\n";
-#exit 1;
-#print "no default $checking_default\n";
+
+# Here is similar to use \s in stead of the [\f\n\r\t\v]
+$command =~ s/[\f\n\r\t\v]//g;
+
 parse_command_line($command, @command_files);    
