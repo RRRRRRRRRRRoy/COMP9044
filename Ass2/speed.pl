@@ -368,10 +368,10 @@ sub parse_command_line {
             if ($command_in_list =~ /([0-9]+)s(.)(.*)\2(.*)\2(g?)/){
                 # Based on the if structure, cutting the following parts
                 my $number = $1;
+                my $checking_pattern = $2;
                 my $item = $3;
                 my $string_in_replace = $4;
                 my $g_symbol = $5;
-                my $checking_pattern = $2;
                 # checking the line number with the cutting number
                 # Checking the number is same or not
                 if ($line_number_counter != $number){
@@ -394,10 +394,10 @@ sub parse_command_line {
             # Example: seq 100 111 | 2041 speed '/1.1/s/1/-/g'
             elsif ($command_in_list =~ /\/(.*?)\/s(.)(.*)\2(.*)\2(g?)/){
                 my $number = $1;
+                my $checking_pattern = $2;
                 my $item = $3;
                 my $string_in_replace = $4;
                 my $g_symbol = $5;
-                my $checking_pattern = $2;
                 $match_pattern = qr/$number/;
                 # Checking whether the string are matching
                 if ( $current_line !~ /$match_pattern/){
