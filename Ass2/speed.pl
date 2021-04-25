@@ -368,7 +368,7 @@ sub parse_command_line {
             # This is similar to sed s///g
             # more info plz check: https://www.digitalocean.com/community/tutorials/the-basics-of-using-the-sed-stream-editor-to-manipulate-text-in-linux
            	# Example: seq 51 60 | 2041 speed '5s/5/9/g'
-            if ($command_in_list =~ /([0-9]+)s(.)(.*)\2(.*)\2(g?)/){
+            if ($command_in_list =~ /([0-9]+)s(.)(..*)\2(..*)\2(g?)/){
                 # Based on the if structure, cutting the following parts
                 my $number = $1;
                 # This is to check with command_line_t and doing the printing
