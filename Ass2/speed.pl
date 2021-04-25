@@ -361,7 +361,8 @@ sub parse_command_line {
             # Here is the format sample sXbbXbbX
             # This is similar to sed s///g
             # more info plz check: https://www.digitalocean.com/community/tutorials/the-basics-of-using-the-sed-stream-editor-to-manipulate-text-in-linux
-           	if ($command_in_list =~ /([0-9]+)s(.)(.*)\2(.*)\2(g?)/){
+           	$regrex_number_s = "([0-9]+)s(.)(.*)\2(.*)\2(g?)"
+            if ($command_in_list =~ /\$regrex_number_s/){
                 # Based on the if structure, cutting the following parts
                 (my $number, my $item, my $string_in_replace, my $g_symbol) = ($1,$3,$4,$5);
                 # checking the line number with the cutting number
@@ -383,7 +384,8 @@ sub parse_command_line {
             }
             # This situation option is similar to the previous one
             # THe previous match the digital numebr. This one match all characters
-            elsif ($command_in_list =~ /\/(.*?)\/s(.)(.*)\2(.*)\2(g?)/){
+            $regrex_middle_s = "\/(.*?)\/s(.)(.*)\2(.*)\2(g?)";
+            elsif ($command_in_list =~ /\$regrex_middle_s/){
                 (my $number, my $item, my $string_in_replace, my $g_symbol) = ($1,$3,$4,$5);
                 $match_pattern = qr/$number/;
                 # Checking whether the string are matching
@@ -403,7 +405,8 @@ sub parse_command_line {
             # Difference no need doing comparison
             # Here is the difference between /1 and $1
             # Source: https://stackoverflow.com/questions/1068840/what-is-the-difference-between-1-and-1-in-a-perl-regex
-            elsif ($command_in_list =~ /s(.)(.*)\1(.*)\1(g?)/){
+            $regrex_with_3rd_situation = "s(.)(.*)\1(.*)\1(g?)";
+            elsif ($command_in_list =~ /\$regrex_with_3rd_situation/){
                 (my $item, my $string_in_replace, my $g_symbol) = ($2,$3,$4);
                 
                     if (not $g_symbol){
@@ -415,7 +418,8 @@ sub parse_command_line {
                     }
             }
             # This part is to checking s///g in the test case
-            elsif ( $command_in_list =~ /s\/((.*)?)\/((.*)?)\/(g?)/){
+            $regrex_with_slash = "s\/((.*)?)\/((.*)?)\/(g?)/";
+            elsif ( $command_in_list =~ /\$regrex_with_slash/){
                 (my $item, my $string_in_replace, my $g_symbol) = ($1,$2,$3);
                 # print " *** $line $command_in_list ***\n";
                 if (not $g_symbol){
