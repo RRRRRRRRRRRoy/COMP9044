@@ -276,7 +276,7 @@ sub parse_command_line {
                                 }
                             }
                         }	# This part of code is similar to the addresses1 part
-                    } elsif (!$addresses2_pointer && ($current_line =~ /$addresses_2/) && !$finish_pointer && $start_pointer){
+                    } elsif (!$addresses2_pointer && ($current_line =~ /$addresses_2/)){
                         if(!$finish_pointer){
                             if($start_pointer){
                                 $string_needs_print = 0;
