@@ -1,6 +1,6 @@
 #!/bin/dash
 
-# This shell is for testing the s options in the ass2
+# This shell is for testing the -n and address options in the ass2
 # This script is written on macos Therefore, using perl speed.pl to run
 # If one case is fail exit 1 printing fail
 # If all cases pass printing pass exit 0
@@ -40,7 +40,7 @@ fi
 
 echo "\n";
 
-# Test 's/o/OOOOOO/g'
+# Test '$d'
 launch_3=$(seq 27 37 | perl speed.pl '$d');
 correct_answer_3='27 28 29 30 31 32 33 34 35 36';
 checking_answer_3=$(echo $launch_3);
