@@ -418,7 +418,7 @@ sub parse_command_line {
                 if (not $g_symbol){
                     # no g symbol at the end
                     $current_line =~ s#$item#$string_in_replace#;
-                } else($g_symbol){
+                } elsif($g_symbol){
                     # has g symbol at the end
                     $current_line =~ s#$item#$string_in_replace#g;
                 }
@@ -432,7 +432,7 @@ sub parse_command_line {
                 if (not $g_symbol){
                     # no g symbol at the end
                     $current_line =~ s/$item/$string_in_replace/;
-                } else($g_symbol){
+                } elsif($g_symbol){
                     # has g symbol at the end
                     $current_line =~ s#$item#$string_in_replace#g;
                 }
