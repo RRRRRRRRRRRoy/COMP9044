@@ -472,7 +472,7 @@ sub parse_command_line {
         # Counter adding 1
         $line_number_counter ++;
     }
-    if( $command_line_t =~ /\$d/){
+    if( $command_line_t =~ /\$pattern/){
         # no need for printing -> pass
         ;
     }
