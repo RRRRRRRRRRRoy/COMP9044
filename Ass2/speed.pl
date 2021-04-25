@@ -361,7 +361,7 @@ sub parse_command_line {
             # Here is the format sample sXbbXbbX
             # This is similar to sed s///g
             # more info plz check: https://www.digitalocean.com/community/tutorials/the-basics-of-using-the-sed-stream-editor-to-manipulate-text-in-linux
-           	$regrex_number_s = "([0-9]+)s(.)(.*)\2(.*)\2(g?)"
+           	$regrex_number_s = "([0-9]+)s(.)(.*)\2(.*)\2(g?)";
             if ($command_in_list =~ /\$regrex_number_s/){
                 # Based on the if structure, cutting the following parts
                 (my $number, my $item, my $string_in_replace, my $g_symbol) = ($1,$3,$4,$5);
