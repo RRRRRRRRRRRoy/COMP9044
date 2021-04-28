@@ -6,7 +6,7 @@
 foreach $line(<STDIN>){
     # Removing the new line symbol
     # Source: https://www.geeksforgeeks.org/perl-chomp-function/
-    chomp($line);
+    chomp $line;
     # Store the data in an array
     push @line_list,$line;
 }
@@ -22,8 +22,6 @@ foreach $line(@line_list){
         # number regrex
         #$num_regrex="#([0-9]*)";
 		$line =~ s/#([0-9]+)/$target/;
-	}else{
-        next;
-    }
+	}
     print "$line\n";
 }
