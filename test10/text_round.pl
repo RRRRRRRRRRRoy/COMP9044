@@ -20,7 +20,7 @@ foreach $line(<STDIN>){
         # Getting the second matching line
         $round_number = $2;
         # Notice Here adding 1
-        $round_number =+ 1;
+        $round_number += 1;
         $line =~ s/$current_number/$round_number/;
         }
     
