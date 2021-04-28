@@ -17,7 +17,7 @@ foreach $line(@line_list){
         # Getting the first matching string
 		$target_number = $1;
         # The index is the current location number minus 1 
-        $line_list_index = $target_number -1;
+        $line_list_index = $target_number - 1;
         # Getting the target element
 		$target = $line_list[$line_list_index];
         # number regrex

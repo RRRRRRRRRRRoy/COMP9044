@@ -24,7 +24,7 @@ foreach $line(<STDIN>){
         # Notice Here adding 1
         $round_number += 1;
         $line =~ s/$current_number/$round_number/;
-        }
+    }
     
     print "$line\n";
-    }
+}
