@@ -1,9 +1,12 @@
 #!/usr/bin/perl -w
 
 # word list from the input
-@word_list = @ARGV;
+my @word_list = @ARGV;
+my %words_counter=();
+my @printing_array=();
 
 # looping the word in the list
-while($word=<$word_list>){
-    if
-}
+while($word=<@ARGV>){
+    if(exists $words_counter{$word}){
+        next;
+    }else{
