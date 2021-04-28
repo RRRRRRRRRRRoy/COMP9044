@@ -24,7 +24,7 @@ foreach $line(@line_list){
 		$target = $line_list[$line_list_index];
         # number regrex
         $num_regrex="#([0-9]*)";
-		$line =~ s/\$num_regrex/$target/;
+		$line =~ s/$num_regrex/$target/;
 	}
     print "$line\n";
 }
