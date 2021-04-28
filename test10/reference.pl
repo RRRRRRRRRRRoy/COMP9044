@@ -12,9 +12,6 @@ foreach $line(<STDIN>){
 }
 
 foreach $line(@line_list){
-    if($line !~ /^.*\#(\d*).*$/){
-        next;
-    }
     if($line =~ /^.*\#(\d*).*$/){
         # Getting the first matching string
 		$target_number = $1;
@@ -23,8 +20,10 @@ foreach $line(@line_list){
         # Getting the target element
 		$target = $line_list[$line_list_index];
         # number regrex
-        $num_regrex="#([0-9]*)";
-		$line =~ s/$num_regrex/$target/;
-	}
+        #$num_regrex="#([0-9]*)";
+		$line =~ s/#([0-9]*)/$target/;
+	}else{
+        next;
+    }
     print "$line\n";
 }
