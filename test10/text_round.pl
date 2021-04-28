@@ -15,7 +15,7 @@ foreach $line(<STDIN>){
         $line =~ s/$current_number/$round_number/;
         }
     # The situation which is greater than 4
-    $regrex_larger_than5 = "((\\d*)\.[5-9]\\d*)"
+    $regrex_larger_than5 = "((\\d*)\.[5-9]\\d*)";
     while($line =~ /$regrex_larger_than5/){
         # Getting the first matching line
         $current_number = $1;
