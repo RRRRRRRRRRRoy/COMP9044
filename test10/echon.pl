@@ -18,11 +18,11 @@ if($length_input == 2){
         }
     }else{
         # If the input is wrong
-        print "./echon.pl: argument 1 must be a non-negative integer";
+        print "./echon.pl: argument 1 must be a non-negative integer\n";
         exit 1;
     }
 }else{
     # If the input is wrong
-    print "Usage: ./echon.pl <number of lines> <string>";
+    print "Usage: ./echon.pl <number of lines> <string>\n";
     exit 1;
 }
