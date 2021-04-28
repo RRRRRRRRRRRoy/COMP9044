@@ -15,5 +15,16 @@ foreach $line(@line_list){
     if($line !~ /^.*\#(\d*).*$/){
         next;
     }
-
+    if($line =~ /^.*\#(\d*).*$/){
+        # Getting the first matching string
+		$target_number = $1;
+        # The index is the current location number minus 1 
+        $line_list_index = $target_number -1;
+        # Getting the target element
+		$target = $line_list[$line_list_index];
+        # number regrex
+        $num_regrex="#(\d*)";
+		$line =~ s/\$num_regrex/$target/;
+	}
+    print "$line\n";
 }
