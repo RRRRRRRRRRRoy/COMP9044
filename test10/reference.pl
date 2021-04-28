@@ -12,7 +12,7 @@ foreach $line(<STDIN>){
 }
 
 foreach $line(@line_list){
-    if($line =~ /^.*\#(\d+).*$/){
+    if($line =~ /^.*\#([0-9]+).*$/){
         # Getting the first matching string
 		$target_number = $1;
         # The index is the current location number minus 1 
