@@ -3,7 +3,8 @@
 $counter = 0;
 
 while($line = <STDIN>){
-    if($line =~ /3711\//){
+    $regrex = '^.+3711/.+$'
+    if($line =~ /$regrex/){
         $counter += 1;
     }
 }
