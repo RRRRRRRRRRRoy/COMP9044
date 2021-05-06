@@ -7,4 +7,4 @@ while($line = <STDIN>){
         $counter += 1;
     }
 }
-print "$counter";
+print "$counter\n";
