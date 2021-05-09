@@ -14,7 +14,7 @@ while($line=<STDIN>){
     #print $firstname;
     while($lastname =~ / $/){
         $regrex = ' $';
-        $lastname =~ s/ $//;
+        $lastname =~ s/$regrex//;
     }
     # Swapping the name in the list
     $line =~ s/$firstname, $lastname/$lastname $firstname/;
